@@ -1,4 +1,12 @@
 package org.academiadecodigo.haltistas.lastsurvivor.graphics;
 
-public class Canvas {
+import org.academiadecodigo.haltistas.lastsurvivor.interfaces.Drawable;
+
+public class Canvas implements Drawable {
+
+    @Override
+    public void draw(){
+
+    }
+
 }

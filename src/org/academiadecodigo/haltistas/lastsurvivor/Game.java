@@ -1,17 +1,37 @@
 package org.academiadecodigo.haltistas.lastsurvivor;
 
+import org.academiadecodigo.haltistas.lastsurvivor.characters.CharacterFactory;
+import org.academiadecodigo.haltistas.lastsurvivor.graphics.Canvas;
+
 public class Game {
+
+    private InputHandler inputHandler;
+    private CharacterFactory characterFactory;
+    private Canvas canvas;
 
     /**
      *  Game Class
      *  Game preparation and game logic should go here
      *
      */
+    public void init(){
 
-    public void start(){
+        inputHandler = new InputHandler();
+
+        characterFactory = new CharacterFactory();
+
+        canvas = new Canvas();
 
 
     }
+
+    public void start(){
+
+        canvas.draw();
+
+
+    }
+
 
 
 }

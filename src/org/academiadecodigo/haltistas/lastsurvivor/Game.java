@@ -1,5 +1,6 @@
 package org.academiadecodigo.haltistas.lastsurvivor;
 
+import org.academiadecodigo.haltistas.lastsurvivor.characters.Character;
 import org.academiadecodigo.haltistas.lastsurvivor.characters.CharacterFactory;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.Canvas;
 
@@ -29,6 +30,10 @@ public class Game {
 
         canvas.draw();
 
+        //Temporary enemy for testing
+        //@TODO remove temporary enemies
+        Character tempEnemy = characterFactory.createCharacter("Baddie");
+        Character playerCharacter = characterFactory.createCharacter("Player");
 
     }
 

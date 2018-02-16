@@ -37,10 +37,10 @@ public class Canvas implements Drawable {
 
     private void createMenu() {
 
-        Menu menu = new Menu();
-        menu.draw();
+        Menu statusMenu = new StatusMenu();
+        Menu characterMenu = new CharacterMenu();
 
+        statusMenu.draw();
+        characterMenu.draw();
     }
-
-
 }

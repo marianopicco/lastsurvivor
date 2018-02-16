@@ -25,11 +25,6 @@ public class InputHandler implements KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
-    }
-
-    @Override
-    public void keyReleased(KeyboardEvent keyboardEvent) {
-
         switch (keyboardEvent.getKey()) {
 
             case KeyboardEvent.KEY_LEFT:
@@ -40,5 +35,12 @@ public class InputHandler implements KeyboardHandler {
                 System.out.println("Error");
 
         }
+
     }
+
+    @Override
+    public void keyReleased(KeyboardEvent keyboardEvent) {
+
+    }
+
 }

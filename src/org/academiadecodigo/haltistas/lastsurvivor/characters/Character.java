@@ -25,12 +25,12 @@ public class Character implements Drawable {
         // Souts for testing
         // @TODO remove the souts after testing
 
-        System.out.println("Attacking " + target);
 
         if (!isAlive) {
             return;
         }
 
+        System.out.println(name + ": I'm attacking " + target);
 
         target.getHit(baseAttack);
 

@@ -7,10 +7,10 @@ public class CharacterFactory {
 
 
 
-    public Character createCharacter(String name) {
+    public Character createCharacter(String name, double constitution, double strength) {
 
-        int randomLife = Randomizer.rInt(50, 70);
-        int randomAttack = Randomizer.rInt(10, 15);
+        int randomLife = (int)Math.floor(Randomizer.rInt(50, 70)*constitution);
+        int randomAttack = (int)Math.floor(Randomizer.rInt(10, 15)*strength);
 
         return new Character(name, randomLife, randomAttack);
 

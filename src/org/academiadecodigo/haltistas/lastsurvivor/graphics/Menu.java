@@ -13,21 +13,43 @@ public class Menu implements Drawable {
     @Override
     public void draw() {
 
-        Rectangle rightMenu = new Rectangle(500,550, 560, 150);
+        Rectangle rightMenu = new Rectangle(statusMenuX(), menuY(), menuWidth(), menuHeight());
         rightMenu.fill();
-        rightMenu.setColor(new Color(70,130,180));//steelblue
+        rightMenu.setColor(new Color(70, 130, 180));//steelblue
 
-        Rectangle leftMenu = new Rectangle(10,550, 500, 150);
+
+        Rectangle leftMenu = new Rectangle(characterMenuX(), menuY(), menuWidth(), menuHeight());
         leftMenu.fill();
         leftMenu.setColor(Color.RED);
 
-        Rectangle actionMenu = new Rectangle(250,560,200,120);
+        Rectangle actionMenu = new Rectangle(menuWidth() / 2, menuY() + 10, menuWidth() / 2,
+                menuHeight() - 20);
         actionMenu.fill();
         actionMenu.setColor(Color.CYAN);
 
 
+    }
 
+    private int characterMenuX() {
+        return Canvas.PADDING;
+    }
 
+    private int statusMenuX() {
+        return Canvas.BACKGROUND_WIDTH / 2;
+    }
+
+    private int menuY() {
+        return Canvas.BACKGROUND_HEIGHT - 150;
 
     }
+
+    private int menuHeight() {
+        return Canvas.BACKGROUND_HEIGHT - 550;
+    }
+
+    private int menuWidth() {
+        return Canvas.BACKGROUND_WIDTH / 2;
+    }
+
+
 }

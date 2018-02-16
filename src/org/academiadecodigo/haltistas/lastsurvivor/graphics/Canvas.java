@@ -5,6 +5,7 @@ import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.CharacterMenu;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.Menu;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.StatusMenu;
 import org.academiadecodigo.haltistas.lastsurvivor.interfaces.Drawable;
+import org.academiadecodigo.simplegraphics.graphics.Ellipse;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -21,6 +22,8 @@ public class Canvas implements Drawable {
         createAreaOfGame();
         createBackground();
         createMenu();
+
+        drawCharacters();
 
     }
 
@@ -48,5 +51,14 @@ public class Canvas implements Drawable {
         statusMenu.draw();
         characterMenu.draw();
         ss.draw();
+    }
+
+    public void drawCharacters(){
+        Ellipse evilGuy =new Ellipse(100,250,100,100);
+        evilGuy.fill();
+
+        Ellipse goodGuy = new Ellipse(800, 250, 100, 100);
+        goodGuy.draw();
+
     }
 }

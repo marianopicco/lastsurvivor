@@ -60,5 +60,5 @@ public class ActionMenu extends Menu {
 
         selectionBox.translate(0,20);
     }
-    
+
 }

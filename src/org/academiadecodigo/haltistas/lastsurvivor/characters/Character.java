@@ -26,7 +26,12 @@ public class Character implements Drawable {
         // @TODO remove the souts after testing
 
 
-        if (!isAlive) {
+        if (!this.isAlive) {
+            return;
+        }
+
+        if (!target.isAlive) {
+            System.out.println(name + ": Target is dead\n");
             return;
         }
 
@@ -44,7 +49,7 @@ public class Character implements Drawable {
 
         hp = hp - damage;
 
-        if (hp <= 0) {
+        if (hp <= 0 && isAlive) {
             this.toggleAlive();
             System.out.println(this + " dead.\n");
         }

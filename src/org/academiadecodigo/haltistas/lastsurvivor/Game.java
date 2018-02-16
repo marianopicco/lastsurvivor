@@ -24,7 +24,7 @@ public class Game {
 
         canvas = new Canvas();
 
-        enemies = new Character[1];
+        enemies = new Character[ENEMIES_PER_LEVEL];
 
     }
 

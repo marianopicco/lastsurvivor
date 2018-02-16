@@ -9,11 +9,10 @@ public class CharacterFactory {
 
     public Character createCharacter(String name, double constitution, double strength) {
 
-        int randomLife = (int)Math.floor(Randomizer.rInt(50, 70)*constitution);
-        int randomAttack = (int)Math.floor(Randomizer.rInt(10, 15)*strength);
+        int hp = (int)Math.floor(Randomizer.rInt(50, 70)*constitution);
+        int attack = (int)Math.floor(Randomizer.rInt(10, 15)*strength);
 
-        return new Character(name, randomLife, randomAttack);
-
+        return new Character(name, hp, attack);
 
     }
 

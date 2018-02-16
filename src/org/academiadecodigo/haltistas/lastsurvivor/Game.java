@@ -11,11 +11,10 @@ public class Game {
     private Canvas canvas;
 
     /**
-     *  Game Class
-     *  Game preparation and game logic should go here
-     *
+     * Game Class
+     * Game preparation and game logic should go here
      */
-    public void init(){
+    public void init() {
 
         inputHandler = new InputHandler();
 
@@ -26,7 +25,7 @@ public class Game {
 
     }
 
-    public void start(){
+    public void start() {
 
         canvas.draw();
 
@@ -35,8 +34,15 @@ public class Game {
         Character tempEnemy = characterFactory.createCharacter("Baddie");
         Character playerCharacter = characterFactory.createCharacter("Player");
 
-    }
+        for (int i = 0; i < 5; i++) {
 
+            if (tempEnemy.isAlive()) {
+                playerCharacter.attack(tempEnemy);
+            }
+            tempEnemy.attack(playerCharacter);
+        }
+
+    }
 
 
 }

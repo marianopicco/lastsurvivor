@@ -10,7 +10,7 @@ public class InputHandler implements KeyboardHandler {
     private Keyboard keyboard;
     private KeyboardEvent keyboardEvent;
 
-    public InputHandler() {
+    InputHandler() {
 
         keyboard = new Keyboard(this);
         keyboardEvent = new KeyboardEvent();

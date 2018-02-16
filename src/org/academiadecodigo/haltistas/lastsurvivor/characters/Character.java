@@ -13,6 +13,7 @@ public class Character implements Drawable {
         this.name = name;
         this.hp = hp;
         this.baseAttack = baseAttack;
+        this.isAlive = true;
 
         // Souts for testing
         // @TODO remove souts after testing
@@ -20,11 +21,16 @@ public class Character implements Drawable {
         System.out.println("Created character " + name + " with " + hp + " hp.\n");
     }
 
-    public void attack(Character target){
+    public void attack(Character target) {
         // Souts for testing
         // @TODO remove the souts after testing
 
         System.out.println("Attacking " + target);
+
+        if (!isAlive) {
+            return;
+        }
+
 
         target.getHit(baseAttack);
 
@@ -32,15 +38,21 @@ public class Character implements Drawable {
 
     private void getHit(int damage) {
 
-        hp -= hp - damage;
+        // Souts for testing
+        // @TODO remove souts after testing
 
-        if ( hp <= 0 ) {
+
+        hp = hp - damage;
+
+        if (hp <= 0) {
             this.toggleAlive();
+            System.out.println(this + " dead.\n");
         }
+
 
     }
 
-    public void toggleAlive(){
+    public void toggleAlive() {
         isAlive = !isAlive;
 
     }
@@ -67,7 +79,6 @@ public class Character implements Drawable {
     public boolean isAlive() {
         return isAlive;
     }
-
 
 
 }

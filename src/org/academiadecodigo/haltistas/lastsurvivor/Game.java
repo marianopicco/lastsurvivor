@@ -5,6 +5,7 @@ import org.academiadecodigo.haltistas.lastsurvivor.characters.CharacterFactory;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.Canvas;
 
 public class Game {
+
     private final int ENEMIES_PER_LEVEL = 1;
     private InputHandler inputHandler;
     private Character[] enemies;

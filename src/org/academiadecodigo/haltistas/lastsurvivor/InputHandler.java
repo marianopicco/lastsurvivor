@@ -13,10 +13,20 @@ public class InputHandler implements KeyboardHandler {
     InputHandler() {
 
         keyboard = new Keyboard(this);
+
+
         keyboardEvent = new KeyboardEvent();
+        keyboardEvent.setKey(KeyboardEvent.KEY_UP);
+        keyboardEvent.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(keyboardEvent);
 
+        keyboardEvent = new KeyboardEvent();
+        keyboardEvent.setKey(KeyboardEvent.KEY_DOWN);
+        keyboardEvent.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(keyboardEvent);
 
-        keyboardEvent.setKey(KeyboardEvent.KEY_LEFT);
+        keyboardEvent = new KeyboardEvent();
+        keyboardEvent.setKey(KeyboardEvent.KEY_SPACE);
         keyboardEvent.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(keyboardEvent);
 
@@ -27,8 +37,16 @@ public class InputHandler implements KeyboardHandler {
 
         switch (keyboardEvent.getKey()) {
 
-            case KeyboardEvent.KEY_LEFT:
-                System.out.println("Key left");
+            case KeyboardEvent.KEY_UP:
+                System.out.println("Key Up");
+                break;
+
+            case KeyboardEvent.KEY_DOWN:
+                System.out.println("Key Down");
+                break;
+
+            case KeyboardEvent.KEY_SPACE:
+                System.out.println("Key Space");
                 break;
 
             default:

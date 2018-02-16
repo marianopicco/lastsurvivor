@@ -53,7 +53,7 @@ public class Character implements Drawable {
     @Override
     public String toString() {
         return "Character{" +
-                name +
+                "name='" + name + '\'' +
                 ", hp=" + hp +
                 ", baseAttack=" + baseAttack +
                 ", isAlive=" + isAlive +

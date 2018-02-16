@@ -10,21 +10,33 @@ public class Canvas implements Drawable {
     public void draw(){
 
         createAreaOfGame();
-createBackground();
+        createBackground();
+        createMenu();
 
     }
 
     private void createAreaOfGame() {
+
         Rectangle areaOfGame = new Rectangle(10, 10, 1000, 700);
 
         areaOfGame.draw();
     }
 
     private void createBackground() {
-        
+
         Picture pic = new Picture(-150, -180, "assets/background_test.jpg");
+
         pic.grow(-2000, -180);
         pic.draw();
     }
+
+    private void createMenu() {
+
+        Menu menu = new Menu();
+        menu.draw();
+
+    }
+
+
 
 }

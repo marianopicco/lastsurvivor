@@ -2,6 +2,7 @@ package org.academiadecodigo.haltistas.lastsurvivor;
 
 import org.academiadecodigo.haltistas.lastsurvivor.characters.CharacterFactory;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.Canvas;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class Game {
 
@@ -21,7 +22,6 @@ public class Game {
         characterFactory = new CharacterFactory();
 
         canvas = new Canvas();
-
 
     }
 

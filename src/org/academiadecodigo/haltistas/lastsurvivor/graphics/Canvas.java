@@ -1,5 +1,9 @@
 package org.academiadecodigo.haltistas.lastsurvivor.graphics;
 
+import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.ActionMenu;
+import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.CharacterMenu;
+import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.Menu;
+import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.StatusMenu;
 import org.academiadecodigo.haltistas.lastsurvivor.interfaces.Drawable;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
@@ -39,8 +43,10 @@ public class Canvas implements Drawable {
 
         Menu statusMenu = new StatusMenu();
         Menu characterMenu = new CharacterMenu();
+        Menu ss = new ActionMenu();
 
         statusMenu.draw();
         characterMenu.draw();
+        ss.draw();
     }
 }

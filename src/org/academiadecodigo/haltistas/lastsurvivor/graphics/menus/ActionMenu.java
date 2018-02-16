@@ -1,9 +1,9 @@
-package org.academiadecodigo.haltistas.lastsurvivor.graphics;
+package org.academiadecodigo.haltistas.lastsurvivor.graphics.menus;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
-public class ActionMenu extends Menu{
+public class ActionMenu extends Menu {
 
     public ActionMenu() {
 
@@ -31,4 +31,6 @@ public class ActionMenu extends Menu{
     public int menuWidth() {
         return super.menuWidth() / 2;
     }
+
+    
 }

@@ -1,5 +1,6 @@
-package org.academiadecodigo.haltistas.lastsurvivor.graphics;
+package org.academiadecodigo.haltistas.lastsurvivor.graphics.menus;
 
+import org.academiadecodigo.haltistas.lastsurvivor.graphics.Canvas;
 import org.academiadecodigo.haltistas.lastsurvivor.interfaces.Drawable;
 
 public abstract class Menu implements Drawable {
@@ -22,7 +23,5 @@ public abstract class Menu implements Drawable {
     public int menuWidth() {
         return Canvas.BACKGROUND_WIDTH / 2;
     }
-
-
 
 }

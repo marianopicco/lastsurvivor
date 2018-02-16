@@ -15,7 +15,7 @@ public class Menu implements Drawable {
 
         Rectangle rightMenu = new Rectangle(500,550, 560, 150);
         rightMenu.fill();
-        rightMenu.setColor(new Color(70,130,180));
+        rightMenu.setColor(new Color(70,130,180));//steelblue
 
         Rectangle leftMenu = new Rectangle(10,550, 500, 150);
         leftMenu.fill();
@@ -24,6 +24,8 @@ public class Menu implements Drawable {
         Rectangle actionMenu = new Rectangle(250,560,200,120);
         actionMenu.fill();
         actionMenu.setColor(Color.CYAN);
+
+
 
 
 

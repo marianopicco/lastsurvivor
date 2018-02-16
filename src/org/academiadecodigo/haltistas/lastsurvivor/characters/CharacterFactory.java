@@ -12,6 +12,7 @@ public class CharacterFactory {
         int hp = (int)Math.floor(Randomizer.rInt(50, 70)*constitution);
         int attack = (int)Math.floor(Randomizer.rInt(10, 15)*strength);
 
+
         return new Character(name, hp, attack);
 
     }

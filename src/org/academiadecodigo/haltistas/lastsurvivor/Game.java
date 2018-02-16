@@ -6,8 +6,8 @@ import org.academiadecodigo.haltistas.lastsurvivor.graphics.Canvas;
 
 public class Game {
 
-    private final int PLAYER_PARTY_SIZE = 1;
-    private final int ENEMIES_PER_LEVEL = 1;
+    private final int PLAYER_PARTY_SIZE = 4;
+    private final int ENEMIES_PER_LEVEL = 4;
     private InputHandler inputHandler;
     private Character[] enemies;
     private Character[] playerParty;
@@ -39,9 +39,11 @@ public class Game {
         //@TODO remove temporary enemies
 
         for (int i = 0; i < enemies.length ; i++) {
-            enemies[i] = characterFactory.createCharacter("Baddie " + (i+1), 1.23, 3.4);
+            enemies[i] = characterFactory.createCharacter("Baddie " + (i+1), 1.23, 1);
         }
-        playerParty[0] = characterFactory.createCharacter("Player",1,1);
+
+        playerParty[0] = characterFactory.createCharacter("Player",1,1.9);
+        playerParty[1] = characterFactory.createCharacter("John",1.5,1.1);
 
         for (int i = 0; i < 5; i++) {
 
@@ -49,12 +51,12 @@ public class Game {
 
                 Thread.sleep(2500);
                 if (enemy.isAlive()) {
-                    playerParty[0].attack(enemy);
+                    playerParty[0].attack(enemies, enemies.length);
                     System.out.println("\n");
                 }
 
                 Thread.sleep(2500);
-                enemy.attack(playerParty[0]);
+                enemy.attack(playerParty, playerParty.length);
                 System.out.println("\n");
 
             }

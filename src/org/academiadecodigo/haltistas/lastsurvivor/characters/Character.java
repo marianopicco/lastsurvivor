@@ -1,5 +1,6 @@
 package org.academiadecodigo.haltistas.lastsurvivor.characters;
 
+import org.academiadecodigo.haltistas.lastsurvivor.Randomizer;
 import org.academiadecodigo.haltistas.lastsurvivor.interfaces.Drawable;
 
 public class Character implements Drawable {
@@ -21,13 +22,29 @@ public class Character implements Drawable {
         System.out.println("Created character " + name + " with " + hp + " hp.\n");
     }
 
-    public void attack(Character target) {
+    public void attack(Character[] enemies, int numberOfEnemies) {
+        Character target = null;
+
         // Souts for testing
         // @TODO remove the souts after testing
 
 
         if (!this.isAlive) {
             return;
+        }
+
+        while (target == null)  {
+
+            int random = Randomizer.rInt(0, numberOfEnemies-1);
+
+            if (enemies[random] == null){
+                continue;
+            }
+
+            if (enemies[random].isAlive()) {
+                target = enemies[random];
+            }
+
         }
 
         if (!target.isAlive) {

@@ -39,7 +39,7 @@ public class Canvas implements Drawable {
         Picture pic = new Picture(-150, -180, "assets/background_test.jpg");
 
         pic.grow(-2000, -180);
-        //pic.draw();
+        pic.draw();
     }
 
     private void createMenu() {
@@ -59,6 +59,8 @@ public class Canvas implements Drawable {
 
         Ellipse goodGuy = new Ellipse(800, 250, 100, 100);
         goodGuy.draw();
+
+        //goodGuy.translate(-600,0); é a deslocação de ataque
 
     }
 }

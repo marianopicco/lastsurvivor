@@ -60,6 +60,12 @@ public class Canvas implements Drawable {
         Ellipse goodGuy = new Ellipse(800, 250, 100, 100);
         goodGuy.draw();
 
+
+        Picture pointer2 = new Picture(5, 50, "assets/bluediamond.png");
+        pointer2.grow(-100, -100);
+        pointer2.draw();
+
+
         //goodGuy.translate(-600,0); é a deslocação de ataque
 
     }

@@ -10,9 +10,11 @@ public class Game {
 
     private final int PLAYER_PARTY_SIZE = 4;
     private final int ENEMIES_PER_LEVEL = 2;
+
     private InputHandler inputHandler;
     private Character[] enemies;
     private Character[] playerParty;
+    private Stage currentStage;
     private Canvas canvas;
     private boolean gameRunning;
     private boolean receivedMenuChoice;
@@ -43,7 +45,7 @@ public class Game {
 
         playerParty[0] = CharacterFactory.createCharacter("Player", 1.8, 1.9);
 
-        new Stage(1);
+        currentStage = new Stage(3);
     }
 
     public void start() throws InterruptedException {
@@ -63,7 +65,7 @@ public class Game {
                 * For now, all it can do is fight();
                 */
 
-                fight(playerParty[0], enemies[0]);
+                fight(playerParty[0], currentStage.getEnemies()[0]);
                 receivedMenuChoice = true;
                 Thread.sleep(800);
 
@@ -73,6 +75,7 @@ public class Game {
             }
 
             Thread.sleep(1000);
+
         }
     }
 
@@ -104,7 +107,7 @@ public class Game {
             playerChar.attack(enemyChar);
             System.out.println("\n");
         }
-        for (Character enemy : enemies) {
+        for (Character enemy : currentStage.getEnemies()) {
 
             try {
                 Thread.sleep(1000);

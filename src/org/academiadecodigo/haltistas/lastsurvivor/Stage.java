@@ -15,22 +15,26 @@ public class Stage {
             System.out.println("Pick a number of enemies between 1 and 3");
             return;
         }
+
         this.numEnemies = numEnemies;
         enemies = new Character[numEnemies];
-
 
         for (int i = 0; i < numEnemies; i++) {
             enemies[i] = CharacterFactory.createCharacter("Baddie " + (i + 1), 1.23, 1);
         }
 
-        if (enemyChar.getIsAlive() == false) {
-            System.out.println("god why");
-            numEnemies--;
-        }
-
+        enemyChar = enemies[0];
 
     }
 
+    public void enemyKilled() {
+        numEnemies--;
+
+    }
+
+    public Character[] getEnemies() {
+        return enemies;
+    }
 
 }
 

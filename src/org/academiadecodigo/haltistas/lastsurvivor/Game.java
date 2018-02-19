@@ -34,12 +34,13 @@ public class Game {
         //Temporary enemy for testing
         //@TODO remove temporary enemies
 
-        for (int i = 0; i < enemies.length; i++) {
-            enemies[i] = CharacterFactory.createCharacter("Baddie " + (i + 1), 1.23, 1);
-        }
+       /* for (int i = 0; i < enemies.length; i++) {
+           enemies[i] = CharacterFactory.createCharacter("Baddie " + (i + 1), 1.23, 1);
+        }*/
 
         playerParty[0] = CharacterFactory.createCharacter("Player", 1, 1.9);
 
+        new Stage(1);
     }
 
     public void receiveInput() throws InterruptedException {

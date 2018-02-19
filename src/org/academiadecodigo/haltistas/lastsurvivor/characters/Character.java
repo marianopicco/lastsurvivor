@@ -123,5 +123,7 @@ public class Character implements Drawable {
         return isAlive;
     }
 
-
+    public boolean getIsAlive() {
+        return isAlive;
+    }
 }

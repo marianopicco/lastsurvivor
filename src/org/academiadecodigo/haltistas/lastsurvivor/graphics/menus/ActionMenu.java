@@ -6,8 +6,14 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 
 public class ActionMenu extends Menu {
+
     private final static int INITIAL_POSITION_X = 260;
+    private final static int SELECTION_MOVE_X = 0;
+    private final static int SELECTION_MOVE_Y = 20;
+
     private int initialPositionY = menuY() + 10;
+    private int actionPointer = 0;
+    private Rectangle selectionBox;
 
 
     public ActionMenu() {
@@ -49,7 +55,7 @@ public class ActionMenu extends Menu {
         Text defend = new Text(INITIAL_POSITION_X, menuY() + 50, Action.DEFEND.getAction());
         Text item = new Text(INITIAL_POSITION_X, menuY() + 70, Action.ITEMS.getAction());
 
-        Rectangle selectionBox = new Rectangle(INITIAL_POSITION_X, initialPositionY, 60, 20);
+        selectionBox = new Rectangle(INITIAL_POSITION_X, initialPositionY, 60, 20);
         selectionBox.draw();
 
         attack.draw();
@@ -57,7 +63,29 @@ public class ActionMenu extends Menu {
         defend.draw();
         item.draw();
 
-        //selectionBox.translate(0, 20);
+        while (true) {
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            moveDown();
+        }
+    }
+
+    public void moveDown() {
+
+        actionPointer++;
+
+        if (actionPointer == Action.values().length) {
+            selectionBox.translate(SELECTION_MOVE_X, -80);
+            actionPointer = 0;
+        }
+
+        selectionBox.translate(SELECTION_MOVE_X, SELECTION_MOVE_Y);
+
     }
 
 }

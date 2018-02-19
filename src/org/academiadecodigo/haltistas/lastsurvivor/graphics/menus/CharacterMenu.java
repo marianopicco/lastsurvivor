@@ -4,7 +4,6 @@ import org.academiadecodigo.haltistas.lastsurvivor.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class CharacterMenu extends Menu {
 

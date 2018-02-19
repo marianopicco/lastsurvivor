@@ -54,6 +54,7 @@ public class Canvas implements Drawable {
     }
 
     public void drawCharacters(){
+
         Ellipse evilGuy =new Ellipse(100,250,100,100);
         evilGuy.fill();
 

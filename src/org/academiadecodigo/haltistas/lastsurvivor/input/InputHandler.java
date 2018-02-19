@@ -43,21 +43,18 @@ public class InputHandler implements KeyboardHandler {
 
             case KeyboardEvent.KEY_UP:
                 System.out.println("Key Up");
+                game.receiveInput(KeyPress.UP);
                 break;
 
             case KeyboardEvent.KEY_DOWN:
                 System.out.println("Key Down");
+                game.receiveInput(KeyPress.DOWN);
                 break;
 
             case KeyboardEvent.KEY_SPACE:
-                System.out.println("Key Space");
-                try {
-                    game.receiveInput();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                //System.out.println("Key Space");
+                game.receiveInput(KeyPress.SPACE);
                 break;
-
             default:
                 System.out.println("Error");
 

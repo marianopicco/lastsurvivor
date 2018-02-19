@@ -4,6 +4,7 @@ import org.academiadecodigo.haltistas.lastsurvivor.characters.Character;
 import org.academiadecodigo.haltistas.lastsurvivor.characters.CharacterFactory;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.Canvas;
 import org.academiadecodigo.haltistas.lastsurvivor.input.InputHandler;
+import org.academiadecodigo.haltistas.lastsurvivor.input.KeyPress;
 
 public class Game {
 
@@ -13,8 +14,9 @@ public class Game {
     private Character[] enemies;
     private Character[] playerParty;
     private Canvas canvas;
-
-    private boolean playerTurn = true;
+    private boolean gameRunning;
+    private boolean receivedMenuChoice;
+    private KeyPress keyPressed;
 
     /**
      * Game Class
@@ -22,14 +24,15 @@ public class Game {
      */
     public void init() {
 
+        canvas = new Canvas();
+        canvas.draw();
+
         inputHandler = new InputHandler(this);
 
-        canvas = new Canvas();
 
         enemies = new Character[ENEMIES_PER_LEVEL];
         playerParty = new Character[PLAYER_PARTY_SIZE];
 
-        canvas.draw();
 
         //Temporary enemy for testing
         //@TODO remove temporary enemies
@@ -38,40 +41,83 @@ public class Game {
            enemies[i] = CharacterFactory.createCharacter("Baddie " + (i + 1), 1.23, 1);
         }*/
 
-        playerParty[0] = CharacterFactory.createCharacter("Player", 1, 1.9);
+        playerParty[0] = CharacterFactory.createCharacter("Player", 1.8, 1.9);
 
         new Stage(1);
     }
 
-    public void receiveInput() throws InterruptedException {
+    public void start() throws InterruptedException {
 
-        if (playerTurn) {
-            playerTurn = false;
-            fight(playerParty[0], enemies[0]);
+        gameRunning = true;
 
+        while (gameRunning) {
+
+            // Checks if a key was pressed, or sleeps for 1000 ms
+
+            if (keyPressed != null) {
+                /* PLACEHOLDER -- Here, we should see something from the InputHandler, and act on it
+                * Menu logic (be something like this)
+                * menu.processKey( keyPressed );
+                *
+                * and should return something that tells the game what to do.
+                * For now, all it can do is fight();
+                */
+
+                fight(playerParty[0], enemies[0]);
+                receivedMenuChoice = true;
+                Thread.sleep(800);
+
+
+                keyPressed = null;
+
+            }
+
+            Thread.sleep(1000);
         }
     }
 
-    private void fight(Character playerChar, Character enemyChar) throws InterruptedException {
+    public void receiveInput(KeyPress key) {
+
+        if (keyPressed != null) {
+            return;
+        }
+
+        keyPressed = key;
+
+    }
+
+    private void fight(Character playerChar, Character enemyChar) {
+
+        while (!receivedMenuChoice) {
+            return;
+        }
 
 
-        Thread.sleep(2500);
+        //TODO handle exceptions correctly
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if (enemyChar.isAlive()) {
             playerChar.attack(enemyChar);
             System.out.println("\n");
         }
         for (Character enemy : enemies) {
 
-            Thread.sleep(2500);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             enemy.attack(playerParty, playerParty.length);
             System.out.println("\n");
 
         }
 
-        playerTurn = true;
+        receivedMenuChoice = false;
     }
-
-
-
 
 }

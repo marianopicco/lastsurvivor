@@ -11,8 +11,8 @@ public class Game {
     private InputHandler inputHandler;
     private Character[] enemies;
     private Character[] playerParty;
-    private CharacterFactory characterFactory;
     private Canvas canvas;
+    private boolean playerTurn;
 
     /**
      * Game Class
@@ -20,14 +20,15 @@ public class Game {
      */
     public void init() {
 
-        inputHandler = new InputHandler();
-
-        characterFactory = new CharacterFactory();
+        inputHandler = new InputHandler(this);
 
         canvas = new Canvas();
 
         enemies = new Character[ENEMIES_PER_LEVEL];
         playerParty = new Character[PLAYER_PARTY_SIZE];
+
+    }
+    public void receiveInput() {
 
     }
 
@@ -39,11 +40,11 @@ public class Game {
         //@TODO remove temporary enemies
 
         for (int i = 0; i < enemies.length ; i++) {
-            enemies[i] = characterFactory.createCharacter("Baddie " + (i+1), 1.23, 1);
+            enemies[i] = CharacterFactory.createCharacter("Baddie " + (i+1), 1.23, 1);
         }
 
-        playerParty[0] = characterFactory.createCharacter("Player",1,1.9);
-        playerParty[1] = characterFactory.createCharacter("John",1.5,1.1);
+        playerParty[0] = CharacterFactory.createCharacter("Player",1,1.9);
+        playerParty[1] = CharacterFactory.createCharacter("John",1.5,1.1);
 
         for (int i = 0; i < 5; i++) {
 

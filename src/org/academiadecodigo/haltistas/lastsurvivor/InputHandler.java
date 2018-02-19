@@ -9,8 +9,10 @@ public class InputHandler implements KeyboardHandler {
 
     private Keyboard keyboard;
     private KeyboardEvent keyboardEvent;
+    private Game game;
+    InputHandler(Game game) {
 
-    InputHandler() {
+        this.game = game;
 
         keyboard = new Keyboard(this);
 

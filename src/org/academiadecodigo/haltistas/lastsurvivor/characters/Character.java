@@ -58,6 +58,27 @@ public class Character implements Drawable {
 
     }
 
+    public void attack(Character target) {
+
+        // Souts for testing
+        // @TODO remove the souts after testing
+
+
+        if (!this.isAlive) {
+            return;
+        }
+
+        if (!target.isAlive) {
+            System.out.println(name + ": Target is dead\n");
+            return;
+        }
+
+        System.out.println(name + ": I'm attacking " + target);
+
+        target.getHit(baseAttack);
+
+    }
+
     private void getHit(int damage) {
 
         // Souts for testing

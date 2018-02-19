@@ -8,12 +8,13 @@ import org.academiadecodigo.haltistas.lastsurvivor.input.InputHandler;
 public class Game {
 
     private final int PLAYER_PARTY_SIZE = 4;
-    private final int ENEMIES_PER_LEVEL = 4;
+    private final int ENEMIES_PER_LEVEL = 2;
     private InputHandler inputHandler;
     private Character[] enemies;
     private Character[] playerParty;
     private Canvas canvas;
-    private boolean playerTurn;
+
+    private boolean playerTurn = true;
 
     /**
      * Game Class
@@ -28,43 +29,45 @@ public class Game {
         enemies = new Character[ENEMIES_PER_LEVEL];
         playerParty = new Character[PLAYER_PARTY_SIZE];
 
-    }
-    public void receiveInput() {
-
-    }
-
-    public void start() throws InterruptedException {
-
         canvas.draw();
 
         //Temporary enemy for testing
         //@TODO remove temporary enemies
 
-        for (int i = 0; i < enemies.length ; i++) {
-            enemies[i] = CharacterFactory.createCharacter("Baddie " + (i+1), 1.23, 1);
+        for (int i = 0; i < enemies.length; i++) {
+            enemies[i] = CharacterFactory.createCharacter("Baddie " + (i + 1), 1.23, 1);
         }
 
-        playerParty[0] = CharacterFactory.createCharacter("Player",1,1.9);
-        playerParty[1] = CharacterFactory.createCharacter("John",1.5,1.1);
+        playerParty[0] = CharacterFactory.createCharacter("Player", 1, 1.9);
 
-        for (int i = 0; i < 5; i++) {
+    }
 
-            for (Character enemy : enemies) {
+    public void receiveInput() throws InterruptedException {
 
-                Thread.sleep(2500);
-                if (enemy.isAlive()) {
-                    playerParty[0].attack(enemies, enemies.length);
-                    System.out.println("\n");
-                }
+        if (playerTurn) {
+            playerTurn = false;
+            fight(playerParty[0], enemies[0]);
 
-                Thread.sleep(2500);
-                enemy.attack(playerParty, playerParty.length);
-                System.out.println("\n");
+        }
+    }
 
-            }
+    private void fight(Character playerChar, Character enemyChar) throws InterruptedException {
+
+
+        Thread.sleep(2500);
+        if (enemyChar.isAlive()) {
+            playerChar.attack(enemyChar);
+            System.out.println("\n");
+        }
+        for (Character enemy : enemies) {
+
+            Thread.sleep(2500);
+            enemy.attack(playerParty, playerParty.length);
+            System.out.println("\n");
 
         }
 
+        playerTurn = true;
     }
 
 

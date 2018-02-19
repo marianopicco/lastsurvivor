@@ -11,7 +11,8 @@ public class InputHandler implements KeyboardHandler {
     private Keyboard keyboard;
     private KeyboardEvent keyboardEvent;
     private Game game;
-    InputHandler(Game game) {
+
+    public InputHandler(Game game) {
 
         this.game = game;
 
@@ -50,6 +51,11 @@ public class InputHandler implements KeyboardHandler {
 
             case KeyboardEvent.KEY_SPACE:
                 System.out.println("Key Space");
+                try {
+                    game.receiveInput();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 break;
 
             default:

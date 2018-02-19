@@ -14,6 +14,7 @@ public class Game {
     private Character[] enemies;
     private Character[] playerParty;
     private Canvas canvas;
+    private boolean gameRunning;
     private boolean receivedMenuChoice;
     private KeyPress keyPressed;
 
@@ -23,14 +24,15 @@ public class Game {
      */
     public void init() {
 
+        canvas = new Canvas();
+        canvas.draw();
+
         inputHandler = new InputHandler(this);
 
-        canvas = new Canvas();
 
         enemies = new Character[ENEMIES_PER_LEVEL];
         playerParty = new Character[PLAYER_PARTY_SIZE];
 
-        canvas.draw();
 
         //Temporary enemy for testing
         //@TODO remove temporary enemies
@@ -45,14 +47,25 @@ public class Game {
 
     public void start() throws InterruptedException {
 
-        while(true) {
+        gameRunning = true;
 
-            if (keyPressed != null){
-                //logica();
-                receivedMenuChoice = true;
-                System.out.println("pressed");
+        while (gameRunning) {
+
+            // Checks if a key was pressed, or sleeps for 1000 ms
+
+            if (keyPressed != null) {
+                /* PLACEHOLDER -- Here, we should see something from the InputHandler, and act on it
+                * Menu logic (be something like this)
+                * menu.processKey( keyPressed );
+                *
+                * and should return something that tells the game what to do.
+                * For now, all it can do is fight();
+                */
+
                 fight(playerParty[0], enemies[0]);
+                receivedMenuChoice = true;
                 Thread.sleep(800);
+
 
                 keyPressed = null;
 
@@ -70,20 +83,6 @@ public class Game {
 
         keyPressed = key;
 
-        /*
-        // Game needs to talk to the menu depending on which key was pressed:
-        switch (key) {
-            case UP:
-                break;
-            case DOWN:
-                break;
-            case SPACE:
-                 break;
-            default:
-                break;
-
-        }
-*/
     }
 
     private void fight(Character playerChar, Character enemyChar) {

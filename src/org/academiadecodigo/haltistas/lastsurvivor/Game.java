@@ -3,6 +3,7 @@ package org.academiadecodigo.haltistas.lastsurvivor;
 import org.academiadecodigo.haltistas.lastsurvivor.characters.Character;
 import org.academiadecodigo.haltistas.lastsurvivor.characters.CharacterFactory;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.Canvas;
+import org.academiadecodigo.haltistas.lastsurvivor.input.InputHandler;
 
 public class Game {
 

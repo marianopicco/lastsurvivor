@@ -1,5 +1,6 @@
-package org.academiadecodigo.haltistas.lastsurvivor;
+package org.academiadecodigo.haltistas.lastsurvivor.input;
 
+import org.academiadecodigo.haltistas.lastsurvivor.Game;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;

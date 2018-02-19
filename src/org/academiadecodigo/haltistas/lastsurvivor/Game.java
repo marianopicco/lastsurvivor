@@ -4,6 +4,7 @@ import org.academiadecodigo.haltistas.lastsurvivor.characters.Character;
 import org.academiadecodigo.haltistas.lastsurvivor.characters.CharacterFactory;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.Canvas;
 import org.academiadecodigo.haltistas.lastsurvivor.input.InputHandler;
+import org.academiadecodigo.haltistas.lastsurvivor.input.KeyPress;
 
 public class Game {
 
@@ -13,8 +14,8 @@ public class Game {
     private Character[] enemies;
     private Character[] playerParty;
     private Canvas canvas;
-
-    private boolean playerTurn = true;
+    private boolean receivedMenuChoice;
+    private KeyPress keyPressed;
 
     /**
      * Game Class
@@ -38,37 +39,84 @@ public class Game {
             enemies[i] = CharacterFactory.createCharacter("Baddie " + (i + 1), 1.23, 1);
         }
 
-        playerParty[0] = CharacterFactory.createCharacter("Player", 1, 1.9);
+        playerParty[0] = CharacterFactory.createCharacter("Player", 1.8, 1.9);
 
     }
 
-    public void receiveInput() throws InterruptedException {
+    public void start() throws InterruptedException {
 
-        if (playerTurn) {
-            playerTurn = false;
-            fight(playerParty[0], enemies[0]);
+        while(true) {
 
+            if (keyPressed != null){
+                //logica();
+                receivedMenuChoice = true;
+                System.out.println("pressed");
+                fight(playerParty[0], enemies[0]);
+                Thread.sleep(800);
+
+                keyPressed = null;
+
+            }
+
+            Thread.sleep(1000);
         }
     }
 
-    private void fight(Character playerChar, Character enemyChar) throws InterruptedException {
+    public void receiveInput(KeyPress key) {
+
+        if (keyPressed != null) {
+            return;
+        }
+
+        keyPressed = key;
+
+        /*
+        // Game needs to talk to the menu depending on which key was pressed:
+        switch (key) {
+            case UP:
+                break;
+            case DOWN:
+                break;
+            case SPACE:
+                 break;
+            default:
+                break;
+
+        }
+*/
+    }
+
+    private void fight(Character playerChar, Character enemyChar) {
+
+        while (!receivedMenuChoice) {
+            return;
+        }
 
 
-        Thread.sleep(2500);
+        //TODO handle exceptions correctly
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if (enemyChar.isAlive()) {
             playerChar.attack(enemyChar);
             System.out.println("\n");
         }
         for (Character enemy : enemies) {
 
-            Thread.sleep(2500);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             enemy.attack(playerParty, playerParty.length);
             System.out.println("\n");
 
         }
 
-        playerTurn = true;
+        receivedMenuChoice = false;
     }
-
-
 }

@@ -62,17 +62,7 @@ public class ActionMenu extends Menu {
         magic.draw();
         defend.draw();
         item.draw();
-
-        while (true) {
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            moveDown();
-        }
+        
     }
 
     public void moveDown() {
@@ -88,6 +78,15 @@ public class ActionMenu extends Menu {
 
     }
 
-    
+    public void moveUp() {
+
+        if (actionPointer == 0) {
+            selectionBox.translate(SELECTION_MOVE_X, 80);
+            actionPointer = Action.values().length;
+        }
+
+        actionPointer--;
+        selectionBox.translate(SELECTION_MOVE_X, - SELECTION_MOVE_Y);
+    }
 
 }

@@ -10,7 +10,7 @@ public class StatusMenu  extends Menu {
 
         Rectangle rightMenu = new Rectangle(menuX(), menuY(), menuWidth(), menuHeight());
         rightMenu.fill();
-        rightMenu.setColor(new Color(70, 130, 180));//steelblue
+        rightMenu.setColor(new Color(70, 130, 180)); //steelblue
     }
 
     @Override

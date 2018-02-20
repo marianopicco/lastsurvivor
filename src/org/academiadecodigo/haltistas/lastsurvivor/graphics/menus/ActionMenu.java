@@ -93,14 +93,14 @@ public class ActionMenu extends Menu {
 
     public void actionSelection() {
 
-        Action action = Action.values()[0];
-        System.out.println(action);
+        Action action = Action.values()[0]; // needed to find another way
 
         switch (action) {
             case ATTACK:
                 enemySelection();
                 break;
             case MAGIC:
+                enemySelection();
                 break;
             case DEFEND:
                 break;
@@ -116,7 +116,7 @@ public class ActionMenu extends Menu {
         Picture pointer2 = new Picture(5, 50, "assets/bluediamond.png");
         pointer2.grow(-100, -100);
         pointer2.draw();
-        
+
     }
 
 }

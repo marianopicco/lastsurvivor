@@ -36,9 +36,8 @@ public class Canvas implements Drawable {
 
     private void createBackground() {
 
-        Picture pic = new Picture(-150, -180, "assets/background_test.jpg");
+        Picture pic = new Picture(PADDING, PADDING, "assets/background_test.jpg");
 
-        pic.grow(-2000, -180);
         pic.draw();
     }
 

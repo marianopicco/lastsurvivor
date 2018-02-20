@@ -115,15 +115,8 @@ public class Character implements Drawable {
                 '}';
     }
 
-    public int getHp() {
-        return hp;
-    }
-
     public boolean isAlive() {
         return isAlive;
     }
 
-    public boolean getIsAlive() {
-        return isAlive;
-    }
 }

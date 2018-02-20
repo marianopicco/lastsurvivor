@@ -8,8 +8,8 @@ import org.academiadecodigo.haltistas.lastsurvivor.input.KeyPress;
 
 public class Game {
 
-    private final int PLAYER_PARTY_SIZE = 4;
-    private final int ENEMIES_PER_LEVEL = 2;
+    private final int PLAYER_PARTY_SIZE = 3;
+    private final int ENEMIES_PER_LEVEL = 3;
 
     private InputHandler inputHandler;
     private Character[] enemies;
@@ -35,15 +35,9 @@ public class Game {
         enemies = new Character[ENEMIES_PER_LEVEL];
         playerParty = new Character[PLAYER_PARTY_SIZE];
 
+        // Current party only has one character, expandable in the future
 
-        //Temporary enemy for testing
-        //@TODO remove temporary enemies
-
-       /* for (int i = 0; i < enemies.length; i++) {
-           enemies[i] = CharacterFactory.createCharacter("Baddie " + (i + 1), 1.23, 1);
-        }*/
-
-        playerParty[0] = CharacterFactory.createCharacter("Player", 1.8, 1.9);
+        playerParty[0] = CharacterFactory.createCharacter("Player", 3, 4);
 
         currentStage = new Stage(3);
     }
@@ -52,11 +46,17 @@ public class Game {
 
         gameRunning = true;
 
+        // Player is now targeting enemies sequentially until the menu is working
+
+        int playerTarget = 0;
+
         while (gameRunning) {
 
             // Checks if a key was pressed, or sleeps for 1000 ms
 
             if (keyPressed != null) {
+
+                //TODO add menu interaction
                 /* PLACEHOLDER -- Here, we should see something from the InputHandler, and act on it
                 * Menu logic (be something like this)
                 * menu.processKey( keyPressed );
@@ -65,16 +65,28 @@ public class Game {
                 * For now, all it can do is fight();
                 */
 
-                fight(playerParty[0], currentStage.getEnemies()[0]);
-                receivedMenuChoice = true;
-                Thread.sleep(800);
+                fight(playerParty[0], currentStage.getEnemies()[playerTarget]);
 
+                // Attack current target till it dies then get the next
+
+                if (!currentStage.getEnemies()[playerTarget].isAlive()) {
+
+                    playerTarget++;
+                    if (playerTarget >= ENEMIES_PER_LEVEL) {
+                        System.out.println("Game over for this level, all enemies dead.");
+                        gameRunning = false;
+                        currentStage = new Stage(3);
+                    }
+                }
+
+                receivedMenuChoice = true;
+                Thread.sleep(500);
 
                 keyPressed = null;
 
             }
 
-            Thread.sleep(1000);
+            Thread.sleep(500);
 
         }
     }
@@ -88,6 +100,8 @@ public class Game {
         keyPressed = key;
 
     }
+
+    // Fight is the only method for our characters right now
 
     private void fight(Character playerChar, Character enemyChar) {
 
@@ -119,6 +133,8 @@ public class Game {
             System.out.println("\n");
 
         }
+
+        // Menu should reset so we can get a new command
 
         receivedMenuChoice = false;
     }

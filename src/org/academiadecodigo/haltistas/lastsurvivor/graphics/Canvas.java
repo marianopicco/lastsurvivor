@@ -55,19 +55,66 @@ public class Canvas implements Drawable {
 
     public void drawCharacters(){
 
-        Ellipse evilGuy =new Ellipse(100,250,100,100);
+        Ellipse evilGuy =new Ellipse(100,100,100,100);
         evilGuy.fill();
+
+        Ellipse evilGuy2 =new Ellipse(100,250,100,100);
+        evilGuy2.fill();
+
+        Ellipse evilGuy3 =new Ellipse(100,400,100,100);
+        evilGuy3.fill();
 
         Ellipse goodGuy = new Ellipse(800, 250, 100, 100);
         goodGuy.draw();
 
+/*
+        Picture evil1 = new Picture(100, 50, "assets/evil1.png");
+        evil1.draw();
 
-        Picture pointer2 = new Picture(5, 50, "assets/bluediamond.png");
-        pointer2.grow(-100, -100);
+        Picture evil2 = new Picture(100, 225, "assets/evil2.png");
+        evil2.draw();
+
+        Picture evil3 = new Picture(100, 400, "assets/evil3.png");
+        evil3.draw();
+
+        Picture hero = new Picture(800, 250, "assets/hero.png");
+        hero.draw();
+*/
+
+        Picture pointer = new Picture(70, 70, "assets/bluediamond.png");
+        pointer.draw();
+
+        Picture pointer2 = new Picture(70, 220, "assets/bluediamond.png");
         pointer2.draw();
 
+        Picture pointer3 = new Picture(70, 370, "assets/bluediamond.png");
+        pointer3.draw();
 
-        //goodGuy.translate(-600,0); é a deslocação de ataque
+
+
+
+        //goodGuy.translate(-600,0); //é a deslocação de ataque
+        //goodGuy.translate(600,0);
 
     }
+/*
+    public void enemyPosition(){
+
+        int numberOfEnemies;
+
+        switch(numberOfEnemies) {
+            case 1:
+
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            default:
+
+
+        }
+
+    }
+    */
 }

@@ -19,6 +19,10 @@ public class Canvas implements Drawable {
     private Menu statusMenu;
     private Menu actionMenu;
     private Menu characterMenu;
+    private Ellipse goodGuy;
+    private Ellipse evilGuy;
+    private Ellipse evilGuy2;
+    private Ellipse evilGuy3;
 
 
     public Canvas() {
@@ -68,6 +72,7 @@ public class Canvas implements Drawable {
 
             case UP:
                 currentMenu.moveUp();
+                translateGoodGuy();
                 break;
             case DOWN:
                 currentMenu.moveDown();
@@ -83,16 +88,16 @@ public class Canvas implements Drawable {
 
     public void drawCharacters() {
 
-        Ellipse evilGuy = new Ellipse(100, 100, 100, 100);
+        evilGuy = new Ellipse(100, 100, 100, 100);
         evilGuy.fill();
 
-        Ellipse evilGuy2 = new Ellipse(100, 250, 100, 100);
+        evilGuy2 = new Ellipse(100, 250, 100, 100);
         evilGuy2.fill();
 
-        Ellipse evilGuy3 = new Ellipse(100, 400, 100, 100);
+        evilGuy3 = new Ellipse(100, 400, 100, 100);
         evilGuy3.fill();
 
-        Ellipse goodGuy = new Ellipse(800, 250, 100, 100);
+        goodGuy = new Ellipse(800, 250, 100, 100);
         goodGuy.draw();
 
         Picture pointer = new Picture(70, 70, "assets/bluediamond.png");
@@ -105,5 +110,34 @@ public class Canvas implements Drawable {
         pointer3.draw();
 
     }
+    //goodGuy.translate(-600,0); //é a deslocação de ataque
+    //goodGuy.translate(600,0);
+
+
+    public void translateGoodGuy(){
+        goodGuy.translate(300,0);
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        goodGuy.translate(000,0);
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        goodGuy.translate(-600,0); //é a deslocação de ataque
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        goodGuy.translate(600,0);
+    }
+
+
+
+
 
 }

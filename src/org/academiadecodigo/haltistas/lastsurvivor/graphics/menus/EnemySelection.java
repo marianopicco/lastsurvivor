@@ -14,7 +14,6 @@ public class EnemySelection implements Movement{
 
     @Override
     public void actionSelection() {
-        
 
     }
 }

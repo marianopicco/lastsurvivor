@@ -65,7 +65,6 @@ public class ActionMenu extends Menu implements Movement {
         magic.draw();
         defend.draw();
         item.draw();
-
         actionSelection();
     }
 

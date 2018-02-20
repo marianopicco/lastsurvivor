@@ -23,7 +23,7 @@ public class Canvas implements Drawable {
 
     public Canvas() {
         draw();
-        currentMenu = (ActionMenu)actionMenu;
+        currentMenu = (ActionMenu) actionMenu;
     }
 
 
@@ -33,7 +33,6 @@ public class Canvas implements Drawable {
         createAreaOfGame();
         createBackground();
         createMenu();
-
         drawCharacters();
 
     }
@@ -63,8 +62,10 @@ public class Canvas implements Drawable {
         actionMenu.draw();
     }
 
-    public void receivedAction(KeyPress keyPress){
-        switch(keyPress){
+    public void receivedAction(KeyPress keyPress) {
+
+        switch (keyPress) {
+
             case UP:
                 currentMenu.moveUp();
                 break;
@@ -76,8 +77,6 @@ public class Canvas implements Drawable {
                 break;
             default:
                 System.out.println("JVM fucked up");
-
-
         }
 
     }
@@ -96,20 +95,6 @@ public class Canvas implements Drawable {
         Ellipse goodGuy = new Ellipse(800, 250, 100, 100);
         goodGuy.draw();
 
-/*
-        Picture evil1 = new Picture(100, 50, "assets/evil1.png");
-        evil1.draw();
-
-        Picture evil2 = new Picture(100, 225, "assets/evil2.png");
-        evil2.draw();
-
-        Picture evil3 = new Picture(100, 400, "assets/evil3.png");
-        evil3.draw();
-
-        Picture hero = new Picture(800, 250, "assets/hero.png");
-        hero.draw();
-*/
-
         Picture pointer = new Picture(70, 70, "assets/bluediamond.png");
         pointer.draw();
 
@@ -119,29 +104,6 @@ public class Canvas implements Drawable {
         Picture pointer3 = new Picture(70, 370, "assets/bluediamond.png");
         pointer3.draw();
 
-
-        //goodGuy.translate(-600,0); //é a deslocação de ataque
-        //goodGuy.translate(600,0);
-
     }
-/*
-    public void enemyPosition(){
 
-        int numberOfEnemies;
-
-        switch(numberOfEnemies) {
-            case 1:
-
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            default:
-
-
-        }
-
-    }
-    */
 }

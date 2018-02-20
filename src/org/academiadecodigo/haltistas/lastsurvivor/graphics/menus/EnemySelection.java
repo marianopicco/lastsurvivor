@@ -1,6 +1,6 @@
 package org.academiadecodigo.haltistas.lastsurvivor.graphics.menus;
 
-public class EnemySelection implements Movement{
+public class EnemySelection implements Movable {
 
     @Override
     public void moveDown() {

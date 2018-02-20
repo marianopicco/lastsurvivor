@@ -1,9 +1,6 @@
 package org.academiadecodigo.haltistas.lastsurvivor.graphics;
 
-import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.ActionMenu;
-import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.CharacterMenu;
-import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.Menu;
-import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.StatusMenu;
+import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.*;
 import org.academiadecodigo.haltistas.lastsurvivor.input.KeyPress;
 import org.academiadecodigo.haltistas.lastsurvivor.interfaces.Drawable;
 import org.academiadecodigo.simplegraphics.graphics.Ellipse;
@@ -15,15 +12,16 @@ public class Canvas implements Drawable {
     public final static int PADDING = 10;
     public final static int BACKGROUND_WIDTH = 1000;
     public final static int BACKGROUND_HEIGHT = 700;
-    private ActionMenu currentMenu;
+
+    private Movable currentMenu;
+    private Movable actionMenu;
     private Menu statusMenu;
-    private Menu actionMenu;
     private Menu characterMenu;
 
 
     public Canvas() {
         draw();
-        currentMenu = (ActionMenu) actionMenu;
+        currentMenu = actionMenu;
     }
 
 

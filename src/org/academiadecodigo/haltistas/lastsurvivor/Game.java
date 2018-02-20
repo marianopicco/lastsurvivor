@@ -57,14 +57,15 @@ public class Game {
 
                 //TODO add menu interaction
                 /* PLACEHOLDER -- Here, we should see something from the InputHandler, and act on it
-                * Menu logic (be something like this)
-                * menu.processKey( keyPressed );
-                *
-                * and should return something that tells the game what to do.
-                * For now, all it can do is fight();
-                */
+                 * Menu logic (be something like this)
+                 * menu.processKey( keyPressed );
+                 *
+                 * and should return something that tells the game what to do.
+                 * For now, all it can do is fight();
+                 */
 
-               canvas.receivedAction(keyPressed);
+
+                canvas.receivedAction(keyPressed);
 
 
                 /*fight(playerParty[0], currentStage.getEnemies()[playerTarget]);

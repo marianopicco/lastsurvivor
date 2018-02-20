@@ -4,9 +4,8 @@ import org.academiadecodigo.haltistas.lastsurvivor.graphics.Action;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public class ActionMenu extends Menu implements Movement {
+public class ActionMenu extends Menu implements Movable {
 
     private final static int INITIAL_POSITION_X = 260;
     private final static int SELECTION_MOVE_X = 0;

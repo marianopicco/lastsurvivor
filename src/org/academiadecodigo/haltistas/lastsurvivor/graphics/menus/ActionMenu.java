@@ -6,7 +6,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public class ActionMenu extends Menu {
+public class ActionMenu extends Menu implements Movement {
 
     private final static int INITIAL_POSITION_X = 260;
     private final static int SELECTION_MOVE_X = 0;
@@ -15,6 +15,7 @@ public class ActionMenu extends Menu {
     private int initialPositionY = menuY() + 10;
     private int actionPointer = 0;
     private Rectangle selectionBox;
+    private Action currentAction;
 
 
     public ActionMenu() {
@@ -22,6 +23,7 @@ public class ActionMenu extends Menu {
         Rectangle actionMenu = new Rectangle(menuX(), menuY(), menuWidth(), menuHeight());
         actionMenu.fill();
         actionMenu.setColor(Color.CYAN);
+        currentAction = Action.ATTACK;
     }
 
     @Override
@@ -67,6 +69,7 @@ public class ActionMenu extends Menu {
         actionSelection();
     }
 
+    @Override
     public void moveDown() {
 
         actionPointer++;
@@ -80,6 +83,7 @@ public class ActionMenu extends Menu {
 
     }
 
+    @Override
     public void moveUp() {
 
         if (actionPointer == 0) {
@@ -91,35 +95,27 @@ public class ActionMenu extends Menu {
         selectionBox.translate(SELECTION_MOVE_X, -SELECTION_MOVE_Y);
     }
 
+    @Override
     public void actionSelection() {
 
-        Action action = Action.values()[0]; // needed to find another way
-
-        switch (action) {
+        switch (currentAction) {
             case ATTACK:
-                enemySelection();
+                //call class EnemySelection
                 break;
             case MAGIC:
-                enemySelection();
+                //call class EnemySelection
                 break;
             case DEFEND:
                 break;
             case ITEMS:
                 break;
             default:
-                System.out.println("Error");
+                System.out.println("JVM fucked up");
         }
     }
 
-    public void enemySelection() {
-
-        Picture pointer2 = new Picture(5, 50, "assets/bluediamond.png");
-        pointer2.grow(-100, -100);
-        pointer2.draw();
-
+    public Action getCurrentAction() {
+        return currentAction;
     }
 
-    public Rectangle getSelectionBox() {
-        return selectionBox;
-    }
 }

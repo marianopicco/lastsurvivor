@@ -38,7 +38,7 @@ public class Game {
 
         playerParty[0] = CharacterFactory.createCharacter("Player", 3, 4);
 
-        currentStage = new Stage(3);
+        currentStage = new Stage(1);
     }
 
     public void start() throws InterruptedException {

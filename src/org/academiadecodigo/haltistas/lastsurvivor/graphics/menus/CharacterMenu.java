@@ -17,8 +17,6 @@ public class CharacterMenu extends Menu {
         leftMenu.setColor(Color.RED);
 
         textCharacter();
-
-
     }
 
     @Override

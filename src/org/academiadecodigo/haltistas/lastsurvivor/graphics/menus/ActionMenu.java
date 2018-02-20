@@ -4,6 +4,7 @@ import org.academiadecodigo.haltistas.lastsurvivor.graphics.Action;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class ActionMenu extends Menu {
 
@@ -25,7 +26,7 @@ public class ActionMenu extends Menu {
 
     @Override
     public void draw() {
-        defineAction();
+        drawAction();
     }
 
     @Override
@@ -48,7 +49,7 @@ public class ActionMenu extends Menu {
         return super.menuWidth() / 2;
     }
 
-    public void defineAction() {
+    public void drawAction() {
 
         Text attack = new Text(INITIAL_POSITION_X, initialPositionY, Action.ATTACK.getAction());
         Text magic = new Text(INITIAL_POSITION_X, menuY() + 30, Action.MAGIC.getAction());
@@ -62,7 +63,8 @@ public class ActionMenu extends Menu {
         magic.draw();
         defend.draw();
         item.draw();
-        
+
+        actionSelection();
     }
 
     public void moveDown() {
@@ -86,7 +88,35 @@ public class ActionMenu extends Menu {
         }
 
         actionPointer--;
-        selectionBox.translate(SELECTION_MOVE_X, - SELECTION_MOVE_Y);
+        selectionBox.translate(SELECTION_MOVE_X, -SELECTION_MOVE_Y);
+    }
+
+    public void actionSelection() {
+
+        Action action = Action.values()[0];
+        System.out.println(action);
+
+        switch (action) {
+            case ATTACK:
+                enemySelection();
+                break;
+            case MAGIC:
+                break;
+            case DEFEND:
+                break;
+            case ITEMS:
+                break;
+            default:
+                System.out.println("Error");
+        }
+    }
+
+    public void enemySelection() {
+
+        Picture pointer2 = new Picture(5, 50, "assets/bluediamond.png");
+        pointer2.grow(-100, -100);
+        pointer2.draw();
+        
     }
 
 }

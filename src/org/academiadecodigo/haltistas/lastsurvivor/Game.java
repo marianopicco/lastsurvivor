@@ -27,7 +27,6 @@ public class Game {
     public void init() {
 
         canvas = new Canvas();
-        canvas.draw();
 
         inputHandler = new InputHandler(this);
 
@@ -65,9 +64,14 @@ public class Game {
                 * For now, all it can do is fight();
                 */
 
-                fight(playerParty[0], currentStage.getEnemies()[playerTarget]);
+               canvas.receivedAction(keyPressed);
+
+
+                /*fight(playerParty[0], currentStage.getEnemies()[playerTarget]);
 
                 // Attack current target till it dies then get the next
+
+
 
                 if (!currentStage.getEnemies()[playerTarget].isAlive()) {
 
@@ -77,7 +81,8 @@ public class Game {
                         gameRunning = false;
                         currentStage = new Stage(3);
                     }
-                }
+                }*/
+
 
                 receivedMenuChoice = true;
                 Thread.sleep(500);

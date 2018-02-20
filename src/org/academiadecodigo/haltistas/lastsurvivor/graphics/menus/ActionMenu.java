@@ -119,4 +119,7 @@ public class ActionMenu extends Menu {
 
     }
 
+    public Rectangle getSelectionBox() {
+        return selectionBox;
+    }
 }

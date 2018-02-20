@@ -4,6 +4,7 @@ import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.ActionMenu;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.CharacterMenu;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.Menu;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.StatusMenu;
+import org.academiadecodigo.haltistas.lastsurvivor.input.KeyPress;
 import org.academiadecodigo.haltistas.lastsurvivor.interfaces.Drawable;
 import org.academiadecodigo.simplegraphics.graphics.Ellipse;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
@@ -14,6 +15,16 @@ public class Canvas implements Drawable {
     public final static int PADDING = 10;
     public final static int BACKGROUND_WIDTH = 1000;
     public final static int BACKGROUND_HEIGHT = 700;
+    private ActionMenu currentMenu;
+    private Menu statusMenu;
+    private Menu actionMenu;
+    private Menu characterMenu;
+
+
+    public Canvas() {
+        draw();
+        currentMenu = (ActionMenu)actionMenu;
+    }
 
 
     @Override
@@ -43,24 +54,43 @@ public class Canvas implements Drawable {
 
     private void createMenu() {
 
-        Menu statusMenu = new StatusMenu();
-        Menu characterMenu = new CharacterMenu();
-        Menu ss = new ActionMenu();
+        statusMenu = new StatusMenu();
+        characterMenu = new CharacterMenu();
+        actionMenu = new ActionMenu();
 
         statusMenu.draw();
         characterMenu.draw();
-        ss.draw();
+        actionMenu.draw();
     }
 
-    public void drawCharacters(){
+    public void receivedAction(KeyPress keyPress){
+        switch(keyPress){
+            case UP:
+                currentMenu.moveUp();
+                break;
+            case DOWN:
+                currentMenu.moveDown();
+                break;
+            case SPACE:
+                currentMenu.actionSelection();
+                break;
+            default:
+                System.out.println("JVM fucked up");
 
-        Ellipse evilGuy =new Ellipse(100,100,100,100);
+
+        }
+
+    }
+
+    public void drawCharacters() {
+
+        Ellipse evilGuy = new Ellipse(100, 100, 100, 100);
         evilGuy.fill();
 
-        Ellipse evilGuy2 =new Ellipse(100,250,100,100);
+        Ellipse evilGuy2 = new Ellipse(100, 250, 100, 100);
         evilGuy2.fill();
 
-        Ellipse evilGuy3 =new Ellipse(100,400,100,100);
+        Ellipse evilGuy3 = new Ellipse(100, 400, 100, 100);
         evilGuy3.fill();
 
         Ellipse goodGuy = new Ellipse(800, 250, 100, 100);
@@ -88,8 +118,6 @@ public class Canvas implements Drawable {
 
         Picture pointer3 = new Picture(70, 370, "assets/bluediamond.png");
         pointer3.draw();
-
-
 
 
         //goodGuy.translate(-600,0); //é a deslocação de ataque

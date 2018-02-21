@@ -112,11 +112,10 @@ public class Canvas implements Drawable {
     public class ActionMenu extends Menu {
 
         private Position pos;
-        private final static int INITIAL_POSITION_X = 260;
-        private final static int SELECTION_MOVE_X = 0;
-        private final static int SELECTION_MOVE_Y = 20;
+        private final static int TEXT_PADDING_LEFT = 30;
+        private final static int TEXT_PADDING = 20;
+        private final static int TEXT_POSITION = 260;
 
-        private int initialPositionY = menuY() + 10;
         private int actionPointer = 0;
         private Rectangle selectionBox;
         private Rectangle actionMenu;
@@ -126,11 +125,22 @@ public class Canvas implements Drawable {
         private Text defend;
         private Text item;
 
+        private Position textPos1;
+        private Position textPos2;
+        private Position textPos3;
+        private Position textPos4;
+
 
         ActionMenu() {
             currentAction = null;
             pos = new Position(super.menuWidth()/2, super.menuY()+10);
 
+            double leftPadding = pos.getPosX() + TEXT_PADDING_LEFT;
+            // Text starts at background position, then increases relating to the previous text
+            textPos1 = new Position(leftPadding, this.pos.getPosY() + TEXT_PADDING);
+            textPos2 = new Position(leftPadding, textPos1.getPosY() + TEXT_PADDING);
+            textPos3 = new Position(leftPadding, textPos2.getPosY() + TEXT_PADDING);
+            textPos4 = new Position(leftPadding, textPos3.getPosY() + TEXT_PADDING);
         }
 
         @Override
@@ -142,37 +152,17 @@ public class Canvas implements Drawable {
             hideAction();
         }
 
-        @Override
-        public int menuX() {
-            return super.menuWidth() / 2;
-        }
-
-        @Override
-        public int menuY() {
-            return super.menuY() + 10;
-        }
-
-        @Override
-        public int menuHeight() {
-            return super.menuHeight() - 20;
-        }
-
-        @Override
-        public int menuWidth() {
-            return super.menuWidth() / 2;
-        }
-
         void instantiateStuff() {
 
-            actionMenu = new Rectangle(this.pos.getPosX(), this.pos.getPosY(), menuWidth(), menuHeight());
+            actionMenu = new Rectangle(this.pos.getPosX(), this.pos.getPosY(), 250, 130);
             actionMenu.setColor(Color.CYAN);
 
-            attack = new Text(INITIAL_POSITION_X, initialPositionY, Action.ATTACK.getAction());
-            magic = new Text(INITIAL_POSITION_X, menuY() + 30, Action.MAGIC.getAction());
-            defend = new Text(INITIAL_POSITION_X, menuY() + 50, Action.DEFEND.getAction());
-            item = new Text(INITIAL_POSITION_X, menuY() + 70, Action.ITEMS.getAction());
+            attack = new Text(textPos1.getPosX(), textPos1.getPosY(), Action.ATTACK.getAction());
+            magic = new Text(textPos2.getPosX(), textPos2.getPosY(), Action.MAGIC.getAction());
+            defend = new Text(textPos3.getPosX(), textPos3.getPosY(), Action.DEFEND.getAction());
+            item = new Text(textPos4.getPosX(), textPos4.getPosY(), Action.ITEMS.getAction());
 
-            selectionBox = new Rectangle(INITIAL_POSITION_X, initialPositionY, 60, 20);
+            selectionBox = new Rectangle(textPos1.getPosX(), textPos1.getPosY(), 60, 20);
 
         }
         void drawAction() {
@@ -204,23 +194,23 @@ public class Canvas implements Drawable {
             actionPointer++;
 
             if (actionPointer == Action.values().length) {
-                selectionBox.translate(SELECTION_MOVE_X, -80);
+                selectionBox.translate(0, - (Action.values().length * TEXT_PADDING));
                 actionPointer = 0;
             }
 
-            selectionBox.translate(SELECTION_MOVE_X, SELECTION_MOVE_Y);
+            selectionBox.translate(0, TEXT_PADDING);
 
         }
 
         void moveUp() {
 
             if (actionPointer == 0) {
-                selectionBox.translate(SELECTION_MOVE_X, 80);
+                selectionBox.translate(0, (Action.values().length * TEXT_PADDING));
                 actionPointer = Action.values().length;
             }
 
             actionPointer--;
-            selectionBox.translate(SELECTION_MOVE_X, -SELECTION_MOVE_Y);
+            selectionBox.translate(0, -TEXT_PADDING);
         }
 
         void actionSelection() {

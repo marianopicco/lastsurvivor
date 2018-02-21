@@ -129,7 +129,7 @@ public class Canvas implements Drawable {
 
         ActionMenu() {
             currentAction = null;
-            pos = new Position(INITIAL_POSITION_X, initialPositionY);
+            pos = new Position(super.menuWidth()/2, super.menuY()+10);
 
         }
 
@@ -164,7 +164,7 @@ public class Canvas implements Drawable {
 
         void instantiateStuff() {
 
-            actionMenu = new Rectangle(menuX(), menuY(), menuWidth(), menuHeight());
+            actionMenu = new Rectangle(this.pos.getPosX(), this.pos.getPosY(), menuWidth(), menuHeight());
             actionMenu.setColor(Color.CYAN);
 
             attack = new Text(INITIAL_POSITION_X, initialPositionY, Action.ATTACK.getAction());

@@ -24,12 +24,14 @@ public class Stage {
     private void populateEnemies() {
         for (int i = 0; i < numEnemies; i++) {
             enemies[i] = CharacterFactory.createCharacter("Baddie " + (i + 1), 1, 1);
+
         }
 
     }
 
     public Character[] getEnemies() {
             return enemies;
+
     }
 
 }

@@ -55,37 +55,27 @@ public class Game {
 
             if (keyPressed != null) {
 
-                //TODO add menu interaction
-                /* PLACEHOLDER -- Here, we should see something from the InputHandler, and act on it
-                 * Menu logic (be something like this)
-                 * menu.processKey( keyPressed );
-                 *
-                 * and should return something that tells the game what to do.
-                 * For now, all it can do is fight();
-                 */
+                //TODO finish menu interaction
 
                 canvas.receivedAction(keyPressed);
 
 
-                if (canvas.playerChoice() != null) {
+                if (canvas.getCurrentAction() != null) {
 
-                    fight(playerParty[0], currentStage.getEnemies()[playerTarget]);
+                    switch (canvas.getCurrentAction()) {
 
-                    // Attack current target till it dies then get the next
+                        case ATTACK:
+                            fight(playerParty[0], currentStage.getEnemies()[playerTarget]);
+                            break;
+                        case DEFEND:
+                            break;
+                        default:
+                            System.out.println("JVM error");
 
-
-                    if (!currentStage.getEnemies()[playerTarget].isAlive()) {
-
-                        playerTarget++;
-                        if (playerTarget >= ENEMIES_PER_LEVEL) {
-                            System.out.println("Game over for this level, all enemies dead.");
-
-                            gameRunning = false;
-                        }
                     }
 
+                    canvas.resetCurrentAction();
                 }
-
 
                 receivedMenuChoice = true;
                 Thread.sleep(500);

@@ -56,7 +56,6 @@ public class Game {
             canvas.showActionMenu();
 
             if (keyPressed != null) {
-                canvas.translateGoodGuyToE();
 
                 canvas.receivedAction(keyPressed);
 

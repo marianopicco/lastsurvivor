@@ -23,7 +23,6 @@ public class Canvas implements Drawable {
     private Ellipse evilGuy;
 
 
-
     public Canvas() {
         draw();
     }
@@ -63,7 +62,8 @@ public class Canvas implements Drawable {
 
         actionMenu.instantiateStuff();
     }
-//TODO clear translate tests in receivedAction method
+
+    //TODO clear translate tests in receivedAction method
     public void receivedAction(KeyPress keyPress) {
 
         switch (keyPress) {
@@ -108,51 +108,29 @@ public class Canvas implements Drawable {
 
     }
 
+    //Todo verify and change the argument
+    public void translateCharacter(Ellipse origin, Ellipse target) throws InterruptedException {
 
-    public void translateCharacter(Character origin, Character target) throws InterruptedException {
 
-        double initialX, initialY;
-        double finalX, finalY;
-
-        while (goodGuy.getX() > evilGuy.getX() + 100) {
-            goodGuy.translate(-3, 0);
-            Thread.sleep(1);
+        if (origin.equals(goodGuy)) {
+            while (origin.getX() > target.getX() + 100) {
+                origin.translate(-3, 0);
+                Thread.sleep(1);
+            }
+            while (origin.getX() < 800) {
+                origin.translate(3, 0);
+                Thread.sleep(1);
+            }
+        } else {
+            while (origin.getX() < target.getX() - 100) {
+                origin.translate(3, 0);
+                Thread.sleep(1);
+            }
+            while (origin.getX() > 100) {
+                origin.translate(-3, 0);
+                Thread.sleep(1);
+            }
         }
-        while (goodGuy.getX() < 800) {
-            goodGuy.translate(3, 0);
-            Thread.sleep(1);
-        }
-
-    }
-
-
-        public void translateGoodGuyToE() {
-
-        goodGuy.translate(-200,0);
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        goodGuy.translate(-200,0);
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        goodGuy.translate(-200,0); //Atack possition
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        goodGuy.translate(300,0);
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        goodGuy.translate(300,0);
     }
 
     public void resetCurrentAction() {
@@ -222,6 +200,7 @@ public class Canvas implements Drawable {
             selectionBox = new Rectangle(INITIAL_POSITION_X, initialPositionY, 60, 20);
 
         }
+
         void drawAction() {
 
             actionMenu.fill();
@@ -291,34 +270,5 @@ public class Canvas implements Drawable {
         }
 
 
-    }
-
-
-    public void translateEToGoodGuy(){
-        evilGuy.translate(200,0);
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        evilGuy.translate(200,0);
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        evilGuy.translate(200,0); //Atack possition
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        evilGuy.translate(-300,0);
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        evilGuy.translate(-300,0);
     }
 }

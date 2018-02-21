@@ -16,13 +16,16 @@ public class Canvas implements Drawable {
     public final static int BACKGROUND_HEIGHT = 700;
 
     private ActionMenu actionMenu;
-    private Menu statusMenu;
-    private Menu characterMenu;
     private Action currentAction;
 
+    private Position leftPosition;
+    private Position rightPosition;
 
     public Canvas() {
+        leftPosition = new Position(100, 250);
+        rightPosition = new Position(800, 250);
         draw();
+
     }
 
     @Override
@@ -38,27 +41,28 @@ public class Canvas implements Drawable {
     private void createAreaOfGame() {
 
         Rectangle areaOfGame = new Rectangle(PADDING, PADDING, BACKGROUND_WIDTH, BACKGROUND_HEIGHT);
-
         areaOfGame.draw();
+
     }
 
     private void createBackground() {
 
         Picture pic = new Picture(PADDING, PADDING, "assets/background_test.jpg");
-
         pic.draw();
+
     }
 
     private void createMenu() {
 
-        statusMenu = new StatusMenu();
-        characterMenu = new CharacterMenu();
+        Menu statusMenu = new StatusMenu();
+        Menu characterMenu = new CharacterMenu();
         actionMenu = new ActionMenu();
 
         statusMenu.draw();
         characterMenu.draw();
 
         actionMenu.instantiateStuff();
+
     }
 
     public void receivedAction(KeyPress keyPress) {
@@ -76,6 +80,7 @@ public class Canvas implements Drawable {
                 break;
             default:
                 System.out.println("JVM fucked up");
+
         }
 
     }
@@ -92,31 +97,35 @@ public class Canvas implements Drawable {
         actionMenu.hide();
     }
 
-    void drawCharacters() {
+    private void drawCharacters() {
 
-        Ellipse evilGuy = new Ellipse(100, 100, 100, 100);
+        Ellipse evilGuy = new Ellipse(leftPosition.getPosX(), leftPosition.getPosY(), 100, 100);
         evilGuy.fill();
 
-        Ellipse goodGuy = new Ellipse(800, 250, 100, 100);
+        Ellipse goodGuy = new Ellipse(rightPosition.getPosX(), rightPosition.getPosY(), 100, 100);
         goodGuy.draw();
 
-        Picture pointer = new Picture(70, 70, "assets/bluediamond.png");
+        /* Pointer should be added when there is more than one enemy in the game
+        Picture pointer = new Picture(evilGuy.getX(), evilGuy.getY(), "assets/bluediamond.png");
         pointer.draw();
+        */
 
     }
 
     public void resetCurrentAction() {
         currentAction = null;
+
     }
 
     public class ActionMenu extends Menu {
 
-        private Position pos;
-        private final static int TEXT_PADDING_LEFT = 30;
-        private final static int TEXT_PADDING = 20;
-        private final static int TEXT_POSITION = 260;
 
+        private final static int TEXT_PADDING_LEFT = 50;
+        private final static int TEXT_PADDING = 23;
+
+        private Position menuPos;
         private int actionPointer = 0;
+
         private Rectangle selectionBox;
         private Rectangle actionMenu;
 
@@ -133,11 +142,12 @@ public class Canvas implements Drawable {
 
         ActionMenu() {
             currentAction = null;
-            pos = new Position(super.menuWidth()/2, super.menuY()+10);
+            menuPos = new Position(super.menuWidth() / 2, super.menuY() + 10);
 
-            double leftPadding = pos.getPosX() + TEXT_PADDING_LEFT;
+            double leftPadding = menuPos.getPosX() + TEXT_PADDING_LEFT;
+
             // Text starts at background position, then increases relating to the previous text
-            textPos1 = new Position(leftPadding, this.pos.getPosY() + TEXT_PADDING);
+            textPos1 = new Position(leftPadding, this.menuPos.getPosY() + TEXT_PADDING);
             textPos2 = new Position(leftPadding, textPos1.getPosY() + TEXT_PADDING);
             textPos3 = new Position(leftPadding, textPos2.getPosY() + TEXT_PADDING);
             textPos4 = new Position(leftPadding, textPos3.getPosY() + TEXT_PADDING);
@@ -145,27 +155,6 @@ public class Canvas implements Drawable {
 
         @Override
         public void draw() {
-            drawAction();
-        }
-
-        public void hide() {
-            hideAction();
-        }
-
-        void instantiateStuff() {
-
-            actionMenu = new Rectangle(this.pos.getPosX(), this.pos.getPosY(), 250, 130);
-            actionMenu.setColor(Color.CYAN);
-
-            attack = new Text(textPos1.getPosX(), textPos1.getPosY(), Action.ATTACK.getAction());
-            magic = new Text(textPos2.getPosX(), textPos2.getPosY(), Action.MAGIC.getAction());
-            defend = new Text(textPos3.getPosX(), textPos3.getPosY(), Action.DEFEND.getAction());
-            item = new Text(textPos4.getPosX(), textPos4.getPosY(), Action.ITEMS.getAction());
-
-            selectionBox = new Rectangle(textPos1.getPosX(), textPos1.getPosY(), 60, 20);
-
-        }
-        void drawAction() {
 
             actionMenu.fill();
 
@@ -175,6 +164,24 @@ public class Canvas implements Drawable {
             magic.draw();
             defend.draw();
             item.draw();
+        }
+
+        void hide() {
+            hideAction();
+        }
+
+        void instantiateStuff() {
+
+            actionMenu = new Rectangle(this.menuPos.getPosX(), this.menuPos.getPosY(), 250, 130);
+            actionMenu.setColor(Color.CYAN);
+
+            attack = new Text(textPos1.getPosX(), textPos1.getPosY(), Action.ATTACK.getAction());
+            defend = new Text(textPos3.getPosX(), textPos3.getPosY(), Action.DEFEND.getAction());
+            magic = new Text(textPos2.getPosX(), textPos2.getPosY(), Action.MAGIC.getAction());
+            item = new Text(textPos4.getPosX(), textPos4.getPosY(), Action.ITEMS.getAction());
+
+            selectionBox = new Rectangle(textPos1.getPosX(), textPos1.getPosY(), 60, 20);
+
         }
 
         void hideAction() {
@@ -194,7 +201,7 @@ public class Canvas implements Drawable {
             actionPointer++;
 
             if (actionPointer == Action.values().length) {
-                selectionBox.translate(0, - (Action.values().length * TEXT_PADDING));
+                selectionBox.translate(0, -(Action.values().length * TEXT_PADDING));
                 actionPointer = 0;
             }
 
@@ -233,6 +240,34 @@ public class Canvas implements Drawable {
             }
         }
 
+
+    }
+
+    public class CharacterMenu extends Menu {
+
+        private Position charmMenuPos;
+        private int initialPositionX = Canvas.PADDING + 10;
+        private int initialPositionY = 580;
+
+        CharacterMenu() {
+
+            charmMenuPos = new Position(initialPositionX, initialPositionY);
+            Rectangle leftMenu = new Rectangle(menuX(), menuY(), menuWidth(), menuHeight());
+            leftMenu.fill();
+            leftMenu.setColor(Color.RED);
+
+            textCharacter();
+        }
+
+        double menuX() {
+            return charmMenuPos.getPosX();
+        }
+
+        void textCharacter() {
+            Text name = new Text(initialPositionX, initialPositionY, "WARRIOR");
+            name.draw();
+
+        }
 
     }
 

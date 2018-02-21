@@ -14,8 +14,9 @@ public class ActionMenu extends Menu implements Movement {
 
     private int initialPositionY = menuY() + 10;
     private int actionPointer = 0;
-    private Rectangle selectionBox;
     private Action currentAction;
+    private Picture selectionPoint;
+
 
 
     public ActionMenu() {
@@ -58,8 +59,10 @@ public class ActionMenu extends Menu implements Movement {
         Text defend = new Text(INITIAL_POSITION_X, menuY() + 50, Action.DEFEND.getAction());
         Text item = new Text(INITIAL_POSITION_X, menuY() + 70, Action.ITEMS.getAction());
 
-        selectionBox = new Rectangle(INITIAL_POSITION_X, initialPositionY, 60, 20);
-        selectionBox.draw();
+
+        selectionPoint = new Picture(INITIAL_POSITION_X-25, initialPositionY+7, "assets/point.png");
+        selectionPoint.draw();
+
 
         attack.draw();
         magic.draw();
@@ -74,11 +77,11 @@ public class ActionMenu extends Menu implements Movement {
         actionPointer++;
 
         if (actionPointer == Action.values().length) {
-            selectionBox.translate(SELECTION_MOVE_X, -80);
+            selectionPoint.translate(SELECTION_MOVE_X, -80);
             actionPointer = 0;
         }
 
-        selectionBox.translate(SELECTION_MOVE_X, SELECTION_MOVE_Y);
+        selectionPoint.translate(SELECTION_MOVE_X, SELECTION_MOVE_Y);
 
     }
 
@@ -86,12 +89,12 @@ public class ActionMenu extends Menu implements Movement {
     public void moveUp() {
 
         if (actionPointer == 0) {
-            selectionBox.translate(SELECTION_MOVE_X, 80);
+            selectionPoint.translate(SELECTION_MOVE_X, 80);
             actionPointer = Action.values().length;
         }
 
         actionPointer--;
-        selectionBox.translate(SELECTION_MOVE_X, -SELECTION_MOVE_Y);
+        selectionPoint.translate(SELECTION_MOVE_X, -SELECTION_MOVE_Y);
     }
 
     @Override

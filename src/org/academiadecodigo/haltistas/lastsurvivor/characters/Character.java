@@ -25,11 +25,11 @@ public class Character implements Drawable {
     }
 
     public void attack(Character[] enemies, int numberOfEnemies) {
+        
         Character target = null;
 
         // Souts for testing
         // @TODO remove the souts after testing
-
 
         if (!this.isAlive) {
             return;
@@ -46,25 +46,23 @@ public class Character implements Drawable {
             if (enemies[random].isAlive()) {
                 target = enemies[random];
             }
-
         }
 
         if (!target.isAlive) {
+
             System.out.println(name + ": Target is dead\n");
             return;
         }
 
         System.out.println(name + ": I'm attacking " + target);
 
-        target.getHit(baseAttack);
-
+        target.getHit(realDamage());
     }
 
     public void attack(Character target) {
 
         // Souts for testing
         // @TODO remove the souts after testing
-
 
         if (!this.isAlive) {
             return;
@@ -76,14 +74,12 @@ public class Character implements Drawable {
         }
 
         System.out.println(name + ": I'm attacking " + target);
-        
-        target.getHit(baseAttack);
 
+        target.getHit(realDamage());
     }
 
     private void getHit(int damage) {
 
-        // Souts for testing
         // @TODO remove souts after testing
 
         if (isDefending) {
@@ -92,7 +88,7 @@ public class Character implements Drawable {
 
         hp = hp - damage;
 
-        System.out.println(name+ ": Getting hit for " + damage);
+        System.out.println(name + ": Getting hit for " + damage);
 
         isDefending = false;
 
@@ -100,23 +96,18 @@ public class Character implements Drawable {
             this.toggleAlive();
             System.out.println(this + " dead.\n");
         }
-
-
     }
 
     public void toggleAlive() {
         isAlive = !isAlive;
-
     }
 
     @Override
     public void draw() {
-
     }
 
-    public void setDefending(boolean defending) {
-        System.out.println(name + ": I'm defending!");
-        isDefending = defending;
+    private int realDamage() {
+        return baseAttack + Randomizer.rInt(-2, 2);
     }
 
     @Override
@@ -133,4 +124,9 @@ public class Character implements Drawable {
         return isAlive;
     }
 
+    public void setDefending(boolean defending) {
+
+        System.out.println(name + ": I'm defending!");
+        isDefending = defending;
+    }
 }

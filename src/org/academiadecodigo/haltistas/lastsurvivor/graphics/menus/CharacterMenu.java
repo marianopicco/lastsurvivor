@@ -4,30 +4,31 @@ import org.academiadecodigo.haltistas.lastsurvivor.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class CharacterMenu extends Menu {
 
-    private int INITIAL_POSITION_X = Canvas.PADDING + 10;
-    private int initialPositionY = 580;
+    private int INITIAL_POSITION_X = Canvas.PADDING + 20;
+    private int initialPositionY = 595;
 
     public CharacterMenu() {
 
-        Rectangle leftMenu = new Rectangle(menuX(), menuY(), menuWidth(), menuHeight());
-        leftMenu.fill();
-        leftMenu.setColor(Color.RED);
-
+        Picture leftMenu = new Picture (menuX(), menuY(), "assets/characterframe.png");
+        leftMenu.draw();
         textCharacter();
+
     }
+
 
     @Override
     public int menuX() {
         return Canvas.PADDING;
     }
 
+
     public void textCharacter() {
 
-        Text name = new Text(INITIAL_POSITION_X, initialPositionY, "WARRIOR");
-
+        Picture name = new Picture(INITIAL_POSITION_X, initialPositionY, "assets/supergrannyname.png");
         name.draw();
     }
 

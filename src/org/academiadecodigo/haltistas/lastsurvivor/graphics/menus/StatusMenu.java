@@ -3,18 +3,20 @@ package org.academiadecodigo.haltistas.lastsurvivor.graphics.menus;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class StatusMenu  extends Menu {
 
     public StatusMenu() {
 
-        Rectangle rightMenu = new Rectangle(menuX(), menuY(), menuWidth(), menuHeight());
-        rightMenu.fill();
-        rightMenu.setColor(new Color(70, 130, 180)); //steelblue
+        Picture rightMenu = new Picture (menuX(), menuY(), "assets/statusframe.png");
+        rightMenu.draw();
+
+
     }
 
     @Override
     public int menuX() {
-        return Canvas.BACKGROUND_WIDTH / 2;
+        return Canvas.BACKGROUND_WIDTH / 2 + 10;
     }
 }

@@ -47,7 +47,7 @@ public class Canvas implements Drawable {
 
     private void createBackground() {
 
-        Picture pic = new Picture(PADDING, PADDING, "assets/background_test.jpg");
+        Picture pic = new Picture(PADDING, PADDING, "assets/background.jpg");
 
         pic.draw();
     }
@@ -84,40 +84,40 @@ public class Canvas implements Drawable {
 
     public void drawCharacters() {
 
-        Ellipse evilGuy = new Ellipse(100, 100, 100, 100);
-        evilGuy.fill();
+        //Ellipse evilGuy = new Ellipse(100, 100, 100, 100);
+        //evilGuy.fill();
 
-        Ellipse evilGuy2 = new Ellipse(100, 250, 100, 100);
-        evilGuy2.fill();
+        //Ellipse evilGuy2 = new Ellipse(100, 250, 100, 100);
+        //evilGuy2.fill();
 
-        Ellipse evilGuy3 = new Ellipse(100, 400, 100, 100);
-        evilGuy3.fill();
+        //Ellipse evilGuy3 = new Ellipse(100, 400, 100, 100);
+        //evilGuy3.fill();
 
-        Ellipse goodGuy = new Ellipse(800, 250, 100, 100);
-        goodGuy.draw();
+        //Ellipse goodGuy = new Ellipse(800, 250, 100, 100);
+        //goodGuy.draw();
 
-/*
-        Picture evil1 = new Picture(100, 50, "assets/evil1.png");
+
+        Picture evil1 = new Picture(100, 100, "assets/blastercyst.png");
         evil1.draw();
 
-        Picture evil2 = new Picture(100, 225, "assets/evil2.png");
+        Picture evil2 = new Picture(100, 350, "assets/buzzilisk.png");
         evil2.draw();
 
-        Picture evil3 = new Picture(100, 400, "assets/evil3.png");
-        evil3.draw();
+        //Picture evil3 = new Picture(100, 225, "assets/.png");
+        //evil3.draw();
 
-        Picture hero = new Picture(800, 250, "assets/hero.png");
+        Picture hero = new Picture(700, 350, "assets/supergranny.png");
         hero.draw();
-*/
 
-        Picture pointer = new Picture(70, 70, "assets/bluediamond.png");
-        pointer.draw();
 
-        Picture pointer2 = new Picture(70, 220, "assets/bluediamond.png");
+        Picture pointer1 = new Picture(50, 70, "assets/arrow.png");
+        pointer1.draw();
+
+        Picture pointer2 = new Picture(50, 320, "assets/arrow.png");
         pointer2.draw();
 
-        Picture pointer3 = new Picture(70, 370, "assets/bluediamond.png");
-        pointer3.draw();
+        //Picture pointer3 = new Picture(70, 370, "assets/arrow.png");
+        //pointer3.draw();
 
 
         //goodGuy.translate(-600,0); //é a deslocação de ataque

@@ -1,8 +1,6 @@
 package org.academiadecodigo.haltistas.lastsurvivor.graphics.menus;
 
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.Action;
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -14,15 +12,15 @@ public class ActionMenu extends Menu implements Movement {
 
     private int initialPositionY = menuY() + 10;
     private int actionPointer = 0;
-    private Rectangle selectionBox;
+    private Picture selectionPointer;
     private Action currentAction;
+
 
 
     public ActionMenu() {
 
-        Rectangle actionMenu = new Rectangle(menuX(), menuY(), menuWidth(), menuHeight());
-        actionMenu.fill();
-        actionMenu.setColor(Color.CYAN);
+        Picture actionMenu = new Picture(menuX(), menuY(), "assets/actionframe.png");
+        actionMenu.draw();
         currentAction = Action.ATTACK;
     }
 
@@ -53,13 +51,13 @@ public class ActionMenu extends Menu implements Movement {
 
     public void drawAction() {
 
-        Text attack = new Text(INITIAL_POSITION_X, initialPositionY, Action.ATTACK.getAction());
-        Text magic = new Text(INITIAL_POSITION_X, menuY() + 30, Action.MAGIC.getAction());
-        Text defend = new Text(INITIAL_POSITION_X, menuY() + 50, Action.DEFEND.getAction());
-        Text item = new Text(INITIAL_POSITION_X, menuY() + 70, Action.ITEMS.getAction());
+        Picture attack = new Picture(INITIAL_POSITION_X, initialPositionY, "assets/attackWORD.png");
+        Picture magic = new Picture(INITIAL_POSITION_X, menuY() + 30, "assets/magicWORD.png");
+        Picture defend = new Picture(INITIAL_POSITION_X, menuY() + 50, "assets/defendWORD.png");
+        Picture item = new Picture(INITIAL_POSITION_X, menuY() + 70, "assets/itemsWORD.png");
 
-        selectionBox = new Rectangle(INITIAL_POSITION_X, initialPositionY, 60, 20);
-        selectionBox.draw();
+        selectionPointer = new Picture(INITIAL_POSITION_X, initialPositionY, "assets/littlearrow.png");
+        selectionPointer.draw();
 
         attack.draw();
         magic.draw();
@@ -75,11 +73,11 @@ public class ActionMenu extends Menu implements Movement {
         actionPointer++;
 
         if (actionPointer == Action.values().length) {
-            selectionBox.translate(SELECTION_MOVE_X, -80);
+            selectionPointer.translate(SELECTION_MOVE_X, -80);
             actionPointer = 0;
         }
 
-        selectionBox.translate(SELECTION_MOVE_X, SELECTION_MOVE_Y);
+        selectionPointer.translate(SELECTION_MOVE_X, SELECTION_MOVE_Y);
 
     }
 
@@ -87,12 +85,12 @@ public class ActionMenu extends Menu implements Movement {
     public void moveUp() {
 
         if (actionPointer == 0) {
-            selectionBox.translate(SELECTION_MOVE_X, 80);
+            selectionPointer.translate(SELECTION_MOVE_X, 80);
             actionPointer = Action.values().length;
         }
 
         actionPointer--;
-        selectionBox.translate(SELECTION_MOVE_X, -SELECTION_MOVE_Y);
+        selectionPointer.translate(SELECTION_MOVE_X, -SELECTION_MOVE_Y);
     }
 
     @Override

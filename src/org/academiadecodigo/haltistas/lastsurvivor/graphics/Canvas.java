@@ -97,23 +97,11 @@ public class Canvas implements Drawable {
         Ellipse evilGuy = new Ellipse(100, 100, 100, 100);
         evilGuy.fill();
 
-        Ellipse evilGuy2 = new Ellipse(100, 250, 100, 100);
-        evilGuy2.fill();
-
-        Ellipse evilGuy3 = new Ellipse(100, 400, 100, 100);
-        evilGuy3.fill();
-
         Ellipse goodGuy = new Ellipse(800, 250, 100, 100);
         goodGuy.draw();
 
         Picture pointer = new Picture(70, 70, "assets/bluediamond.png");
         pointer.draw();
-
-        Picture pointer2 = new Picture(70, 220, "assets/bluediamond.png");
-        pointer2.draw();
-
-        Picture pointer3 = new Picture(70, 370, "assets/bluediamond.png");
-        pointer3.draw();
 
     }
 
@@ -123,6 +111,7 @@ public class Canvas implements Drawable {
 
     public class ActionMenu extends Menu {
 
+        private Position pos;
         private final static int INITIAL_POSITION_X = 260;
         private final static int SELECTION_MOVE_X = 0;
         private final static int SELECTION_MOVE_Y = 20;
@@ -140,6 +129,8 @@ public class Canvas implements Drawable {
 
         ActionMenu() {
             currentAction = null;
+            pos = new Position(INITIAL_POSITION_X, initialPositionY);
+
         }
 
         @Override
@@ -252,6 +243,27 @@ public class Canvas implements Drawable {
             }
         }
 
+
+    }
+
+    private class Position {
+
+        private double posX;
+        private double posY;
+
+        Position(double x, double y) {
+            posX = x;
+            posY = y;
+
+        }
+
+        public double getPosX() {
+            return posX;
+        }
+
+        public double getPosY() {
+            return posY;
+        }
 
     }
 

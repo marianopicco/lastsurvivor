@@ -93,13 +93,7 @@ public class Game {
         keyPressed = key;
     }
 
-    // Fight is the only method for our characters right now
-
     private void playerAttack(Character playerChar, Character enemyChar) {
-
-        while (!receivedMenuChoice) {
-            return;
-        }
 
         //TODO handle exceptions correctly
 

@@ -64,7 +64,6 @@ public class Game {
                  * For now, all it can do is fight();
                  */
 
-
                 canvas.receivedAction(keyPressed);
 
 
@@ -84,6 +83,10 @@ public class Game {
                     }
                 }*/
 
+                if (canvas.playerChoice() != null) {
+                    // do shit
+
+                }
 
                 receivedMenuChoice = true;
                 Thread.sleep(500);

@@ -79,6 +79,11 @@ public class Canvas implements Drawable {
 
     }
 
+    public Action playerChoice() {
+
+        return null;
+    }
+
     public void drawCharacters() {
 
         Ellipse evilGuy = new Ellipse(100, 100, 100, 100);

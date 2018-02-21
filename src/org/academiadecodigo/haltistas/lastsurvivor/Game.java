@@ -66,20 +66,20 @@ public class Game {
                     switch (canvas.getCurrentAction()) {
 
                         case ATTACK:
-
-                            fight(playerParty[0], currentStage.getEnemies()[playerTarget]);
+                            playerAttack(playerParty[0], currentStage.getEnemies()[playerTarget]);
                             break;
 
                         case DEFEND:
+                            playerParty[0].setDefending(true);
                             break;
 
                         default:
                             System.out.println("JVM error");
 
                     }
-
                     canvas.hideActionMenu();
                     canvas.resetCurrentAction();
+                    enemyTurn();
                 }
 
                 receivedMenuChoice = true;
@@ -106,7 +106,7 @@ public class Game {
 
     // Fight is the only method for our characters right now
 
-    private void fight(Character playerChar, Character enemyChar) {
+    private void playerAttack(Character playerChar, Character enemyChar) {
 
         while (!receivedMenuChoice) {
             return;
@@ -116,14 +116,23 @@ public class Game {
         //TODO handle exceptions correctly
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         if (enemyChar.isAlive()) {
             playerChar.attack(enemyChar);
             System.out.println("\n");
         }
+
+        // Menu should reset so we can get a new command
+
+        receivedMenuChoice = false;
+    }
+
+    private void enemyTurn() {
+
         for (Character enemy : currentStage.getEnemies()) {
 
             try {
@@ -137,9 +146,5 @@ public class Game {
 
         }
 
-        // Menu should reset so we can get a new command
-
-        receivedMenuChoice = false;
     }
-
 }

@@ -92,6 +92,8 @@ public class Character implements Drawable {
 
         hp = hp - damage;
 
+        System.out.println(name+ ": Getting hit for " + damage);
+
         isDefending = false;
 
         if (hp <= 0 && isAlive) {
@@ -110,6 +112,11 @@ public class Character implements Drawable {
     @Override
     public void draw() {
 
+    }
+
+    public void setDefending(boolean defending) {
+        System.out.println(name + ": I'm defending!");
+        isDefending = defending;
     }
 
     @Override

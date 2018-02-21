@@ -13,4 +13,8 @@ public class EnemySelection {
     public void actionSelection() {
 
     }
+
+    public void draw() {
+
+    }
 }

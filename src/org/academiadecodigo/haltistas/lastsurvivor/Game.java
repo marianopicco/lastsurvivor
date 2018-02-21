@@ -53,27 +53,32 @@ public class Game {
 
             // Checks if a key was pressed, or sleeps for 1000 ms
 
+            canvas.showActionMenu();
+
             if (keyPressed != null) {
 
                 //TODO finish menu interaction
 
                 canvas.receivedAction(keyPressed);
 
-
                 if (canvas.getCurrentAction() != null) {
 
                     switch (canvas.getCurrentAction()) {
 
                         case ATTACK:
+
                             fight(playerParty[0], currentStage.getEnemies()[playerTarget]);
                             break;
+
                         case DEFEND:
                             break;
+
                         default:
                             System.out.println("JVM error");
 
                     }
 
+                    canvas.hideActionMenu();
                     canvas.resetCurrentAction();
                 }
 

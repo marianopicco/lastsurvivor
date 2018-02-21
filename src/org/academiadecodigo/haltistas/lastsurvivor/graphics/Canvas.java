@@ -57,7 +57,8 @@ public class Canvas implements Drawable {
 
         statusMenu.draw();
         characterMenu.draw();
-        actionMenu.draw();
+
+        actionMenu.instantiateStuff();
     }
 
     public void receivedAction(KeyPress keyPress) {
@@ -83,14 +84,13 @@ public class Canvas implements Drawable {
         return currentAction;
     }
 
-    //    public Action playerChoice() {
-//
-//        Action thisAction = actionMenu.getCurrentAction();
-//
-//        actionMenu.resetCurrentAction();
-//
-//        return thisAction;
-//    }
+    public void showActionMenu() {
+        actionMenu.draw();
+    }
+
+    public void hideActionMenu() {
+        actionMenu.hide();
+    }
 
     void drawCharacters() {
 
@@ -130,19 +130,25 @@ public class Canvas implements Drawable {
         private int initialPositionY = menuY() + 10;
         private int actionPointer = 0;
         private Rectangle selectionBox;
+        private Rectangle actionMenu;
+
+        private Text attack;
+        private Text magic;
+        private Text defend;
+        private Text item;
 
 
         ActionMenu() {
-
-            Rectangle actionMenu = new Rectangle(menuX(), menuY(), menuWidth(), menuHeight());
-            actionMenu.fill();
-            actionMenu.setColor(Color.CYAN);
             currentAction = null;
         }
 
         @Override
         public void draw() {
             drawAction();
+        }
+
+        public void hide() {
+            hideAction();
         }
 
         @Override
@@ -165,20 +171,41 @@ public class Canvas implements Drawable {
             return super.menuWidth() / 2;
         }
 
-        void drawAction() {
+        void instantiateStuff() {
 
-            Text attack = new Text(INITIAL_POSITION_X, initialPositionY, Action.ATTACK.getAction());
-            Text magic = new Text(INITIAL_POSITION_X, menuY() + 30, Action.MAGIC.getAction());
-            Text defend = new Text(INITIAL_POSITION_X, menuY() + 50, Action.DEFEND.getAction());
-            Text item = new Text(INITIAL_POSITION_X, menuY() + 70, Action.ITEMS.getAction());
+            actionMenu = new Rectangle(menuX(), menuY(), menuWidth(), menuHeight());
+            actionMenu.setColor(Color.CYAN);
+
+            attack = new Text(INITIAL_POSITION_X, initialPositionY, Action.ATTACK.getAction());
+            magic = new Text(INITIAL_POSITION_X, menuY() + 30, Action.MAGIC.getAction());
+            defend = new Text(INITIAL_POSITION_X, menuY() + 50, Action.DEFEND.getAction());
+            item = new Text(INITIAL_POSITION_X, menuY() + 70, Action.ITEMS.getAction());
 
             selectionBox = new Rectangle(INITIAL_POSITION_X, initialPositionY, 60, 20);
+
+        }
+        void drawAction() {
+
+            actionMenu.fill();
+
             selectionBox.draw();
 
             attack.draw();
             magic.draw();
             defend.draw();
             item.draw();
+        }
+
+        void hideAction() {
+
+            actionMenu.delete();
+
+            selectionBox.delete();
+
+            attack.delete();
+            magic.delete();
+            defend.delete();
+            item.delete();
         }
 
         void moveDown() {

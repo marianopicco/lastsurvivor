@@ -79,7 +79,10 @@ public class Canvas implements Drawable {
 
     public Action playerChoice() {
 
-        return null;
+        Action thisAction = actionMenu.getCurrentAction();
+        actionMenu.resetCurrentAction();
+
+        return thisAction;
     }
 
     public void drawCharacters() {

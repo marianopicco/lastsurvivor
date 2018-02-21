@@ -22,7 +22,7 @@ public class ActionMenu extends Menu {
         Rectangle actionMenu = new Rectangle(menuX(), menuY(), menuWidth(), menuHeight());
         actionMenu.fill();
         actionMenu.setColor(Color.CYAN);
-        currentAction = Action.ATTACK;
+        currentAction = null;
     }
 
     @Override
@@ -64,7 +64,6 @@ public class ActionMenu extends Menu {
         magic.draw();
         defend.draw();
         item.draw();
-        actionSelection();
     }
 
     public void moveDown() {
@@ -93,16 +92,17 @@ public class ActionMenu extends Menu {
 
     public void actionSelection() {
 
-        switch (currentAction) {
-            case ATTACK:
+        switch (actionPointer) {
+
+            case 0:
+                currentAction = Action.ATTACK;
+                break;
+            case 1:
                 //call class EnemySelection
                 break;
-            case MAGIC:
-                //call class EnemySelection
+            case 2:
                 break;
-            case DEFEND:
-                break;
-            case ITEMS:
+            case 3:
                 break;
             default:
                 System.out.println("JVM fucked up");
@@ -111,6 +111,10 @@ public class ActionMenu extends Menu {
 
     public Action getCurrentAction() {
         return currentAction;
+    }
+
+    public void resetCurrentAction() {
+        currentAction = null;
     }
 
 }

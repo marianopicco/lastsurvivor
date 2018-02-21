@@ -52,7 +52,7 @@ public class InputHandler implements KeyboardHandler {
                 break;
 
             case KeyboardEvent.KEY_SPACE:
-                //System.out.println("Key Space");
+                System.out.println("Key Space");
                 game.receiveInput(KeyPress.SPACE);
                 break;
             default:

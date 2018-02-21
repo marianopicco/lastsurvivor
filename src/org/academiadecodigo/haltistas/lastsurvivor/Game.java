@@ -67,26 +67,26 @@ public class Game {
                 canvas.receivedAction(keyPressed);
 
 
-                /*fight(playerParty[0], currentStage.getEnemies()[playerTarget]);
-
-                // Attack current target till it dies then get the next
-
-
-
-                if (!currentStage.getEnemies()[playerTarget].isAlive()) {
-
-                    playerTarget++;
-                    if (playerTarget >= ENEMIES_PER_LEVEL) {
-                        System.out.println("Game over for this level, all enemies dead.");
-                        gameRunning = false;
-                        currentStage = new Stage(3);
-                    }
-                }*/
-
                 if (canvas.playerChoice() != null) {
                     // do shit
 
+                    fight(playerParty[0], currentStage.getEnemies()[playerTarget]);
+
+                    // Attack current target till it dies then get the next
+
+
+                    if (!currentStage.getEnemies()[playerTarget].isAlive()) {
+
+                        playerTarget++;
+                        if (playerTarget >= ENEMIES_PER_LEVEL) {
+                            System.out.println("Game over for this level, all enemies dead.");
+
+                            gameRunning = false;
+                        }
+                    }
+
                 }
+
 
                 receivedMenuChoice = true;
                 Thread.sleep(500);

@@ -13,15 +13,13 @@ public class Canvas implements Drawable {
     public final static int BACKGROUND_WIDTH = 1000;
     public final static int BACKGROUND_HEIGHT = 700;
 
-    private Movable currentMenu;
-    private Movable actionMenu;
+    private ActionMenu actionMenu;
     private Menu statusMenu;
     private Menu characterMenu;
 
 
     public Canvas() {
         draw();
-        currentMenu = actionMenu;
     }
 
 
@@ -65,13 +63,13 @@ public class Canvas implements Drawable {
         switch (keyPress) {
 
             case UP:
-                currentMenu.moveUp();
+                actionMenu.moveUp();
                 break;
             case DOWN:
-                currentMenu.moveDown();
+                actionMenu.moveDown();
                 break;
             case SPACE:
-                currentMenu.actionSelection();
+                actionMenu.actionSelection();
                 break;
             default:
                 System.out.println("JVM fucked up");

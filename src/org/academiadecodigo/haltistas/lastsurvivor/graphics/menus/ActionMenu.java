@@ -5,7 +5,7 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 
-public class ActionMenu extends Menu implements Movable {
+public class ActionMenu extends Menu {
 
     private final static int INITIAL_POSITION_X = 260;
     private final static int SELECTION_MOVE_X = 0;
@@ -67,7 +67,6 @@ public class ActionMenu extends Menu implements Movable {
         actionSelection();
     }
 
-    @Override
     public void moveDown() {
 
         actionPointer++;
@@ -81,7 +80,6 @@ public class ActionMenu extends Menu implements Movable {
 
     }
 
-    @Override
     public void moveUp() {
 
         if (actionPointer == 0) {
@@ -93,7 +91,6 @@ public class ActionMenu extends Menu implements Movable {
         selectionBox.translate(SELECTION_MOVE_X, -SELECTION_MOVE_Y);
     }
 
-    @Override
     public void actionSelection() {
 
         switch (currentAction) {

@@ -17,6 +17,9 @@ public class Canvas implements Drawable {
     private Movable actionMenu;
     private Menu statusMenu;
     private Menu characterMenu;
+    private Ellipse goodGuy;
+    private Ellipse evilGuy;
+
 
 
     public Canvas() {
@@ -59,7 +62,7 @@ public class Canvas implements Drawable {
         characterMenu.draw();
         actionMenu.draw();
     }
-
+//TODO clear translate tests in receivedAction method
     public void receivedAction(KeyPress keyPress) {
 
         switch (keyPress) {
@@ -81,27 +84,72 @@ public class Canvas implements Drawable {
 
     public void drawCharacters() {
 
-        Ellipse evilGuy = new Ellipse(100, 100, 100, 100);
+        evilGuy = new Ellipse(100, 250, 100, 100);
         evilGuy.fill();
 
-        Ellipse evilGuy2 = new Ellipse(100, 250, 100, 100);
-        evilGuy2.fill();
-
-        Ellipse evilGuy3 = new Ellipse(100, 400, 100, 100);
-        evilGuy3.fill();
-
-        Ellipse goodGuy = new Ellipse(800, 250, 100, 100);
+        goodGuy = new Ellipse(800, 250, 100, 100);
         goodGuy.draw();
-
-        Picture pointer = new Picture(70, 70, "assets/bluediamond.png");
-        pointer.draw();
 
         Picture pointer2 = new Picture(70, 220, "assets/bluediamond.png");
         pointer2.draw();
 
-        Picture pointer3 = new Picture(70, 370, "assets/bluediamond.png");
-        pointer3.draw();
-
     }
 
+
+    public void translateGoodGuyToE(){
+        goodGuy.translate(-200,0);
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        goodGuy.translate(-200,0);
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        goodGuy.translate(-200,0); //Atack possition
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        goodGuy.translate(300,0);
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        goodGuy.translate(300,0);
+    }
+
+
+    public void translateEToGoodGuy(){
+        evilGuy.translate(200,0);
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        evilGuy.translate(200,0);
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        evilGuy.translate(200,0); //Atack possition
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        evilGuy.translate(-300,0);
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        evilGuy.translate(-300,0);
+    }
 }

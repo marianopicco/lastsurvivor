@@ -22,7 +22,6 @@ public class Canvas implements Drawable {
         draw();
     }
 
-
     @Override
     public void draw() {
 
@@ -78,7 +77,6 @@ public class Canvas implements Drawable {
     }
 
     public Action playerChoice() {
-
         Action thisAction = actionMenu.getCurrentAction();
         actionMenu.resetCurrentAction();
 

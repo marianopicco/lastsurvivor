@@ -68,7 +68,6 @@ public class Game {
 
 
                 if (canvas.playerChoice() != null) {
-                    // do shit
 
                     fight(playerParty[0], currentStage.getEnemies()[playerTarget]);
 

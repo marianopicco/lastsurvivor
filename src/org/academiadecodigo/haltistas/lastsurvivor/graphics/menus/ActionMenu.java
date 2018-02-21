@@ -101,6 +101,7 @@ public class ActionMenu extends Menu {
                 //call class EnemySelection
                 break;
             case 2:
+                currentAction = Action.DEFEND;
                 break;
             case 3:
                 break;

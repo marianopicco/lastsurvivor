@@ -9,12 +9,14 @@ public class Character implements Drawable {
     private int hp;
     private int baseAttack;
     private boolean isAlive;
+    private boolean isDefending;
 
     public Character(String name, int hp, int baseAttack) {
         this.name = name;
         this.hp = hp;
         this.baseAttack = baseAttack;
         this.isAlive = true;
+        this.isDefending = false;
 
         // Souts for testing
         // @TODO remove souts after testing
@@ -33,11 +35,11 @@ public class Character implements Drawable {
             return;
         }
 
-        while (target == null)  {
+        while (target == null) {
 
-            int random = Randomizer.rInt(0, numberOfEnemies-1);
+            int random = Randomizer.rInt(0, numberOfEnemies - 1);
 
-            if (enemies[random] == null){
+            if (enemies[random] == null) {
                 continue;
             }
 
@@ -84,8 +86,13 @@ public class Character implements Drawable {
         // Souts for testing
         // @TODO remove souts after testing
 
+        if (isDefending) {
+            damage = damage / 2;
+        }
 
         hp = hp - damage;
+
+        isDefending = false;
 
         if (hp <= 0 && isAlive) {
             this.toggleAlive();

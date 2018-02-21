@@ -19,6 +19,9 @@ public class Game {
     private boolean gameRunning;
     private boolean receivedMenuChoice;
     private KeyPress keyPressed;
+    private boolean isPlayerTurn;
+
+    private int playerTarget = 0;
 
     /**
      * Game Class
@@ -29,7 +32,6 @@ public class Game {
         canvas = new Canvas();
 
         inputHandler = new InputHandler(this);
-
 
         enemies = new Character[ENEMIES_PER_LEVEL];
         playerParty = new Character[PLAYER_PARTY_SIZE];
@@ -47,7 +49,7 @@ public class Game {
 
         // Player is now targeting enemies sequentially until the menu is working
 
-        int playerTarget = 0;
+        //int playerTarget = 0;
 
         while (gameRunning) {
 
@@ -63,22 +65,11 @@ public class Game {
 
                 if (canvas.getCurrentAction() != null) {
 
-                    switch (canvas.getCurrentAction()) {
+                    playerTurn();
 
-                        case ATTACK:
-                            playerAttack(playerParty[0], currentStage.getEnemies()[playerTarget]);
-                            break;
-
-                        case DEFEND:
-                            playerParty[0].setDefending(true);
-                            break;
-
-                        default:
-                            System.out.println("JVM error");
-
-                    }
                     canvas.hideActionMenu();
                     canvas.resetCurrentAction();
+
                     enemyTurn();
                 }
 
@@ -90,7 +81,6 @@ public class Game {
             }
 
             Thread.sleep(500);
-
         }
     }
 
@@ -101,7 +91,6 @@ public class Game {
         }
 
         keyPressed = key;
-
     }
 
     // Fight is the only method for our characters right now
@@ -111,7 +100,6 @@ public class Game {
         while (!receivedMenuChoice) {
             return;
         }
-
 
         //TODO handle exceptions correctly
 
@@ -131,6 +119,23 @@ public class Game {
         receivedMenuChoice = false;
     }
 
+    private void playerTurn() {
+
+        switch (canvas.getCurrentAction()) {
+
+            case ATTACK:
+                playerAttack(playerParty[0], currentStage.getEnemies()[playerTarget]);
+                break;
+
+            case DEFEND:
+                playerParty[0].setDefending(true);
+                break;
+
+            default:
+                System.out.println("JVM error");
+        }
+    }
+
     private void enemyTurn() {
 
         for (Character enemy : currentStage.getEnemies()) {
@@ -143,8 +148,8 @@ public class Game {
 
             enemy.attack(playerParty, playerParty.length);
             System.out.println("\n");
-
         }
 
+        isPlayerTurn = false;
     }
 }

@@ -76,7 +76,7 @@ public class Character implements Drawable {
         }
 
         System.out.println(name + ": I'm attacking " + target);
-        
+
         target.getHit(baseAttack);
 
     }

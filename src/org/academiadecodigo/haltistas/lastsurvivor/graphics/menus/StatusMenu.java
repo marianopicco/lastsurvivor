@@ -13,7 +13,6 @@ public class StatusMenu extends Menu {
         rightMenu.setColor(new Color(70, 130, 180));
     }
 
-    @Override
     public int menuX() {
         return Canvas.BACKGROUND_WIDTH / 2;
     }

@@ -96,7 +96,25 @@ public class Canvas implements Drawable {
     }
 
 
-    public void translateGoodGuyToE(){
+    public void translateCharacter(Character origin, Character target) throws InterruptedException {
+
+        double initialX, initialY;
+        double finalX, finalY;
+
+        while (goodGuy.getX() > evilGuy.getX() + 100) {
+            goodGuy.translate(-3, 0);
+            Thread.sleep(1);
+        }
+        while (goodGuy.getX() < 800) {
+            goodGuy.translate(3, 0);
+            Thread.sleep(1);
+        }
+
+    }
+
+
+        public void translateGoodGuyToE() {
+
         goodGuy.translate(-200,0);
         try {
             Thread.sleep(300);

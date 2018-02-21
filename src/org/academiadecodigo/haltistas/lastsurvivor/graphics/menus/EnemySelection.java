@@ -16,4 +16,9 @@ public class EnemySelection implements Movable {
     public void actionSelection() {
 
     }
+
+    @Override
+    public void draw() {
+
+    }
 }

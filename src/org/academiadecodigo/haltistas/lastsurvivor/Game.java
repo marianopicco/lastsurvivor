@@ -54,7 +54,7 @@ public class Game {
             // Checks if a key was pressed, or sleeps for 1000 ms
 
             if (keyPressed != null) {
-
+                canvas.translateGoodGuyToE();
                 //TODO add menu interaction
                 /* PLACEHOLDER -- Here, we should see something from the InputHandler, and act on it
                  * Menu logic (be something like this)
@@ -83,7 +83,6 @@ public class Game {
                         currentStage = new Stage(3);
                     }
                 }*/
-
 
                 receivedMenuChoice = true;
                 Thread.sleep(500);

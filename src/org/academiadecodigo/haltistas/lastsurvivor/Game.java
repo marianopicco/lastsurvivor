@@ -79,7 +79,6 @@ public class Game {
             if (!currentStage.getEnemies()[playerTarget].isAlive()) {
 
                 canvas.getEvilGuy().delete();
-
                 try {
                     Thread.sleep(1500);
                 } catch (InterruptedException e) {
@@ -208,6 +207,7 @@ public class Game {
     private void newStage() {
 
         currentStage = new Stage(1);
+        canvas.newEnemy();
         canvas.getEvilGuy().draw();
     }
 

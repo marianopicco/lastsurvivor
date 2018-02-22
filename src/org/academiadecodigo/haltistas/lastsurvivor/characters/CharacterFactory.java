@@ -1,6 +1,7 @@
 package org.academiadecodigo.haltistas.lastsurvivor.characters;
 
 import org.academiadecodigo.haltistas.lastsurvivor.Randomizer;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
 public class CharacterFactory {
@@ -56,5 +57,14 @@ public class CharacterFactory {
 
         // Enemies don't have neither magic power or role
         return new Character(name, hp, attack, 0);
+    }
+
+    public static Picture getEnemyPicture(double x, double y){
+
+        int r = Randomizer.rInt(0, CharacterPictures.values().length -1);
+        System.out.println(r);
+        System.out.println(CharacterPictures.values()[r]);
+        return new Picture(x, y, CharacterPictures.values()[r].getFilePath());
+
     }
 }

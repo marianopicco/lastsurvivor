@@ -1,5 +1,6 @@
 package org.academiadecodigo.haltistas.lastsurvivor.graphics;
 
+import org.academiadecodigo.haltistas.lastsurvivor.characters.CharacterFactory;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.*;
 import org.academiadecodigo.haltistas.lastsurvivor.input.KeyPress;
 import org.academiadecodigo.haltistas.lastsurvivor.interfaces.Drawable;
@@ -108,7 +109,7 @@ public class Canvas implements Drawable {
 
     private void drawCharacters() {
 
-        evilGuy = new Picture(leftPosition.getPosX(), leftPosition.getPosY(), "assets/buzzilisk.png");
+        evilGuy = CharacterFactory.getEnemyPicture(leftPosition.getPosX(), leftPosition.getPosY());
         evilGuy.draw();
 
         goodGuy = new Picture(rightPosition.getPosX(), rightPosition.getPosY(), "assets/supergranny.png");
@@ -120,6 +121,9 @@ public class Canvas implements Drawable {
         */
     }
 
+    public void newEnemy(){
+        evilGuy = CharacterFactory.getEnemyPicture(leftPosition.getPosX(), leftPosition.getPosY());
+    }
     // The argument may change
 
     public void translateCharacter(Picture attacker, Picture target) throws InterruptedException {

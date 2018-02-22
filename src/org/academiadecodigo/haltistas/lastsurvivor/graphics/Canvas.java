@@ -30,9 +30,9 @@ public class Canvas implements Drawable {
 
     public Canvas() {
 
-        magicAttack = new Picture(rightPosition.getPosX(), rightPosition.getPosY(), "assets/magic.png");
         leftPosition = new Position(90, 330);
         rightPosition = new Position(750, 340);
+        magicAttack = new Picture(rightPosition.getPosX(), rightPosition.getPosY(), "assets/magic.png");
         draw();
     }
 

@@ -72,7 +72,6 @@ public class Canvas implements Drawable {
         actionMenu.instantiateStuff();
 
         damage = new Text(20, 20,"");
-
     }
 
     //TODO clear translate tests in receivedAction method
@@ -167,6 +166,10 @@ public class Canvas implements Drawable {
 
         this.damage.setText(" " + damage);
         this.damage.draw();
+    }
+
+    public void clearDamageDealt() {
+        this.damage.delete();
     }
 
     public Picture getEvilGuy() {

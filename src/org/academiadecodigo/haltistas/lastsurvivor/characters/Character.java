@@ -134,7 +134,6 @@ public class Character implements Drawable {
     }
 
     public int getDamage() {
-        System.out.println("U: " + realDamage);
         return realDamage;
     }
 

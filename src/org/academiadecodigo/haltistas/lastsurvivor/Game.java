@@ -134,7 +134,8 @@ public class Game {
                 }
 
                 playerAttack(playerParty[0], currentStage.getEnemies()[playerTarget]);
-                canvas.showDamage(playerParty[0].getDamage());
+                showDamage(playerParty[0]);
+                
                 break;
 
             case DEFEND:
@@ -158,7 +159,8 @@ public class Game {
             }
 
             enemy.attack(playerParty, playerParty.length);
-            canvas.showDamage(enemy.getDamage());
+            showDamage(enemy);
+
             System.out.println("\n");
         }
 
@@ -168,6 +170,33 @@ public class Game {
     private void characterStats() {
 
         canvas.showHitPoints(playerParty[0].getHp(), playerParty[0].getMaxHp());
+    }
+
+    private void showDamage(Character character) {
+
+        if (character == playerParty[0]) {
+
+            canvas.showDamage(playerParty[0].getDamage());
+
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            canvas.clearDamageDealt();
+            return;
+        }
+
+        canvas.showDamage(currentStage.getEnemies()[playerTarget].getDamage());
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        canvas.clearDamageDealt();
     }
 
     private void newStage() {

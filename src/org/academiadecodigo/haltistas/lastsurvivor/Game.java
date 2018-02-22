@@ -41,7 +41,7 @@ public class Game {
 
         playerParty[0] = CharacterFactory.createCharacter("Player", 3, 4, 1, Role.WARRIOR);
         //playerParty[0] = CharacterFactory.createCharacter("Player", 2, 1, 4, Role.WIZARD);
-        
+
         characterStats();
 
         currentStage = new Stage(1);
@@ -73,25 +73,29 @@ public class Game {
                     canvas.hideActionMenu();
                     canvas.resetCurrentAction();
 
-                    if (!currentStage.getEnemies()[playerTarget].isAlive()) {
 
-                        canvas.getEvilGuy().delete();
-
-                        try {
-                            Thread.sleep(1500);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-                        newStage();
-                        continue;
-                    }
 
                     enemyTurn();
                     characterStats();
                 }
 
+
+
                 keyPressed = null;
+            }
+
+            if (!currentStage.getEnemies()[playerTarget].isAlive()) {
+
+                canvas.getEvilGuy().delete();
+
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                newStage();
+                continue;
             }
         }
 
@@ -158,6 +162,10 @@ public class Game {
 
     private void enemyTurn() {
 
+        if (!currentStage.getEnemies()[playerTarget].isAlive()) {
+            return;
+        }
+        
         for (Character enemy : currentStage.getEnemies()) {
 
             try {

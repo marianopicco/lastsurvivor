@@ -6,6 +6,7 @@ import org.academiadecodigo.haltistas.lastsurvivor.characters.Role;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.Canvas;
 import org.academiadecodigo.haltistas.lastsurvivor.input.InputHandler;
 import org.academiadecodigo.haltistas.lastsurvivor.input.KeyPress;
+import org.academiadecodigo.haltistas.lastsurvivor.sound.Sound;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Game {
@@ -21,6 +22,7 @@ public class Game {
     private boolean gameRunning;
     private KeyPress keyPressed;
     private boolean isPlayerTurn;
+    private Sound sound;
 
     private int playerTarget = 0;
 
@@ -41,15 +43,19 @@ public class Game {
 
         playerParty[0] = CharacterFactory.createCharacter("Player", 3, 4, 1, Role.WARRIOR);
         //playerParty[0] = CharacterFactory.createCharacter("Player", 2, 1, 4, Role.WIZARD);
-        
+
         characterStats();
 
         currentStage = new Stage(1);
+
+        sound = new Sound("/assets/BarbieGirl8Bit.wav");
     }
 
     public void start() {
 
         gameRunning = true;
+
+        sound.loopIndef();
 
         // Player is now targeting enemies sequentially until the menu is working
 

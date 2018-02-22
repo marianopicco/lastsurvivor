@@ -15,7 +15,6 @@ public class StatusMenu  extends Menu {
 
     }
 
-    @Override
     public int menuX() {
         return Canvas.BACKGROUND_WIDTH / 2 + 10;
     }

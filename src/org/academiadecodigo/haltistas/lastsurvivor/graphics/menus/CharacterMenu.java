@@ -20,7 +20,6 @@ public class CharacterMenu extends Menu {
     }
 
 
-    @Override
     public int menuX() {
         return Canvas.PADDING;
     }

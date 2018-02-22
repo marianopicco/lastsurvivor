@@ -14,22 +14,23 @@ public class Stage {
     private Character enemyChar;
 
     public Stage(int numEnemies) {
+
         enemies = new Character[numEnemies];
         this.numEnemies = numEnemies;
 
         populateEnemies();
-
     }
 
     private void populateEnemies() {
+
         for (int i = 0; i < numEnemies; i++) {
             enemies[i] = CharacterFactory.createCharacter("Baddie " + (i + 1), 1, 1);
-        }
 
+        }
     }
 
     public Character[] getEnemies() {
             return enemies;
-    }
 
+    }
 }

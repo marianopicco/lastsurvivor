@@ -10,47 +10,19 @@ public class ActionMenu extends Menu {
     private final static int SELECTION_MOVE_X = 0;
     private final static int SELECTION_MOVE_Y = 20;
 
-    private int initialPositionY = menuY() + 10;
     private int actionPointer = 0;
     private Picture selectionPointer;
     private Action currentAction;
 
 
 
-    public ActionMenu() {
 
-        Picture actionMenu = new Picture(menuX(), menuY(), "assets/actionframe.png");
-        actionMenu.draw();
-        currentAction = Action.ATTACK;
-    }
 
-    @Override
-    public void draw() {
-        drawAction();
-    }
 
-    @Override
-    public int menuX() {
-        return super.menuWidth() / 2;
-    }
 
-    @Override
-    public int menuY() {
-        return super.menuY() + 10;
-    }
 
-    @Override
-    public int menuHeight() {
-        return super.menuHeight() - 20;
-    }
 
-    @Override
-    public int menuWidth() {
-        return super.menuWidth() / 2;
-    }
-
-    public void drawAction() {
-
+    /*
         Picture attack = new Picture(INITIAL_POSITION_X, initialPositionY, "assets/attackWORD.png");
         Picture magic = new Picture(INITIAL_POSITION_X, menuY() + 30, "assets/magicWORD.png");
         Picture defend = new Picture(INITIAL_POSITION_X, menuY() + 50, "assets/defendWORD.png");
@@ -65,8 +37,7 @@ public class ActionMenu extends Menu {
         item.draw();
 
         actionSelection();
-    }
-
+    */
 
     public void moveDown() {
 

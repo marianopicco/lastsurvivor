@@ -17,9 +17,6 @@ public class Canvas implements Drawable {
 
     private ActionMenu actionMenu;
     private Action currentAction;
-    private Ellipse goodGuy;
-    private Ellipse evilGuy;
-
 
     private Position leftPosition;
     private Position rightPosition;
@@ -104,14 +101,14 @@ public class Canvas implements Drawable {
     private void drawCharacters() {
 
 
-        Ellipse evilGuy = new Ellipse(leftPosition.getPosX(), leftPosition.getPosY(), 100, 100);
-        evilGuy.fill();
+        Picture evilGuy = new Picture(leftPosition.getPosX(), leftPosition.getPosY(), "assets/buzzilisk.png");
+        evilGuy.draw();
 
-        Ellipse goodGuy = new Ellipse(rightPosition.getPosX(), rightPosition.getPosY(), 100, 100);
+        Picture goodGuy = new Picture(rightPosition.getPosX(), rightPosition.getPosY(), "assets/supergranny.png");
         goodGuy.draw();
 
         /* Pointer should be added when there is more than one enemy in the game
-        Picture pointer = new Picture(evilGuy.getX(), evilGuy.getY(), "assets/bluediamond.png");
+        Picture pointer = new Picture(evilGuy.getX(), evilGuy.getY(), "assets/littlearrow.png");
         pointer.draw();
         */
 
@@ -131,13 +128,13 @@ public class Canvas implements Drawable {
         private Position menuPos;
         private int actionPointer = 0;
 
-        private Rectangle selectionBox;
-        private Rectangle actionMenu;
+        private Picture selectionBox;
+        private Picture actionMenu;
 
-        private Text attack;
-        private Text magic;
-        private Text defend;
-        private Text item;
+        private Picture attack;
+        private Picture magic;
+        private Picture defend;
+        private Picture item;
 
         private Position textPos1;
         private Position textPos2;
@@ -161,8 +158,7 @@ public class Canvas implements Drawable {
         @Override
         public void draw() {
 
-            actionMenu.fill();
-
+            actionMenu.draw();
             selectionBox.draw();
 
             attack.draw();
@@ -177,15 +173,15 @@ public class Canvas implements Drawable {
 
         void instantiateStuff() {
 
-            actionMenu = new Rectangle(this.menuPos.getPosX(), this.menuPos.getPosY(), 250, 130);
-            actionMenu.setColor(Color.CYAN);
+            actionMenu = new Picture(this.menuPos.getPosX(), this.menuPos.getPosY(), "assets/actionframe.png");
 
-            attack = new Text(textPos1.getPosX(), textPos1.getPosY(), Action.ATTACK.getAction());
-            defend = new Text(textPos3.getPosX(), textPos3.getPosY(), Action.DEFEND.getAction());
-            magic = new Text(textPos2.getPosX(), textPos2.getPosY(), Action.MAGIC.getAction());
-            item = new Text(textPos4.getPosX(), textPos4.getPosY(), Action.ITEMS.getAction());
+            attack = new Picture(textPos1.getPosX(), textPos1.getPosY(), "assets/attackWord.png");
+            defend = new Picture(textPos3.getPosX(), textPos3.getPosY(), "assets/magicWORD.png");
+            magic = new Picture(textPos2.getPosX(), textPos2.getPosY(), "assets/defendWORD.png");
+            item = new Picture(textPos4.getPosX(), textPos4.getPosY(), "assets/itemsWORD.png");
 
-            selectionBox = new Rectangle(textPos1.getPosX(), textPos1.getPosY(), 60, 20);
+            selectionBox = new Picture(textPos1.getPosX(), textPos1.getPosY(), "assets/littlearrow.png");
+
 
         }
 
@@ -258,11 +254,10 @@ public class Canvas implements Drawable {
         CharacterMenu() {
 
             charmMenuPos = new Position(initialPositionX, initialPositionY);
-            Rectangle leftMenu = new Rectangle(menuX(), menuY(), menuWidth(), menuHeight());
-            leftMenu.fill();
-            leftMenu.setColor(Color.RED);
-
+            Picture leftMenu = new Picture (menuX(), menuY(), "assets/characterframe.png");
+            leftMenu.draw();
             textCharacter();
+
         }
 
         double menuX() {
@@ -270,7 +265,8 @@ public class Canvas implements Drawable {
         }
 
         void textCharacter() {
-            Text name = new Text(initialPositionX, initialPositionY, "WARRIOR");
+
+            Picture name = new Picture(initialPositionX, initialPositionY, "assets/supergrannyname.png");
             name.draw();
 
         }

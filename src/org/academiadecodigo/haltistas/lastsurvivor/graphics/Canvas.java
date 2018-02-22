@@ -10,9 +10,9 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Canvas implements Drawable {
 
-    public final static int PADDING = 10;
     public final static int BACKGROUND_WIDTH = 1000;
     public final static int BACKGROUND_HEIGHT = 700;
+    private final static int PADDING = 10;
 
     private ActionMenu actionMenu;
     private Action currentAction;

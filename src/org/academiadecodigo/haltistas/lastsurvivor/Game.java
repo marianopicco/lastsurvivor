@@ -43,14 +43,8 @@ public class Game {
 
     public void start() {
 
-        // Player is now targeting enemies sequentially until the menu is working
-
-        //int playerTarget = 0;
-
         // TODO: 22/02/18 needed to see while condition when more than one character on party
         while (playerParty[0].isAlive()) {
-
-            // Checks if a key was pressed, or sleeps for 1000 ms
 
             canvas.showActionMenu();
 
@@ -65,13 +59,9 @@ public class Game {
                     canvas.hideActionMenu();
                     canvas.resetCurrentAction();
 
-
-
                     enemyTurn();
                     characterStats();
                 }
-
-
 
                 keyPressed = null;
             }

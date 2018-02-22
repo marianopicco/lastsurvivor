@@ -39,15 +39,6 @@ public class CharacterFactory {
         return new Character(name, hp, attack, magic);
     }
 
-    /*public static Character createCharacter(String name, double constitution, double strength, double wisdom, Role role) {
-
-        int hp = (int) Math.floor(Randomizer.rInt(50, 70) * constitution);
-        int attack = (int) Math.floor(Randomizer.rInt(10, 15) * strength);
-        int magic = (int) Math.floor(Randomizer.rInt(10, 15) * wisdom);
-
-        return new Character(name, hp, attack, magic);
-    }*/
-
     public static Character createEnemy(String name, double constitution, double strength) {
 
         int hp = (int) Math.floor(Randomizer.rInt(50, 70) * constitution);

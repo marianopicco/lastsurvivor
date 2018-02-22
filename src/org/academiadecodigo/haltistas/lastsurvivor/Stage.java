@@ -10,7 +10,6 @@ public class Stage {
 
     private Character[] enemies;
     private int numEnemies;
-    private Character enemyChar;
 
     public Stage(int numEnemies) {
 

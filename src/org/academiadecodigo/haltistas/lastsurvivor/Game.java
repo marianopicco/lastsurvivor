@@ -48,7 +48,7 @@ public class Game {
     public void start() {
 
         sound.loopIndef();
-        
+
         // TODO: 22/02/18 needed to see while condition when more than one character on party
         while (playerParty[0].isAlive()) {
 

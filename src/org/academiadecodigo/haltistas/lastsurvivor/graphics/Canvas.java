@@ -31,8 +31,8 @@ public class Canvas implements Drawable {
 
     public Canvas() {
 
-        leftPosition = new Position(100, 250);
-        rightPosition = new Position(800, 250);
+        leftPosition = new Position(90, 330);
+        rightPosition = new Position(750, 340);
         draw();
     }
 
@@ -134,7 +134,7 @@ public class Canvas implements Drawable {
                 Thread.sleep(1);
             }
 
-            while (attacker.getX() < 800) {
+            while (attacker.getX() < 750) {
                 attacker.translate(3, 0);
                 Thread.sleep(1);
             }
@@ -184,7 +184,7 @@ public class Canvas implements Drawable {
 
 
         private final static int TEXT_PADDING_LEFT = 50;
-        private final static int TEXT_PADDING = 23;
+        private final static int TEXT_PADDING = 22;
 
         private Position menuPos;
         private int actionPointer = 0;
@@ -206,7 +206,7 @@ public class Canvas implements Drawable {
         ActionMenu() {
 
             currentAction = null;
-            menuPos = new Position(super.menuWidth() / 2, super.menuY() + 10);
+            menuPos = new Position(super.menuWidth() / 2, super.menuY() + PADDING);
 
             double leftPadding = menuPos.getPosX() + TEXT_PADDING_LEFT;
 
@@ -242,7 +242,7 @@ public class Canvas implements Drawable {
             defend = new Picture(textPos3.getPosX(), textPos3.getPosY(), "assets/defendWORD.png");
             item = new Picture(textPos4.getPosX(), textPos4.getPosY(), "assets/itemsWORD.png");
 
-            selectionPointer = new Picture(textPos1.getPosX()-TEXT_PADDING, textPos1.getPosY()-10, "assets/littlearrow.png");
+            selectionPointer = new Picture(textPos1.getPosX()-TEXT_PADDING, textPos1.getPosY()-PADDING, "assets/littlearrow.png");
 
         }
 
@@ -309,7 +309,7 @@ public class Canvas implements Drawable {
         private int initialPositionX = Canvas.PADDING;
         private int initialPositionY = 580;
         private int textCharacterPositionX = initialPositionX + 20;
-        private int textCharacterPositionY = initialPositionY + 20;
+        private int textCharacterPositionY = initialPositionY + 30;
 
         CharacterMenu() {
 

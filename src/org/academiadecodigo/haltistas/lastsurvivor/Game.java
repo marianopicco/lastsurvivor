@@ -215,7 +215,7 @@ public class Game {
 
     private void gameOver() {
 
-        Picture gameover = new Picture(10, 10, "assets/gameover.png");
+        Picture gameover = new Picture(10, 10, "assets/gameover.jpg");
         gameover.draw();
 
         try {

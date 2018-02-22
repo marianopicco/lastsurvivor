@@ -17,7 +17,6 @@ public class Game {
     private Stage currentStage;
     private Canvas canvas;
     private boolean gameRunning;
-    private boolean receivedMenuChoice;
     private KeyPress keyPressed;
     private boolean isPlayerTurn;
 
@@ -71,8 +70,6 @@ public class Game {
                     enemyTurn();
                 }
 
-                receivedMenuChoice = true;
-
                 keyPressed = null;
 
             }
@@ -106,7 +103,6 @@ public class Game {
 
         // Menu should reset so we can get a new command
 
-        receivedMenuChoice = false;
     }
 
     private void playerTurn() {

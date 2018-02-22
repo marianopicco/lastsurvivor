@@ -165,7 +165,7 @@ public class Canvas implements Drawable {
         private Position menuPos;
         private int actionPointer = 0;
 
-        private Picture selectionBox;
+        private Picture selectionPointer;
         private Picture actionMenu;
 
         private Picture attack;
@@ -196,7 +196,7 @@ public class Canvas implements Drawable {
         public void draw() {
 
             actionMenu.draw();
-            selectionBox.draw();
+            selectionPointer.draw();
 
             attack.draw();
             magic.draw();
@@ -217,8 +217,7 @@ public class Canvas implements Drawable {
             defend = new Picture(textPos3.getPosX(), textPos3.getPosY(), "assets/defendWORD.png");
             item = new Picture(textPos4.getPosX(), textPos4.getPosY(), "assets/itemsWORD.png");
 
-            selectionBox = new Picture(textPos1.getPosX(), textPos1.getPosY(), "assets/littlearrow.png");
-
+            selectionPointer = new Picture(textPos1.getPosX(), textPos1.getPosY(), "assets/littlearrow.png");
 
         }
 
@@ -226,7 +225,7 @@ public class Canvas implements Drawable {
 
             actionMenu.delete();
 
-            selectionBox.delete();
+            selectionPointer.delete();
 
             attack.delete();
             magic.delete();
@@ -239,23 +238,23 @@ public class Canvas implements Drawable {
             actionPointer++;
 
             if (actionPointer == Action.values().length) {
-                selectionBox.translate(0, -(Action.values().length * TEXT_PADDING));
+                selectionPointer.translate(0, -(Action.values().length * TEXT_PADDING));
                 actionPointer = 0;
             }
 
-            selectionBox.translate(0, TEXT_PADDING);
+            selectionPointer.translate(0, TEXT_PADDING);
 
         }
 
         void moveUp() {
 
             if (actionPointer == 0) {
-                selectionBox.translate(0, (Action.values().length * TEXT_PADDING));
+                selectionPointer.translate(0, (Action.values().length * TEXT_PADDING));
                 actionPointer = Action.values().length;
             }
 
             actionPointer--;
-            selectionBox.translate(0, -TEXT_PADDING);
+            selectionPointer.translate(0, -TEXT_PADDING);
         }
 
         void actionSelection() {

@@ -5,6 +5,7 @@ import org.academiadecodigo.haltistas.lastsurvivor.characters.CharacterFactory;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.Canvas;
 import org.academiadecodigo.haltistas.lastsurvivor.input.InputHandler;
 import org.academiadecodigo.haltistas.lastsurvivor.input.KeyPress;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Game {
 
@@ -42,7 +43,7 @@ public class Game {
         currentStage = new Stage(1);
     }
 
-    public void start() throws InterruptedException {
+    public void start() {
 
         gameRunning = true;
 
@@ -50,7 +51,7 @@ public class Game {
 
         //int playerTarget = 0;
 
-        while (gameRunning) {
+        while (playerParty[0].isAlive()) {
 
             // Checks if a key was pressed, or sleeps for 1000 ms
 
@@ -75,6 +76,8 @@ public class Game {
             }
 
         }
+
+        gameOver();
     }
 
     public void receiveInput(KeyPress key) {
@@ -111,7 +114,7 @@ public class Game {
 
             case ATTACK:
                 try {
-                    canvas.translateCharacter(canvas.getGoodGuy(),canvas.getEvilGuy());
+                    canvas.translateCharacter(canvas.getGoodGuy(), canvas.getEvilGuy());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -132,7 +135,7 @@ public class Game {
         for (Character enemy : currentStage.getEnemies()) {
 
             try {
-                canvas.translateCharacter(canvas.getEvilGuy(),canvas.getGoodGuy());
+                canvas.translateCharacter(canvas.getEvilGuy(), canvas.getGoodGuy());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -141,5 +144,19 @@ public class Game {
         }
 
         isPlayerTurn = false;
+    }
+
+    private void gameOver() {
+
+        Picture gameover = new Picture(10, 10, "assets/gameover.png");
+        gameover.draw();
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.exit(0);
     }
 }

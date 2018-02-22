@@ -213,8 +213,8 @@ public class Game {
 
     private void gameOver() {
 
-        Picture gameover = new Picture(10, 10, "assets/gameover.png");
-        gameover.draw();
+        Picture gameOver = new Picture(10, 10, "assets/gameover.png");
+        gameOver.draw();
 
         try {
             Thread.sleep(2000);

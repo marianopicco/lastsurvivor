@@ -115,7 +115,7 @@ public class Canvas implements Drawable {
     public void drawMagicAttack() {
         magicAttack.draw();
     }
-    
+
     public void translateMagic(Picture target) throws InterruptedException {
         while (magicAttack.getX() > target.getX() + 100) {
             magicAttack.translate(-3, 0);

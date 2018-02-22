@@ -10,7 +10,6 @@ public class Character implements Drawable {
     private int maxHp;
     private int baseAttack;
     private int baseMagic;
-    private Role role;
     private int realDamage;
     private boolean isAlive;
     private boolean isDefending;

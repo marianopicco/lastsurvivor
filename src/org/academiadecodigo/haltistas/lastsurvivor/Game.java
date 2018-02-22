@@ -12,16 +12,11 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public class Game {
 
     private final int PLAYER_PARTY_SIZE = 3;
-    private final int ENEMIES_PER_LEVEL = 3;
 
-    private InputHandler inputHandler;
-    private Character[] enemies;
     private Character[] playerParty;
     private Stage currentStage;
     private Canvas canvas;
-    private boolean gameRunning;
     private KeyPress keyPressed;
-    private boolean isPlayerTurn;
     private Sound sound;
 
     private int playerTarget = 0;
@@ -34,15 +29,14 @@ public class Game {
 
         canvas = new Canvas();
 
-        inputHandler = new InputHandler(this);
+        InputHandler inputHandler = new InputHandler(this);
 
-        enemies = new Character[ENEMIES_PER_LEVEL];
         playerParty = new Character[PLAYER_PARTY_SIZE];
 
         // Current party only has one character, expandable in the future
 
-        playerParty[0] = CharacterFactory.createCharacter("Player", 3, 4, 1, Role.WARRIOR);
-        //playerParty[0] = CharacterFactory.createCharacter("Player", 2, 1, 4, Role.WIZARD);
+        //playerParty[0] = CharacterFactory.createCharacter("Player", Role.WARRIOR);
+        playerParty[0] = CharacterFactory.createCharacter("Player", Role.WIZARD);
 
         characterStats();
 
@@ -53,18 +47,10 @@ public class Game {
 
     public void start() {
 
-        gameRunning = true;
-
         sound.loopIndef();
-
-        // Player is now targeting enemies sequentially until the menu is working
-
-        //int playerTarget = 0;
-
+        
         // TODO: 22/02/18 needed to see while condition when more than one character on party
         while (playerParty[0].isAlive()) {
-
-            // Checks if a key was pressed, or sleeps for 1000 ms
 
             canvas.showActionMenu();
 
@@ -79,25 +65,23 @@ public class Game {
                     canvas.hideActionMenu();
                     canvas.resetCurrentAction();
 
-                    if (!currentStage.getEnemies()[playerTarget].isAlive()) {
-
-                        canvas.getEvilGuy().delete();
-
-                        try {
-                            Thread.sleep(1500);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-                        newStage();
-                        continue;
-                    }
-
                     enemyTurn();
                     characterStats();
                 }
 
                 keyPressed = null;
+            }
+
+            if (!currentStage.getEnemies()[playerTarget].isAlive()) {
+
+                canvas.getEvilGuy().delete();
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                newStage();
             }
         }
 
@@ -170,6 +154,10 @@ public class Game {
 
     private void enemyTurn() {
 
+        if (!currentStage.getEnemies()[playerTarget].isAlive()) {
+            return;
+        }
+
         for (Character enemy : currentStage.getEnemies()) {
 
             try {
@@ -184,7 +172,6 @@ public class Game {
             System.out.println("\n");
         }
 
-        isPlayerTurn = false;
     }
 
     private void characterStats() {
@@ -199,7 +186,7 @@ public class Game {
             canvas.showDamage(playerParty[0].getDamage());
 
             try {
-                Thread.sleep(100);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -222,13 +209,14 @@ public class Game {
     private void newStage() {
 
         currentStage = new Stage(1);
+        canvas.newEnemy();
         canvas.getEvilGuy().draw();
     }
 
     private void gameOver() {
 
-        Picture gameover = new Picture(10, 10, "assets/gameover.png");
-        gameover.draw();
+        Picture gameOver = new Picture(10, 10, "assets/gameover.png");
+        gameOver.draw();
 
         try {
             Thread.sleep(2000);

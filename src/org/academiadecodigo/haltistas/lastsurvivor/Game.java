@@ -11,16 +11,11 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public class Game {
 
     private final int PLAYER_PARTY_SIZE = 3;
-    private final int ENEMIES_PER_LEVEL = 3;
 
-    private InputHandler inputHandler;
-    private Character[] enemies;
     private Character[] playerParty;
     private Stage currentStage;
     private Canvas canvas;
-    private boolean gameRunning;
     private KeyPress keyPressed;
-    private boolean isPlayerTurn;
 
     private int playerTarget = 0;
 
@@ -32,9 +27,8 @@ public class Game {
 
         canvas = new Canvas();
 
-        inputHandler = new InputHandler(this);
+        InputHandler inputHandler = new InputHandler(this);
 
-        enemies = new Character[ENEMIES_PER_LEVEL];
         playerParty = new Character[PLAYER_PARTY_SIZE];
 
         // Current party only has one character, expandable in the future
@@ -48,8 +42,6 @@ public class Game {
     }
 
     public void start() {
-
-        gameRunning = true;
 
         // Player is now targeting enemies sequentially until the menu is working
 
@@ -95,7 +87,6 @@ public class Game {
                 }
 
                 newStage();
-                continue;
             }
         }
 
@@ -165,7 +156,7 @@ public class Game {
         if (!currentStage.getEnemies()[playerTarget].isAlive()) {
             return;
         }
-        
+
         for (Character enemy : currentStage.getEnemies()) {
 
             try {
@@ -180,7 +171,6 @@ public class Game {
             System.out.println("\n");
         }
 
-        isPlayerTurn = false;
     }
 
     private void characterStats() {

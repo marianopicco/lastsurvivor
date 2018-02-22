@@ -19,25 +19,19 @@ public class Canvas implements Drawable {
     private ActionMenu actionMenu;
     private Action currentAction;
 
+    private StatusMenu statusMenu;
+
     private Position leftPosition;
     private Position rightPosition;
 
     private Picture evilGuy;
     private Picture goodGuy;
 
-    public Picture getEvilGuy() {
-        return evilGuy;
-    }
-
-    public Picture getGoodGuy() {
-        return goodGuy;
-    }
-
     public Canvas() {
+
         leftPosition = new Position(100, 250);
         rightPosition = new Position(800, 250);
         draw();
-
     }
 
     @Override
@@ -66,7 +60,7 @@ public class Canvas implements Drawable {
 
     private void createMenu() {
 
-        Menu statusMenu = new StatusMenu();
+        statusMenu = new StatusMenu();
         Menu characterMenu = new CharacterMenu();
         actionMenu = new ActionMenu();
 
@@ -78,6 +72,7 @@ public class Canvas implements Drawable {
     }
 
     //TODO clear translate tests in receivedAction method
+
     public void receivedAction(KeyPress keyPress) {
 
         switch (keyPress) {
@@ -85,17 +80,18 @@ public class Canvas implements Drawable {
             case UP:
                 actionMenu.moveUp();
                 break;
+
             case DOWN:
                 actionMenu.moveDown();
                 break;
+
             case SPACE:
                 actionMenu.actionSelection();
                 break;
+
             default:
                 System.out.println("JVM fucked up");
-
         }
-
     }
 
     public Action getCurrentAction() {
@@ -124,28 +120,29 @@ public class Canvas implements Drawable {
         */
     }
 
-    private void deleteCharacter() {
-        evilGuy.delete();
-    }
-
     // The argument may change
+
     public void translateCharacter(Picture attacker, Picture target) throws InterruptedException {
 
-
         if (attacker.getX() > 500) {
+
             while (attacker.getX() > target.getX() + 100) {
                 attacker.translate(-3, 0);
                 Thread.sleep(1);
             }
+
             while (attacker.getX() < 800) {
                 attacker.translate(3, 0);
                 Thread.sleep(1);
             }
+
         } else {
+
             while (attacker.getX() < target.getX() - 100) {
                 attacker.translate(3, 0);
                 Thread.sleep(1);
             }
+
             while (attacker.getX() > 100) {
                 attacker.translate(-3, 0);
                 Thread.sleep(1);
@@ -156,6 +153,18 @@ public class Canvas implements Drawable {
     public void resetCurrentAction() {
         currentAction = null;
 
+    }
+
+    public void showHitPoints(int hp, int maxHp) {
+        statusMenu.showHitPoints(hp, maxHp);
+    }
+
+    public Picture getEvilGuy() {
+        return evilGuy;
+    }
+
+    public Picture getGoodGuy() {
+        return goodGuy;
     }
 
     public class ActionMenu extends Menu {
@@ -178,8 +187,8 @@ public class Canvas implements Drawable {
         private Position textPos1;
         private Position textPos2;
         private Position textPos3;
-        private Position textPos4;
 
+        private Position textPos4;
 
         ActionMenu() {
 
@@ -279,8 +288,6 @@ public class Canvas implements Drawable {
                     System.out.println("JVM fucked up");
             }
         }
-
-
     }
 
     public class CharacterMenu extends Menu {
@@ -309,32 +316,44 @@ public class Canvas implements Drawable {
         }
     }
 
-    public class StatusMenu  extends Menu {
+    public class StatusMenu extends Menu {
+
+        private final static int INNER_PADDING = 80;
 
         private Position statusMenuPos;
         private int initialPositionX = BACKGROUND_WIDTH / 2 + 10;
         private int initialPositionY = 580;
 
+        private Position hitPointsPos;
+
+        private Text hitPoints;
+
         StatusMenu() {
 
             statusMenuPos = new Position(initialPositionX, initialPositionY);
-            Picture rightMenu = new Picture (menuX(), menuY(), "assets/statusframe.png");
+            Picture rightMenu = new Picture(menuX(), menuY(), "assets/statusframe.png");
             rightMenu.draw();
 
-            showHitPoints();
+            double innerPadding = statusMenuPos.getPosX() + INNER_PADDING;
+
+            hitPointsPos = new Position(innerPadding, statusMenuPos.getPosY());
+
+            hitPoints = new Text(hitPointsPos.getPosX(), hitPointsPos.getPosY(), "");
+            hitPoints.grow(10, 5);
         }
 
         double menuX() {
             return statusMenuPos.getPosX();
         }
 
-        public void showHitPoints() {
+        @Override
+        public void draw() {
+        }
 
-            Text hp = new Text(menuX(), menuY(), "1000");
-            Text maxHp = new Text(menuX() + 50, menuY(), "1000");
+        private void showHitPoints (int hp, int maxHitPoints) {
 
-            hp.draw();
-            maxHp.draw();
+            this.hitPoints.setText(hp + " / " + maxHitPoints);
+            this.hitPoints.draw();
         }
     }
 
@@ -344,9 +363,9 @@ public class Canvas implements Drawable {
         private double posY;
 
         Position(double x, double y) {
+
             posX = x;
             posY = y;
-
         }
 
         public double getPosX() {

@@ -7,6 +7,7 @@ public class Character implements Drawable {
 
     private String name;
     private int hp;
+    private int maxHp;
     private int baseAttack;
     private boolean isAlive;
     private boolean isDefending;
@@ -14,6 +15,7 @@ public class Character implements Drawable {
     public Character(String name, int hp, int baseAttack) {
         this.name = name;
         this.hp = hp;
+        this.maxHp = hp;
         this.baseAttack = baseAttack;
         this.isAlive = true;
         this.isDefending = false;
@@ -25,7 +27,7 @@ public class Character implements Drawable {
     }
 
     public void attack(Character[] enemies, int numberOfEnemies) {
-        
+
         Character target = null;
 
         // Souts for testing
@@ -118,6 +120,14 @@ public class Character implements Drawable {
                 ", baseAttack=" + baseAttack +
                 ", isAlive=" + isAlive +
                 '}';
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
     }
 
     public boolean isAlive() {

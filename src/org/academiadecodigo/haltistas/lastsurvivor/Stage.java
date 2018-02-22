@@ -6,7 +6,6 @@ import org.academiadecodigo.haltistas.lastsurvivor.characters.CharacterFactory;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
-
 public class Stage {
 
     private Character[] enemies;

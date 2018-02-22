@@ -39,6 +39,7 @@ public class Game {
         // Current party only has one character, expandable in the future
 
         playerParty[0] = CharacterFactory.createCharacter("Player", 3, 4);
+        characterStats();
 
         currentStage = new Stage(1);
     }
@@ -84,6 +85,7 @@ public class Game {
                     }
 
                     enemyTurn();
+                    characterStats();
                 }
 
                 keyPressed = null;
@@ -158,6 +160,11 @@ public class Game {
         }
 
         isPlayerTurn = false;
+    }
+
+    private void characterStats() {
+
+        canvas.showHitPoints(playerParty[0].getHp(), playerParty[0].getMaxHp());
     }
 
     private void newStage() {

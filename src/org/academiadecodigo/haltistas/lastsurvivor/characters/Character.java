@@ -15,13 +15,12 @@ public class Character implements Drawable {
     private boolean isAlive;
     private boolean isDefending;
 
-    public Character(String name, int hp, int baseAttack, int baseMagic, Role role) {
+    public Character(String name, int hp, int baseAttack, int baseMagic) {
         this.name = name;
         this.hp = hp;
         this.maxHp = hp;
         this.baseAttack = baseAttack;
         this.baseMagic = baseMagic;
-        this.role = role;
         this.isAlive = true;
         this.isDefending = false;
 
@@ -125,6 +124,7 @@ public class Character implements Drawable {
                 "name='" + name + '\'' +
                 ", hp=" + hp +
                 ", baseAttack=" + baseAttack +
+                ", baseMagic=" + baseMagic +
                 ", isAlive=" + isAlive +
                 '}';
     }

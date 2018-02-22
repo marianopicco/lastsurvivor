@@ -242,7 +242,7 @@ public class Canvas implements Drawable {
             defend = new Picture(textPos3.getPosX(), textPos3.getPosY(), "assets/defendWORD.png");
             item = new Picture(textPos4.getPosX(), textPos4.getPosY(), "assets/itemsWORD.png");
 
-            selectionPointer = new Picture(textPos1.getPosX(), textPos1.getPosY(), "assets/littlearrow.png");
+            selectionPointer = new Picture(textPos1.getPosX()-TEXT_PADDING, textPos1.getPosY()-10, "assets/littlearrow.png");
 
         }
 
@@ -308,6 +308,8 @@ public class Canvas implements Drawable {
         private Position charmMenuPos;
         private int initialPositionX = Canvas.PADDING;
         private int initialPositionY = 580;
+        private int textCharacterPositionX = initialPositionX + 20;
+        private int textCharacterPositionY = initialPositionY + 20;
 
         CharacterMenu() {
 
@@ -324,18 +326,20 @@ public class Canvas implements Drawable {
 
         void textCharacter() {
 
-            Picture name = new Picture(initialPositionX, initialPositionY, "assets/supergrannyname.png");
+
+
+            Picture name = new Picture(textCharacterPositionX, textCharacterPositionY, "assets/supergrannyname.png");
             name.draw();
         }
     }
 
     public class StatusMenu extends Menu {
 
-        private final static int INNER_PADDING = 80;
+        private final static int INNER_PADDING = 135;
 
         private Position statusMenuPos;
         private int initialPositionX = BACKGROUND_WIDTH / 2 + 10;
-        private int initialPositionY = 580;
+        private int initialPositionY = 620;
 
         private Position hitPointsPos;
 
@@ -352,7 +356,8 @@ public class Canvas implements Drawable {
             hitPointsPos = new Position(innerPadding, statusMenuPos.getPosY());
 
             hitPoints = new Text(hitPointsPos.getPosX(), hitPointsPos.getPosY(), "");
-            hitPoints.grow(10, 5);
+            hitPoints.grow(60, 20);
+            hitPoints.setColor(Color.WHITE);
         }
 
         double menuX() {

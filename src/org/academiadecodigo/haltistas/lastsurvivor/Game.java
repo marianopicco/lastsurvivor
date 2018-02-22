@@ -116,6 +116,11 @@ public class Game {
         switch (canvas.getCurrentAction()) {
 
             case ATTACK:
+                try {
+                    canvas.translateCharacter(canvas.getGoodGuy(),canvas.getEvilGuy());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 playerAttack(playerParty[0], currentStage.getEnemies()[playerTarget]);
                 break;
 
@@ -138,6 +143,11 @@ public class Game {
                 e.printStackTrace();
             }
 
+            try {
+                canvas.translateCharacter(canvas.getEvilGuy(),canvas.getGoodGuy());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             enemy.attack(playerParty, playerParty.length);
             System.out.println("\n");
         }

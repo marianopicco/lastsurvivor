@@ -22,6 +22,17 @@ public class Canvas implements Drawable {
     private Position leftPosition;
     private Position rightPosition;
 
+    private Picture evilGuy;
+    private Picture goodGuy;
+
+    public Picture getEvilGuy() {
+        return evilGuy;
+    }
+
+    public Picture getGoodGuy() {
+        return goodGuy;
+    }
+
     public Canvas() {
         leftPosition = new Position(100, 250);
         rightPosition = new Position(800, 250);
@@ -102,10 +113,10 @@ public class Canvas implements Drawable {
     private void drawCharacters() {
 
 
-        Picture evilGuy = new Picture(leftPosition.getPosX(), leftPosition.getPosY(), "assets/buzzilisk.png");
+        evilGuy = new Picture(leftPosition.getPosX(), leftPosition.getPosY(), "assets/buzzilisk.png");
         evilGuy.draw();
 
-        Picture goodGuy = new Picture(rightPosition.getPosX(), rightPosition.getPosY(), "assets/supergranny.png");
+        goodGuy = new Picture(rightPosition.getPosX(), rightPosition.getPosY(), "assets/supergranny.png");
         goodGuy.draw();
 
         /* Pointer should be added when there is more than one enemy in the game
@@ -202,8 +213,8 @@ public class Canvas implements Drawable {
             actionMenu = new Picture(this.menuPos.getPosX(), this.menuPos.getPosY(), "assets/actionframe.png");
 
             attack = new Picture(textPos1.getPosX(), textPos1.getPosY(), "assets/attackWord.png");
-            defend = new Picture(textPos3.getPosX(), textPos3.getPosY(), "assets/magicWORD.png");
-            magic = new Picture(textPos2.getPosX(), textPos2.getPosY(), "assets/defendWORD.png");
+            magic = new Picture(textPos2.getPosX(), textPos2.getPosY(), "assets/magicWORD.png");
+            defend = new Picture(textPos3.getPosX(), textPos3.getPosY(), "assets/defendWORD.png");
             item = new Picture(textPos4.getPosX(), textPos4.getPosY(), "assets/itemsWORD.png");
 
             selectionBox = new Picture(textPos1.getPosX(), textPos1.getPosY(), "assets/littlearrow.png");

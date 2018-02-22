@@ -4,6 +4,7 @@ import org.academiadecodigo.haltistas.lastsurvivor.characters.CharacterFactory;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.*;
 import org.academiadecodigo.haltistas.lastsurvivor.input.KeyPress;
 import org.academiadecodigo.haltistas.lastsurvivor.interfaces.Drawable;
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
@@ -16,9 +17,7 @@ public class Canvas implements Drawable {
 
     private ActionMenu actionMenu;
     private Action currentAction;
-
     private StatusMenu statusMenu;
-
     private Position leftPosition;
     private Position rightPosition;
 
@@ -26,14 +25,14 @@ public class Canvas implements Drawable {
     private Picture goodGuy;
     private Picture magicAttack;
 
-    private Text damage;
+    private Text enemyDamage;
+    private Text characterDamage;
 
     public Canvas() {
 
-        leftPosition = new Position(100, 250);
-        rightPosition = new Position(800, 250);
         magicAttack = new Picture(rightPosition.getPosX(), rightPosition.getPosY(), "assets/magic.png");
-
+        leftPosition = new Position(90, 330);
+        rightPosition = new Position(750, 340);
         draw();
     }
 
@@ -72,7 +71,15 @@ public class Canvas implements Drawable {
 
         actionMenu.instantiateStuff();
 
-        damage = new Text(20, 20, "");
+
+        enemyDamage = new Text(700, 400, "");
+        enemyDamage.grow(60, 20);
+        enemyDamage.setColor(Color.RED);
+
+        characterDamage = new Text(200, 400, "");
+        characterDamage.grow(60, 20);
+        characterDamage.setColor(Color.RED);
+
     }
 
     //TODO clear translate tests in receivedAction method
@@ -142,7 +149,7 @@ public class Canvas implements Drawable {
         */
     }
 
-    public void newEnemy(){
+    public void newEnemy() {
         evilGuy = CharacterFactory.getEnemyPicture(leftPosition.getPosX(), leftPosition.getPosY());
     }
     // The argument may change
@@ -156,7 +163,7 @@ public class Canvas implements Drawable {
                 Thread.sleep(1);
             }
 
-            while (attacker.getX() < 800) {
+            while (attacker.getX() < 750) {
                 attacker.translate(3, 0);
                 Thread.sleep(1);
             }
@@ -184,14 +191,24 @@ public class Canvas implements Drawable {
         statusMenu.showHitPoints(hp, maxHp);
     }
 
-    public void showDamage(int damage) {
 
-        this.damage.setText(" " + damage);
-        this.damage.draw();
+    public void showDamage(Picture attacker, int damage) {
+
+        if (attacker.getX() > 500) {
+
+            this.characterDamage.setText(" " + damage);
+            this.characterDamage.draw();
+
+        } else {
+            this.enemyDamage.setText(" " + damage);
+            this.enemyDamage.draw();
+        }
     }
 
     public void clearDamageDealt() {
-        this.damage.delete();
+
+        this.enemyDamage.delete();
+        this.characterDamage.delete();
     }
 
     public Picture getEvilGuy() {
@@ -206,7 +223,7 @@ public class Canvas implements Drawable {
 
 
         private final static int TEXT_PADDING_LEFT = 50;
-        private final static int TEXT_PADDING = 23;
+        private final static int TEXT_PADDING = 22;
 
         private Position menuPos;
         private int actionPointer = 0;
@@ -228,7 +245,7 @@ public class Canvas implements Drawable {
         ActionMenu() {
 
             currentAction = null;
-            menuPos = new Position(super.menuWidth() / 2, super.menuY() + 10);
+            menuPos = new Position(super.menuWidth() / 2, super.menuY() + PADDING);
 
             double leftPadding = menuPos.getPosX() + TEXT_PADDING_LEFT;
 
@@ -264,7 +281,7 @@ public class Canvas implements Drawable {
             defend = new Picture(textPos3.getPosX(), textPos3.getPosY(), "assets/defendWORD.png");
             item = new Picture(textPos4.getPosX(), textPos4.getPosY(), "assets/itemsWORD.png");
 
-            selectionPointer = new Picture(textPos1.getPosX(), textPos1.getPosY(), "assets/littlearrow.png");
+            selectionPointer = new Picture(textPos1.getPosX() - TEXT_PADDING, textPos1.getPosY() - PADDING, "assets/littlearrow.png");
 
         }
 
@@ -330,6 +347,8 @@ public class Canvas implements Drawable {
         private Position charmMenuPos;
         private int initialPositionX = Canvas.PADDING;
         private int initialPositionY = 580;
+        private int textCharacterPositionX = initialPositionX + 20;
+        private int textCharacterPositionY = initialPositionY + 30;
 
         CharacterMenu() {
 
@@ -346,18 +365,18 @@ public class Canvas implements Drawable {
 
         void textCharacter() {
 
-            Picture name = new Picture(initialPositionX, initialPositionY, "assets/supergrannyname.png");
+            Picture name = new Picture(textCharacterPositionX, textCharacterPositionY, "assets/supergrannyname.png");
             name.draw();
         }
     }
 
     public class StatusMenu extends Menu {
 
-        private final static int INNER_PADDING = 80;
+        private final static int INNER_PADDING = 135;
 
         private Position statusMenuPos;
         private int initialPositionX = BACKGROUND_WIDTH / 2 + 10;
-        private int initialPositionY = 580;
+        private int initialPositionY = 620;
 
         private Position hitPointsPos;
 
@@ -374,7 +393,8 @@ public class Canvas implements Drawable {
             hitPointsPos = new Position(innerPadding, statusMenuPos.getPosY());
 
             hitPoints = new Text(hitPointsPos.getPosX(), hitPointsPos.getPosY(), "");
-            hitPoints.grow(10, 5);
+            hitPoints.grow(60, 20);
+            hitPoints.setColor(Color.WHITE);
         }
 
         double menuX() {

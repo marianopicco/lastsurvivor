@@ -183,7 +183,7 @@ public class Game {
 
         if (character == playerParty[0]) {
 
-            canvas.showDamage(playerParty[0].getDamage());
+            canvas.showDamage(canvas.getGoodGuy(),playerParty[0].getDamage());
 
             try {
                 Thread.sleep(500);
@@ -195,7 +195,7 @@ public class Game {
             return;
         }
 
-        canvas.showDamage(currentStage.getEnemies()[playerTarget].getDamage());
+        canvas.showDamage(canvas.getEvilGuy(),currentStage.getEnemies()[playerTarget].getDamage());
 
         try {
             Thread.sleep(500);
@@ -215,8 +215,8 @@ public class Game {
 
     private void gameOver() {
 
-        Picture gameOver = new Picture(10, 10, "assets/gameover.png");
-        gameOver.draw();
+        Picture gameover = new Picture(10, 10, "assets/gameover.jpg");
+        gameover.draw();
 
         try {
             Thread.sleep(2000);

@@ -142,6 +142,12 @@ public class Game {
 
             case MAGIC:
 
+                try {
+                    canvas.drawMagicAttack();
+                    canvas.translateMagic(canvas.getEvilGuy());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 playerAttack(playerParty[0], currentStage.getEnemies()[playerTarget]);
                 showDamage(playerParty[0]);
                 break;

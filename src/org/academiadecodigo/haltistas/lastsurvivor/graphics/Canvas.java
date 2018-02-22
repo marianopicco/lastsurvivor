@@ -26,6 +26,7 @@ public class Canvas implements Drawable {
 
     private Picture evilGuy;
     private Picture goodGuy;
+    private Picture magicAttack;
 
     private Text damage;
 
@@ -107,6 +108,25 @@ public class Canvas implements Drawable {
 
     public void hideActionMenu() {
         actionMenu.hide();
+    }
+
+    public void drawMagicAttack(){
+        magicAttack= new Picture(rightPosition.getPosX(),rightPosition.getPosY(), "assets/magic.png");
+        magicAttack.draw();
+
+    }
+    public void translateMagic( Picture target) throws InterruptedException{
+        while (magicAttack.getX() > target.getX() + 100) {
+            magicAttack.translate(-3, 0);
+            Thread.sleep(1);
+        }
+        magicAttack.delete();
+
+        while (magicAttack.getX() < 800) {
+            magicAttack.translate(3, 0);
+            Thread.sleep(1);
+        }
+
     }
 
     private void drawCharacters() {

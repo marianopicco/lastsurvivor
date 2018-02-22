@@ -1,5 +1,6 @@
 package org.academiadecodigo.haltistas.lastsurvivor.graphics;
 
+import org.academiadecodigo.haltistas.lastsurvivor.characters.Character;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.*;
 import org.academiadecodigo.haltistas.lastsurvivor.input.KeyPress;
 import org.academiadecodigo.haltistas.lastsurvivor.interfaces.Drawable;
@@ -16,15 +17,16 @@ public class Canvas implements Drawable {
     public final static int BACKGROUND_HEIGHT = 700;
 
     private ActionMenu actionMenu;
-    private Menu statusMenu;
-    private Menu characterMenu;
     private Action currentAction;
-    private Ellipse goodGuy;
-    private Ellipse evilGuy;
 
+    private Position leftPosition;
+    private Position rightPosition;
 
     public Canvas() {
+        leftPosition = new Position(100, 250);
+        rightPosition = new Position(800, 250);
         draw();
+
     }
 
     @Override
@@ -40,27 +42,28 @@ public class Canvas implements Drawable {
     private void createAreaOfGame() {
 
         Rectangle areaOfGame = new Rectangle(PADDING, PADDING, BACKGROUND_WIDTH, BACKGROUND_HEIGHT);
-
         areaOfGame.draw();
+
     }
 
     private void createBackground() {
 
-        Picture pic = new Picture(PADDING, PADDING, "assets/background_test.jpg");
-
+        Picture pic = new Picture(PADDING, PADDING, "assets/background.jpg");
         pic.draw();
+
     }
 
     private void createMenu() {
 
-        statusMenu = new StatusMenu();
-        characterMenu = new CharacterMenu();
+        Menu statusMenu = new StatusMenu();
+        Menu characterMenu = new CharacterMenu();
         actionMenu = new ActionMenu();
 
         statusMenu.draw();
         characterMenu.draw();
 
         actionMenu.instantiateStuff();
+
     }
 
     //TODO clear translate tests in receivedAction method
@@ -79,6 +82,7 @@ public class Canvas implements Drawable {
                 break;
             default:
                 System.out.println("JVM fucked up");
+
         }
 
     }
@@ -95,39 +99,42 @@ public class Canvas implements Drawable {
         actionMenu.hide();
     }
 
-    void drawCharacters() {
+    private void drawCharacters() {
 
-        evilGuy = new Ellipse(100, 250, 100, 100);
-        evilGuy.fill();
 
-        goodGuy = new Ellipse(800, 250, 100, 100);
+        Picture evilGuy = new Picture(leftPosition.getPosX(), leftPosition.getPosY(), "assets/buzzilisk.png");
+        evilGuy.draw();
+
+        Picture goodGuy = new Picture(rightPosition.getPosX(), rightPosition.getPosY(), "assets/supergranny.png");
         goodGuy.draw();
 
-        Picture pointer2 = new Picture(70, 220, "assets/bluediamond.png");
-        pointer2.draw();
+        /* Pointer should be added when there is more than one enemy in the game
+        Picture pointer = new Picture(evilGuy.getX(), evilGuy.getY(), "assets/littlearrow.png");
+        pointer.draw();
+        */
 
     }
 
-    //Todo verify and change the argument
-    public void translateCharacter(Ellipse origin, Ellipse target) throws InterruptedException {
+    // The argument may change
+    public void translateCharacter(Picture attacker, Picture target) throws InterruptedException {
 
 
-        if (origin.equals(goodGuy)) {
-            while (origin.getX() > target.getX() + 100) {
-                origin.translate(-3, 0);
+        if (attacker.getX() > 500) {
+            while (attacker.getX() > target.getX() + 100) {
+                attacker.translate(-3, 0);
                 Thread.sleep(1);
             }
-            while (origin.getX() < 800) {
-                origin.translate(3, 0);
+            while (attacker.getX() < 800) {
+                attacker.translate(3, 0);
                 Thread.sleep(1);
             }
         } else {
-            while (origin.getX() < target.getX() - 100) {
-                origin.translate(3, 0);
+            while (attacker.getX() < target.getX() - 100) {
+                attacker.translate(3, 0);
                 Thread.sleep(1);
             }
-            while (origin.getX() > 100) {
-                origin.translate(-3, 0);
+            while (attacker.getX() > 100) {
+                attacker.translate(-3, 0);
                 Thread.sleep(1);
             }
         }
@@ -135,82 +142,73 @@ public class Canvas implements Drawable {
 
     public void resetCurrentAction() {
         currentAction = null;
+
     }
 
     public class ActionMenu extends Menu {
 
-        private final static int INITIAL_POSITION_X = 260;
-        private final static int SELECTION_MOVE_X = 0;
-        private final static int SELECTION_MOVE_Y = 20;
 
-        private int initialPositionY = menuY() + 10;
+        private final static int TEXT_PADDING_LEFT = 50;
+        private final static int TEXT_PADDING = 23;
+
+        private Position menuPos;
         private int actionPointer = 0;
-        private Rectangle selectionBox;
-        private Rectangle actionMenu;
 
-        private Text attack;
-        private Text magic;
-        private Text defend;
-        private Text item;
+        private Picture selectionBox;
+        private Picture actionMenu;
+
+        private Picture attack;
+        private Picture magic;
+        private Picture defend;
+        private Picture item;
+
+        private Position textPos1;
+        private Position textPos2;
+        private Position textPos3;
+        private Position textPos4;
 
 
         ActionMenu() {
             currentAction = null;
+            menuPos = new Position(super.menuWidth() / 2, super.menuY() + 10);
+
+            double leftPadding = menuPos.getPosX() + TEXT_PADDING_LEFT;
+
+            // Text starts at background position, then increases relating to the previous text
+            textPos1 = new Position(leftPadding, this.menuPos.getPosY() + TEXT_PADDING);
+            textPos2 = new Position(leftPadding, textPos1.getPosY() + TEXT_PADDING);
+            textPos3 = new Position(leftPadding, textPos2.getPosY() + TEXT_PADDING);
+            textPos4 = new Position(leftPadding, textPos3.getPosY() + TEXT_PADDING);
         }
 
         @Override
         public void draw() {
-            drawAction();
-        }
 
-        public void hide() {
-            hideAction();
-        }
-
-        @Override
-        public int menuX() {
-            return super.menuWidth() / 2;
-        }
-
-        @Override
-        public int menuY() {
-            return super.menuY() + 10;
-        }
-
-        @Override
-        public int menuHeight() {
-            return super.menuHeight() - 20;
-        }
-
-        @Override
-        public int menuWidth() {
-            return super.menuWidth() / 2;
-        }
-
-        void instantiateStuff() {
-
-            actionMenu = new Rectangle(menuX(), menuY(), menuWidth(), menuHeight());
-            actionMenu.setColor(Color.CYAN);
-
-            attack = new Text(INITIAL_POSITION_X, initialPositionY, Action.ATTACK.getAction());
-            magic = new Text(INITIAL_POSITION_X, menuY() + 30, Action.MAGIC.getAction());
-            defend = new Text(INITIAL_POSITION_X, menuY() + 50, Action.DEFEND.getAction());
-            item = new Text(INITIAL_POSITION_X, menuY() + 70, Action.ITEMS.getAction());
-
-            selectionBox = new Rectangle(INITIAL_POSITION_X, initialPositionY, 60, 20);
-
-        }
-
-        void drawAction() {
-
-            actionMenu.fill();
-
+            actionMenu.draw();
             selectionBox.draw();
 
             attack.draw();
             magic.draw();
             defend.draw();
             item.draw();
+        }
+
+        void hide() {
+            hideAction();
+        }
+
+        void instantiateStuff() {
+
+            actionMenu = new Picture(this.menuPos.getPosX(), this.menuPos.getPosY(), "assets/actionframe.png");
+
+            attack = new Picture(textPos1.getPosX(), textPos1.getPosY(), "assets/attackWord.png");
+            defend = new Picture(textPos3.getPosX(), textPos3.getPosY(), "assets/magicWORD.png");
+            magic = new Picture(textPos2.getPosX(), textPos2.getPosY(), "assets/defendWORD.png");
+            item = new Picture(textPos4.getPosX(), textPos4.getPosY(), "assets/itemsWORD.png");
+
+            selectionBox = new Picture(textPos1.getPosX(), textPos1.getPosY(), "assets/littlearrow.png");
+
+
         }
 
         void hideAction() {
@@ -230,23 +228,23 @@ public class Canvas implements Drawable {
             actionPointer++;
 
             if (actionPointer == Action.values().length) {
-                selectionBox.translate(SELECTION_MOVE_X, -80);
+                selectionBox.translate(0, -(Action.values().length * TEXT_PADDING));
                 actionPointer = 0;
             }
 
-            selectionBox.translate(SELECTION_MOVE_X, SELECTION_MOVE_Y);
+            selectionBox.translate(0, TEXT_PADDING);
 
         }
 
         void moveUp() {
 
             if (actionPointer == 0) {
-                selectionBox.translate(SELECTION_MOVE_X, 80);
+                selectionBox.translate(0, (Action.values().length * TEXT_PADDING));
                 actionPointer = Action.values().length;
             }
 
             actionPointer--;
-            selectionBox.translate(SELECTION_MOVE_X, -SELECTION_MOVE_Y);
+            selectionBox.translate(0, -TEXT_PADDING);
         }
 
         void actionSelection() {
@@ -271,4 +269,56 @@ public class Canvas implements Drawable {
 
 
     }
+
+
+    public class CharacterMenu extends Menu {
+
+        private Position charmMenuPos;
+        private int initialPositionX = Canvas.PADDING + 10;
+        private int initialPositionY = 580;
+
+        CharacterMenu() {
+
+            charmMenuPos = new Position(initialPositionX, initialPositionY);
+            Picture leftMenu = new Picture(menuX(), menuY(), "assets/characterframe.png");
+            leftMenu.draw();
+            textCharacter();
+
+        }
+
+        double menuX() {
+            return charmMenuPos.getPosX();
+        }
+
+        void textCharacter() {
+
+            Picture name = new Picture(initialPositionX, initialPositionY, "assets/supergrannyname.png");
+            name.draw();
+
+        }
+
+    }
+
+    private class Position {
+
+        private double posX;
+        private double posY;
+
+        Position(double x, double y) {
+            posX = x;
+            posY = y;
+
+        }
+
+        public double getPosX() {
+            return posX;
+        }
+
+        public double getPosY() {
+            return posY;
+        }
+
+    }
+
 }
+

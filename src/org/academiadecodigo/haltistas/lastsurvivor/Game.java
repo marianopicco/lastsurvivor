@@ -51,6 +51,7 @@ public class Game {
 
         //int playerTarget = 0;
 
+        // TODO: 22/02/18 needed to see while condition when more than one character on party
         while (playerParty[0].isAlive()) {
 
             // Checks if a key was pressed, or sleeps for 1000 ms
@@ -68,13 +69,25 @@ public class Game {
                     canvas.hideActionMenu();
                     canvas.resetCurrentAction();
 
+                    if (!currentStage.getEnemies()[playerTarget].isAlive()) {
+
+                        canvas.getEvilGuy().delete();
+
+                        try {
+                            Thread.sleep(1500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        newStage();
+                        continue;
+                    }
+
                     enemyTurn();
                 }
 
                 keyPressed = null;
-
             }
-
         }
 
         gameOver();
@@ -104,8 +117,6 @@ public class Game {
             System.out.println("\n");
         }
 
-        // Menu should reset so we can get a new command
-
     }
 
     private void playerTurn() {
@@ -113,15 +124,18 @@ public class Game {
         switch (canvas.getCurrentAction()) {
 
             case ATTACK:
+
                 try {
                     canvas.translateCharacter(canvas.getGoodGuy(), canvas.getEvilGuy());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
                 playerAttack(playerParty[0], currentStage.getEnemies()[playerTarget]);
                 break;
 
             case DEFEND:
+
                 playerParty[0].setDefending(true);
                 break;
 
@@ -144,6 +158,12 @@ public class Game {
         }
 
         isPlayerTurn = false;
+    }
+
+    private void newStage() {
+
+        currentStage = new Stage(1);
+        canvas.getEvilGuy().draw();
     }
 
     private void gameOver() {

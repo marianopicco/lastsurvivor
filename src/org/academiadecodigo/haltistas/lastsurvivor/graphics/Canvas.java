@@ -112,7 +112,6 @@ public class Canvas implements Drawable {
 
     private void drawCharacters() {
 
-
         evilGuy = new Picture(leftPosition.getPosX(), leftPosition.getPosY(), "assets/buzzilisk.png");
         evilGuy.draw();
 
@@ -123,7 +122,10 @@ public class Canvas implements Drawable {
         Picture pointer = new Picture(evilGuy.getX(), evilGuy.getY(), "assets/littlearrow.png");
         pointer.draw();
         */
+    }
 
+    private void deleteCharacter() {
+        evilGuy.delete();
     }
 
     // The argument may change

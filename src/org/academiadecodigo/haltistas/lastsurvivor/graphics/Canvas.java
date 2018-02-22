@@ -16,16 +16,19 @@ public class Canvas implements Drawable {
     public final static int BACKGROUND_HEIGHT = 700;
 
     private ActionMenu actionMenu;
-    private Menu statusMenu;
-    private Menu characterMenu;
     private Action currentAction;
     private Ellipse goodGuy;
     private Ellipse evilGuy;
 
 
+    private Position leftPosition;
+    private Position rightPosition;
 
     public Canvas() {
+        leftPosition = new Position(100, 250);
+        rightPosition = new Position(800, 250);
         draw();
+
     }
 
     @Override
@@ -41,29 +44,31 @@ public class Canvas implements Drawable {
     private void createAreaOfGame() {
 
         Rectangle areaOfGame = new Rectangle(PADDING, PADDING, BACKGROUND_WIDTH, BACKGROUND_HEIGHT);
-
         areaOfGame.draw();
+
     }
 
     private void createBackground() {
 
         Picture pic = new Picture(PADDING, PADDING, "assets/background_test.jpg");
-
         pic.draw();
+
     }
 
     private void createMenu() {
 
-        statusMenu = new StatusMenu();
-        characterMenu = new CharacterMenu();
+        Menu statusMenu = new StatusMenu();
+        Menu characterMenu = new CharacterMenu();
         actionMenu = new ActionMenu();
 
         statusMenu.draw();
         characterMenu.draw();
 
         actionMenu.instantiateStuff();
+
     }
-//TODO clear translate tests in receivedAction method
+
+    //TODO clear translate tests in receivedAction method
     public void receivedAction(KeyPress keyPress) {
 
         switch (keyPress) {
@@ -79,6 +84,7 @@ public class Canvas implements Drawable {
                 break;
             default:
                 System.out.println("JVM fucked up");
+
         }
 
     }
@@ -95,78 +101,36 @@ public class Canvas implements Drawable {
         actionMenu.hide();
     }
 
-    void drawCharacters() {
+    private void drawCharacters() {
 
-        evilGuy = new Ellipse(100, 250, 100, 100);
+
+        Ellipse evilGuy = new Ellipse(leftPosition.getPosX(), leftPosition.getPosY(), 100, 100);
         evilGuy.fill();
 
-        goodGuy = new Ellipse(800, 250, 100, 100);
+        Ellipse goodGuy = new Ellipse(rightPosition.getPosX(), rightPosition.getPosY(), 100, 100);
         goodGuy.draw();
 
-        Picture pointer2 = new Picture(70, 220, "assets/bluediamond.png");
-        pointer2.draw();
+        /* Pointer should be added when there is more than one enemy in the game
+        Picture pointer = new Picture(evilGuy.getX(), evilGuy.getY(), "assets/bluediamond.png");
+        pointer.draw();
+        */
 
-    }
-
-
-    public void translateCharacter(Character origin, Character target) throws InterruptedException {
-
-        double initialX, initialY;
-        double finalX, finalY;
-
-        while (goodGuy.getX() > evilGuy.getX() + 100) {
-            goodGuy.translate(-3, 0);
-            Thread.sleep(1);
-        }
-        while (goodGuy.getX() < 800) {
-            goodGuy.translate(3, 0);
-            Thread.sleep(1);
-        }
-
-    }
-
-
-        public void translateGoodGuyToE() {
-
-        goodGuy.translate(-200,0);
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        goodGuy.translate(-200,0);
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        goodGuy.translate(-200,0); //Atack possition
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        goodGuy.translate(300,0);
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        goodGuy.translate(300,0);
     }
 
     public void resetCurrentAction() {
         currentAction = null;
+
     }
 
     public class ActionMenu extends Menu {
 
-        private final static int INITIAL_POSITION_X = 260;
-        private final static int SELECTION_MOVE_X = 0;
-        private final static int SELECTION_MOVE_Y = 20;
 
-        private int initialPositionY = menuY() + 10;
+        private final static int TEXT_PADDING_LEFT = 50;
+        private final static int TEXT_PADDING = 23;
+
+        private Position menuPos;
         private int actionPointer = 0;
+
         private Rectangle selectionBox;
         private Rectangle actionMenu;
 
@@ -175,54 +139,27 @@ public class Canvas implements Drawable {
         private Text defend;
         private Text item;
 
+        private Position textPos1;
+        private Position textPos2;
+        private Position textPos3;
+        private Position textPos4;
+
 
         ActionMenu() {
             currentAction = null;
+            menuPos = new Position(super.menuWidth() / 2, super.menuY() + 10);
+
+            double leftPadding = menuPos.getPosX() + TEXT_PADDING_LEFT;
+
+            // Text starts at background position, then increases relating to the previous text
+            textPos1 = new Position(leftPadding, this.menuPos.getPosY() + TEXT_PADDING);
+            textPos2 = new Position(leftPadding, textPos1.getPosY() + TEXT_PADDING);
+            textPos3 = new Position(leftPadding, textPos2.getPosY() + TEXT_PADDING);
+            textPos4 = new Position(leftPadding, textPos3.getPosY() + TEXT_PADDING);
         }
 
         @Override
         public void draw() {
-            drawAction();
-        }
-
-        public void hide() {
-            hideAction();
-        }
-
-        @Override
-        public int menuX() {
-            return super.menuWidth() / 2;
-        }
-
-        @Override
-        public int menuY() {
-            return super.menuY() + 10;
-        }
-
-        @Override
-        public int menuHeight() {
-            return super.menuHeight() - 20;
-        }
-
-        @Override
-        public int menuWidth() {
-            return super.menuWidth() / 2;
-        }
-
-        void instantiateStuff() {
-
-            actionMenu = new Rectangle(menuX(), menuY(), menuWidth(), menuHeight());
-            actionMenu.setColor(Color.CYAN);
-
-            attack = new Text(INITIAL_POSITION_X, initialPositionY, Action.ATTACK.getAction());
-            magic = new Text(INITIAL_POSITION_X, menuY() + 30, Action.MAGIC.getAction());
-            defend = new Text(INITIAL_POSITION_X, menuY() + 50, Action.DEFEND.getAction());
-            item = new Text(INITIAL_POSITION_X, menuY() + 70, Action.ITEMS.getAction());
-
-            selectionBox = new Rectangle(INITIAL_POSITION_X, initialPositionY, 60, 20);
-
-        }
-        void drawAction() {
 
             actionMenu.fill();
 
@@ -232,6 +169,24 @@ public class Canvas implements Drawable {
             magic.draw();
             defend.draw();
             item.draw();
+        }
+
+        void hide() {
+            hideAction();
+        }
+
+        void instantiateStuff() {
+
+            actionMenu = new Rectangle(this.menuPos.getPosX(), this.menuPos.getPosY(), 250, 130);
+            actionMenu.setColor(Color.CYAN);
+
+            attack = new Text(textPos1.getPosX(), textPos1.getPosY(), Action.ATTACK.getAction());
+            defend = new Text(textPos3.getPosX(), textPos3.getPosY(), Action.DEFEND.getAction());
+            magic = new Text(textPos2.getPosX(), textPos2.getPosY(), Action.MAGIC.getAction());
+            item = new Text(textPos4.getPosX(), textPos4.getPosY(), Action.ITEMS.getAction());
+
+            selectionBox = new Rectangle(textPos1.getPosX(), textPos1.getPosY(), 60, 20);
+
         }
 
         void hideAction() {
@@ -251,23 +206,23 @@ public class Canvas implements Drawable {
             actionPointer++;
 
             if (actionPointer == Action.values().length) {
-                selectionBox.translate(SELECTION_MOVE_X, -80);
+                selectionBox.translate(0, -(Action.values().length * TEXT_PADDING));
                 actionPointer = 0;
             }
 
-            selectionBox.translate(SELECTION_MOVE_X, SELECTION_MOVE_Y);
+            selectionBox.translate(0, TEXT_PADDING);
 
         }
 
         void moveUp() {
 
             if (actionPointer == 0) {
-                selectionBox.translate(SELECTION_MOVE_X, 80);
+                selectionBox.translate(0, (Action.values().length * TEXT_PADDING));
                 actionPointer = Action.values().length;
             }
 
             actionPointer--;
-            selectionBox.translate(SELECTION_MOVE_X, -SELECTION_MOVE_Y);
+            selectionBox.translate(0, -TEXT_PADDING);
         }
 
         void actionSelection() {
@@ -294,31 +249,54 @@ public class Canvas implements Drawable {
     }
 
 
-    public void translateEToGoodGuy(){
-        evilGuy.translate(200,0);
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    public class CharacterMenu extends Menu {
+
+        private Position charmMenuPos;
+        private int initialPositionX = Canvas.PADDING + 10;
+        private int initialPositionY = 580;
+
+        CharacterMenu() {
+
+            charmMenuPos = new Position(initialPositionX, initialPositionY);
+            Rectangle leftMenu = new Rectangle(menuX(), menuY(), menuWidth(), menuHeight());
+            leftMenu.fill();
+            leftMenu.setColor(Color.RED);
+
+            textCharacter();
         }
-        evilGuy.translate(200,0);
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+
+        double menuX() {
+            return charmMenuPos.getPosX();
         }
-        evilGuy.translate(200,0); //Atack possition
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+
+        void textCharacter() {
+            Text name = new Text(initialPositionX, initialPositionY, "WARRIOR");
+            name.draw();
+
         }
-        evilGuy.translate(-300,0);
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        evilGuy.translate(-300,0);
+
     }
+
+    private class Position {
+
+        private double posX;
+        private double posY;
+
+        Position(double x, double y) {
+            posX = x;
+            posY = y;
+
+        }
+
+        public double getPosX() {
+            return posX;
+        }
+
+        public double getPosY() {
+            return posY;
+        }
+
+    }
+
 }
+

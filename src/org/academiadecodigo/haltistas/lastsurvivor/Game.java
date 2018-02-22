@@ -19,6 +19,9 @@ public class Game {
     private boolean gameRunning;
     private boolean receivedMenuChoice;
     private KeyPress keyPressed;
+    private boolean isPlayerTurn;
+
+    private int playerTarget = 0;
 
     /**
      * Game Class
@@ -29,7 +32,6 @@ public class Game {
         canvas = new Canvas();
 
         inputHandler = new InputHandler(this);
-
 
         enemies = new Character[ENEMIES_PER_LEVEL];
         playerParty = new Character[PLAYER_PARTY_SIZE];
@@ -47,7 +49,7 @@ public class Game {
 
         // Player is now targeting enemies sequentially until the menu is working
 
-        int playerTarget = 0;
+        //int playerTarget = 0;
 
         while (gameRunning) {
 
@@ -56,29 +58,17 @@ public class Game {
             canvas.showActionMenu();
 
             if (keyPressed != null) {
-                canvas.translateGoodGuyToE();
 
                 canvas.receivedAction(keyPressed);
 
                 if (canvas.getCurrentAction() != null) {
 
-                    switch (canvas.getCurrentAction()) {
-
-                        case ATTACK:
-
-                            fight(playerParty[0], currentStage.getEnemies()[playerTarget]);
-                            break;
-
-                        case DEFEND:
-                            break;
-
-                        default:
-                            System.out.println("JVM error");
-
-                    }
+                    playerTurn();
 
                     canvas.hideActionMenu();
                     canvas.resetCurrentAction();
+
+                    enemyTurn();
                 }
 
                 receivedMenuChoice = true;
@@ -89,7 +79,6 @@ public class Game {
             }
 
             Thread.sleep(500);
-
         }
     }
 
@@ -100,29 +89,47 @@ public class Game {
         }
 
         keyPressed = key;
-
     }
 
-    // Fight is the only method for our characters right now
-
-    private void fight(Character playerChar, Character enemyChar) {
-
-        while (!receivedMenuChoice) {
-            return;
-        }
-
+    private void playerAttack(Character playerChar, Character enemyChar) {
 
         //TODO handle exceptions correctly
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         if (enemyChar.isAlive()) {
             playerChar.attack(enemyChar);
             System.out.println("\n");
         }
+
+        // Menu should reset so we can get a new command
+
+        receivedMenuChoice = false;
+    }
+
+    private void playerTurn() {
+
+        switch (canvas.getCurrentAction()) {
+
+            case ATTACK:
+                playerAttack(playerParty[0], currentStage.getEnemies()[playerTarget]);
+                break;
+
+            case DEFEND:
+                playerParty[0].setDefending(true);
+                break;
+
+            default:
+                System.out.println("JVM error");
+        }
+    }
+
+    private void enemyTurn() {
+
         for (Character enemy : currentStage.getEnemies()) {
 
             try {
@@ -133,12 +140,8 @@ public class Game {
 
             enemy.attack(playerParty, playerParty.length);
             System.out.println("\n");
-
         }
 
-        // Menu should reset so we can get a new command
-
-        receivedMenuChoice = false;
+        isPlayerTurn = false;
     }
-
 }

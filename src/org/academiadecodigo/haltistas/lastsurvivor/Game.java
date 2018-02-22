@@ -48,7 +48,7 @@ public class Game {
 
         currentStage = new Stage(1);
 
-        sound = new Sound("/assets/BarbieGirl8Bit.wav");
+        sound = new Sound("/assets/EyeOfTheTiger8Bit.wav");
     }
 
     public void start() {

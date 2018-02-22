@@ -1,11 +1,8 @@
 package org.academiadecodigo.haltistas.lastsurvivor.graphics;
 
-import org.academiadecodigo.haltistas.lastsurvivor.characters.Character;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.*;
 import org.academiadecodigo.haltistas.lastsurvivor.input.KeyPress;
 import org.academiadecodigo.haltistas.lastsurvivor.interfaces.Drawable;
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Ellipse;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.pictures.Picture;

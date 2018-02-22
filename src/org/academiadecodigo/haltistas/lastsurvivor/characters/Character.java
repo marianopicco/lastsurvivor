@@ -9,15 +9,19 @@ public class Character implements Drawable {
     private int hp;
     private int maxHp;
     private int baseAttack;
+    private int baseMagic;
+    private Role role;
     private int realDamage;
     private boolean isAlive;
     private boolean isDefending;
 
-    public Character(String name, int hp, int baseAttack) {
+    public Character(String name, int hp, int baseAttack, int baseMagic, Role role) {
         this.name = name;
         this.hp = hp;
         this.maxHp = hp;
         this.baseAttack = baseAttack;
+        this.baseMagic = baseMagic;
+        this.role = role;
         this.isAlive = true;
         this.isDefending = false;
 

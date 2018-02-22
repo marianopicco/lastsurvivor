@@ -2,6 +2,7 @@ package org.academiadecodigo.haltistas.lastsurvivor;
 
 import org.academiadecodigo.haltistas.lastsurvivor.characters.Character;
 import org.academiadecodigo.haltistas.lastsurvivor.characters.CharacterFactory;
+import org.academiadecodigo.haltistas.lastsurvivor.characters.Role;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.Canvas;
 import org.academiadecodigo.haltistas.lastsurvivor.input.InputHandler;
 import org.academiadecodigo.haltistas.lastsurvivor.input.KeyPress;
@@ -38,7 +39,9 @@ public class Game {
 
         // Current party only has one character, expandable in the future
 
-        playerParty[0] = CharacterFactory.createCharacter("Player", 3, 4);
+        playerParty[0] = CharacterFactory.createCharacter("Player", 3, 4, 1, Role.WARRIOR);
+        //playerParty[0] = CharacterFactory.createCharacter("Player", 2, 1, 4, Role.WIZARD);
+        
         characterStats();
 
         currentStage = new Stage(1);
@@ -135,7 +138,12 @@ public class Game {
 
                 playerAttack(playerParty[0], currentStage.getEnemies()[playerTarget]);
                 showDamage(playerParty[0]);
-                
+                break;
+
+            case MAGIC:
+
+                playerAttack(playerParty[0], currentStage.getEnemies()[playerTarget]);
+                showDamage(playerParty[0]);
                 break;
 
             case DEFEND:

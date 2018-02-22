@@ -290,7 +290,7 @@ public class Canvas implements Drawable {
                     currentAction = Action.ATTACK;
                     break;
                 case 1:
-                    //call class EnemySelection
+                    currentAction = Action.MAGIC;
                     break;
                 case 2:
                     currentAction = Action.DEFEND;

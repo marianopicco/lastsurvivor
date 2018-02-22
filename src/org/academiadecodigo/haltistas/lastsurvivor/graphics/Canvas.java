@@ -182,6 +182,7 @@ public class Canvas implements Drawable {
 
 
         ActionMenu() {
+
             currentAction = null;
             menuPos = new Position(super.menuWidth() / 2, super.menuY() + 10);
 
@@ -282,11 +283,10 @@ public class Canvas implements Drawable {
 
     }
 
-
     public class CharacterMenu extends Menu {
 
         private Position charmMenuPos;
-        private int initialPositionX = Canvas.PADDING + 10;
+        private int initialPositionX = Canvas.PADDING;
         private int initialPositionY = 580;
 
         CharacterMenu() {
@@ -306,9 +306,36 @@ public class Canvas implements Drawable {
 
             Picture name = new Picture(initialPositionX, initialPositionY, "assets/supergrannyname.png");
             name.draw();
+        }
+    }
 
+    public class StatusMenu  extends Menu {
+
+        private Position statusMenuPos;
+        private int initialPositionX = BACKGROUND_WIDTH / 2 + 10;
+        private int initialPositionY = 580;
+
+        StatusMenu() {
+
+            statusMenuPos = new Position(initialPositionX, initialPositionY);
+            Picture rightMenu = new Picture (menuX(), menuY(), "assets/statusframe.png");
+            rightMenu.draw();
+
+            showHitPoints();
         }
 
+        double menuX() {
+            return statusMenuPos.getPosX();
+        }
+
+        public void showHitPoints() {
+
+            Text hp = new Text(menuX(), menuY(), "1000");
+            Text maxHp = new Text(menuX() + 50, menuY(), "1000");
+
+            hp.draw();
+            maxHp.draw();
+        }
     }
 
     private class Position {

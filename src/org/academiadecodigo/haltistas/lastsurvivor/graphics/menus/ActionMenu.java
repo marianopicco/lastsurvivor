@@ -4,7 +4,7 @@ import org.academiadecodigo.haltistas.lastsurvivor.graphics.Action;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public class ActionMenu extends Menu implements Movement {
+public class ActionMenu extends Menu {
 
     private final static int INITIAL_POSITION_X = 260;
     private final static int SELECTION_MOVE_X = 0;
@@ -67,7 +67,7 @@ public class ActionMenu extends Menu implements Movement {
         actionSelection();
     }
 
-    @Override
+
     public void moveDown() {
 
         actionPointer++;
@@ -81,7 +81,7 @@ public class ActionMenu extends Menu implements Movement {
 
     }
 
-    @Override
+
     public void moveUp() {
 
         if (actionPointer == 0) {
@@ -93,7 +93,7 @@ public class ActionMenu extends Menu implements Movement {
         selectionPointer.translate(SELECTION_MOVE_X, -SELECTION_MOVE_Y);
     }
 
-    @Override
+
     public void actionSelection() {
 
         switch (currentAction) {

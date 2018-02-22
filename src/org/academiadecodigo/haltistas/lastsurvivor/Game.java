@@ -49,52 +49,16 @@ public class Game {
 
         int playerTarget = 0;
 
-        while (gameRunning) {
 
             // Checks if a key was pressed, or sleeps for 1000 ms
 
-            if (keyPressed != null) {
 
-                //TODO add menu interaction
-                /* PLACEHOLDER -- Here, we should see something from the InputHandler, and act on it
-                * Menu logic (be something like this)
-                * menu.processKey( keyPressed );
-                *
-                * and should return something that tells the game what to do.
-                * For now, all it can do is fight();
-                */
-
-               canvas.receivedAction(keyPressed);
-
-
-                /*fight(playerParty[0], currentStage.getEnemies()[playerTarget]);
-
-                // Attack current target till it dies then get the next
-
-
-
-                if (!currentStage.getEnemies()[playerTarget].isAlive()) {
-
-                    playerTarget++;
-                    if (playerTarget >= ENEMIES_PER_LEVEL) {
-                        System.out.println("Game over for this level, all enemies dead.");
-                        gameRunning = false;
-                        currentStage = new Stage(3);
-                    }
-                }*/
-
-
-                receivedMenuChoice = true;
-                Thread.sleep(500);
 
                 keyPressed = null;
 
             }
 
-            Thread.sleep(500);
 
-        }
-    }
 
     public void receiveInput(KeyPress key) {
 

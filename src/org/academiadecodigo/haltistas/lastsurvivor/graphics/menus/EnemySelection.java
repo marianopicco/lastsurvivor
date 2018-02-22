@@ -1,20 +1,20 @@
 package org.academiadecodigo.haltistas.lastsurvivor.graphics.menus;
 
-public class EnemySelection implements Movement{
+public class EnemySelection {
 
-    @Override
     public void moveDown() {
 
     }
 
-    @Override
     public void moveUp() {
 
     }
 
-    @Override
     public void actionSelection() {
-        
+
+    }
+
+    public void draw() {
 
     }
 }

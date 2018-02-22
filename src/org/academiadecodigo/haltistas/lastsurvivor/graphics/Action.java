@@ -8,8 +8,8 @@ public enum Action {
 
     private String action;
 
-    Action (String action){
-        this.action=action;
+    Action(String action) {
+        this.action = action;
     }
 
     public String getAction() {

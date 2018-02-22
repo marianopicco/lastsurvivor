@@ -184,7 +184,7 @@ public class Game {
 
         if (character == playerParty[0]) {
 
-            canvas.showDamage(playerParty[0].getDamage());
+            canvas.showDamage(canvas.getGoodGuy(),playerParty[0].getDamage());
 
             try {
                 Thread.sleep(100);
@@ -196,7 +196,7 @@ public class Game {
             return;
         }
 
-        canvas.showDamage(currentStage.getEnemies()[playerTarget].getDamage());
+        canvas.showDamage(canvas.getEvilGuy(),currentStage.getEnemies()[playerTarget].getDamage());
 
         try {
             Thread.sleep(500);

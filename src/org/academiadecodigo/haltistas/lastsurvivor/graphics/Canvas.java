@@ -1,11 +1,9 @@
 package org.academiadecodigo.haltistas.lastsurvivor.graphics;
 
-import org.academiadecodigo.haltistas.lastsurvivor.characters.Character;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.*;
 import org.academiadecodigo.haltistas.lastsurvivor.input.KeyPress;
 import org.academiadecodigo.haltistas.lastsurvivor.interfaces.Drawable;
 import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Ellipse;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
@@ -27,7 +25,8 @@ public class Canvas implements Drawable {
     private Picture evilGuy;
     private Picture goodGuy;
 
-    private Text damage;
+    private Text enemyDamage;
+    private Text characterDamage;
 
     public Canvas() {
 
@@ -71,7 +70,14 @@ public class Canvas implements Drawable {
 
         actionMenu.instantiateStuff();
 
-        damage = new Text(20, 20,"");
+        enemyDamage = new Text(700, 400, "");
+        enemyDamage.grow(60, 20);
+        enemyDamage.setColor(Color.RED);
+
+        characterDamage = new Text(200, 400, "");
+        characterDamage.grow(60, 20);
+        characterDamage.setColor(Color.RED);
+
     }
 
     //TODO clear translate tests in receivedAction method
@@ -162,14 +168,23 @@ public class Canvas implements Drawable {
         statusMenu.showHitPoints(hp, maxHp);
     }
 
-    public void showDamage (int damage) {
+    public void showDamage(Picture attacker, int damage) {
 
-        this.damage.setText(" " + damage);
-        this.damage.draw();
+        if (attacker.getX() > 500) {
+
+            this.characterDamage.setText(" " + damage);
+            this.characterDamage.draw();
+
+        } else {
+            this.enemyDamage.setText(" " + damage);
+            this.enemyDamage.draw();
+        }
     }
 
     public void clearDamageDealt() {
-        this.damage.delete();
+
+        this.enemyDamage.delete();
+        this.characterDamage.delete();
     }
 
     public Picture getEvilGuy() {
@@ -242,7 +257,7 @@ public class Canvas implements Drawable {
             defend = new Picture(textPos3.getPosX(), textPos3.getPosY(), "assets/defendWORD.png");
             item = new Picture(textPos4.getPosX(), textPos4.getPosY(), "assets/itemsWORD.png");
 
-            selectionPointer = new Picture(textPos1.getPosX()-TEXT_PADDING, textPos1.getPosY()-PADDING, "assets/littlearrow.png");
+            selectionPointer = new Picture(textPos1.getPosX() - TEXT_PADDING, textPos1.getPosY() - PADDING, "assets/littlearrow.png");
 
         }
 
@@ -326,8 +341,6 @@ public class Canvas implements Drawable {
 
         void textCharacter() {
 
-
-
             Picture name = new Picture(textCharacterPositionX, textCharacterPositionY, "assets/supergrannyname.png");
             name.draw();
         }
@@ -368,7 +381,7 @@ public class Canvas implements Drawable {
         public void draw() {
         }
 
-        private void showHitPoints (int hp, int maxHitPoints) {
+        private void showHitPoints(int hp, int maxHitPoints) {
 
             this.hitPoints.setText(hp + " / " + maxHitPoints);
             this.hitPoints.draw();

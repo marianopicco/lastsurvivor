@@ -34,6 +34,8 @@ public class Canvas implements Drawable {
 
         leftPosition = new Position(100, 250);
         rightPosition = new Position(800, 250);
+        magicAttack = new Picture(rightPosition.getPosX(), rightPosition.getPosY(), "assets/magic.png");
+
         draw();
     }
 
@@ -72,7 +74,7 @@ public class Canvas implements Drawable {
 
         actionMenu.instantiateStuff();
 
-        damage = new Text(20, 20,"");
+        damage = new Text(20, 20, "");
     }
 
     //TODO clear translate tests in receivedAction method
@@ -110,12 +112,11 @@ public class Canvas implements Drawable {
         actionMenu.hide();
     }
 
-    public void drawMagicAttack(){
-        magicAttack= new Picture(rightPosition.getPosX(),rightPosition.getPosY(), "assets/magic.png");
+    public void drawMagicAttack() {
         magicAttack.draw();
-
     }
-    public void translateMagic( Picture target) throws InterruptedException{
+    
+    public void translateMagic(Picture target) throws InterruptedException {
         while (magicAttack.getX() > target.getX() + 100) {
             magicAttack.translate(-3, 0);
             Thread.sleep(1);
@@ -182,7 +183,7 @@ public class Canvas implements Drawable {
         statusMenu.showHitPoints(hp, maxHp);
     }
 
-    public void showDamage (int damage) {
+    public void showDamage(int damage) {
 
         this.damage.setText(" " + damage);
         this.damage.draw();
@@ -383,7 +384,7 @@ public class Canvas implements Drawable {
         public void draw() {
         }
 
-        private void showHitPoints (int hp, int maxHitPoints) {
+        private void showHitPoints(int hp, int maxHitPoints) {
 
             this.hitPoints.setText(hp + " / " + maxHitPoints);
             this.hitPoints.draw();

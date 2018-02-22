@@ -134,6 +134,7 @@ public class Game {
                 }
 
                 playerAttack(playerParty[0], currentStage.getEnemies()[playerTarget]);
+                canvas.showDamage(playerParty[0].getDamage());
                 break;
 
             case DEFEND:
@@ -155,7 +156,9 @@ public class Game {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
             enemy.attack(playerParty, playerParty.length);
+            canvas.showDamage(enemy.getDamage());
             System.out.println("\n");
         }
 

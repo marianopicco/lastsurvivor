@@ -9,6 +9,7 @@ public class Character implements Drawable {
     private int hp;
     private int maxHp;
     private int baseAttack;
+    private int realDamage;
     private boolean isAlive;
     private boolean isDefending;
 
@@ -109,7 +110,9 @@ public class Character implements Drawable {
     }
 
     private int realDamage() {
-        return baseAttack + Randomizer.rInt(-2, 2);
+
+        realDamage = baseAttack + Randomizer.rInt(-2, 2);
+        return realDamage;
     }
 
     @Override
@@ -128,6 +131,11 @@ public class Character implements Drawable {
 
     public int getMaxHp() {
         return maxHp;
+    }
+
+    public int getDamage() {
+        System.out.println("U: " + realDamage);
+        return realDamage;
     }
 
     public boolean isAlive() {

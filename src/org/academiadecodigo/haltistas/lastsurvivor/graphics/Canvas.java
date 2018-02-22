@@ -27,6 +27,8 @@ public class Canvas implements Drawable {
     private Picture evilGuy;
     private Picture goodGuy;
 
+    private Text damage;
+
     public Canvas() {
 
         leftPosition = new Position(100, 250);
@@ -68,6 +70,8 @@ public class Canvas implements Drawable {
         characterMenu.draw();
 
         actionMenu.instantiateStuff();
+
+        damage = new Text(20, 20,"");
 
     }
 
@@ -157,6 +161,12 @@ public class Canvas implements Drawable {
 
     public void showHitPoints(int hp, int maxHp) {
         statusMenu.showHitPoints(hp, maxHp);
+    }
+
+    public void showDamage (int damage) {
+
+        this.damage.setText(" " + damage);
+        this.damage.draw();
     }
 
     public Picture getEvilGuy() {

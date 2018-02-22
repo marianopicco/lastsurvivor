@@ -39,8 +39,8 @@ public class Game {
 
         // Current party only has one character, expandable in the future
 
-        playerParty[0] = CharacterFactory.createCharacter("Player", 3, 4, 1, Role.WARRIOR);
-        //playerParty[0] = CharacterFactory.createCharacter("Player", 2, 1, 4, Role.WIZARD);
+        //playerParty[0] = CharacterFactory.createCharacter("Player", Role.WARRIOR);
+        playerParty[0] = CharacterFactory.createCharacter("Player", Role.WIZARD);
 
         characterStats();
 
@@ -195,7 +195,7 @@ public class Game {
             canvas.showDamage(playerParty[0].getDamage());
 
             try {
-                Thread.sleep(100);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

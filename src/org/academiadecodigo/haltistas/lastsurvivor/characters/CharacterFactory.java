@@ -14,34 +14,24 @@ public class CharacterFactory {
     private int attack;
     private int magic;
 
-    public void defineModifiers(Role role) {
+    public static Character createCharacter(String name, Role role) {
+
+        double constitution = 0;
+        double strength = 0;
+        double wisdom = 0;
 
         if (role == Role.WARRIOR) {
 
             constitution = Randomizer.rDouble(7, 10);
-            strength = Randomizer.rDouble(5, 10);
+            strength = Randomizer.rDouble(6, 8);
             wisdom = Randomizer.rDouble(1, 2);
 
         } else if (role == Role.WIZARD) {
 
             constitution = Randomizer.rDouble(4, 6);
-            strength = Randomizer.rDouble(1, 3);
-            wisdom = Randomizer.rDouble(5, 10);
+            strength = Randomizer.rDouble(1, 2);
+            wisdom = Randomizer.rDouble(6, 8);
         }
-    }
-
-    /*public Character createCharacter(String name, Role role) {
-
-        defineModifiers(role);
-
-        hp = (int) Math.floor(Randomizer.rInt(50, 70) * constitution);
-        attack = (int) Math.floor(Randomizer.rInt(10, 15) * strength);
-        magic = (int) Math.floor(Randomizer.rInt(10, 15) * wisdom);
-
-        return new Character(name, hp, attack, magic);
-    }*/
-
-    public static Character createCharacter(String name, double constitution, double strength, double wisdom, Role role) {
 
         int hp = (int) Math.floor(Randomizer.rInt(50, 70) * constitution);
         int attack = (int) Math.floor(Randomizer.rInt(10, 15) * strength);
@@ -49,6 +39,15 @@ public class CharacterFactory {
 
         return new Character(name, hp, attack, magic);
     }
+
+    /*public static Character createCharacter(String name, double constitution, double strength, double wisdom, Role role) {
+
+        int hp = (int) Math.floor(Randomizer.rInt(50, 70) * constitution);
+        int attack = (int) Math.floor(Randomizer.rInt(10, 15) * strength);
+        int magic = (int) Math.floor(Randomizer.rInt(10, 15) * wisdom);
+
+        return new Character(name, hp, attack, magic);
+    }*/
 
     public static Character createEnemy(String name, double constitution, double strength) {
 

@@ -14,12 +14,13 @@ public class Game {
     private final int PLAYER_PARTY_SIZE = 3;
 
     private Character[] playerParty;
-    private Stage currentStage;
+    private Stage stage;
     private Canvas canvas;
     private KeyPress keyPressed;
     private Sound sound;
 
     private int playerTarget = 0;
+    private int currentStage;
 
     /**
      * Game Class
@@ -27,6 +28,7 @@ public class Game {
      */
     public void init() {
 
+        currentStage = 1;
         canvas = new Canvas();
 
         InputHandler inputHandler = new InputHandler(this);
@@ -40,52 +42,72 @@ public class Game {
 
         characterStats();
 
-        currentStage = new Stage(1);
+        stage = new Stage(1, currentStage);
 
         sound = new Sound("/assets/EyeOfTheTiger8Bit.wav");
     }
 
     public void start() {
 
+        int currentKills = 0;
         sound.loopIndef();
 
-        // TODO: 22/02/18 needed to see while condition when more than one character on party
-        while (playerParty[0].isAlive()) {
+        try {
 
-            canvas.showActionMenu();
+            // TODO: 22/02/18 needed to see while condition when more than one character on party
 
-            if (keyPressed != null) {
+            while (playerParty[0].isAlive()) {
 
-                canvas.receivedAction(keyPressed);
+                canvas.showActionMenu();
 
-                if (canvas.getCurrentAction() != null) {
+                if (keyPressed != null) {
 
-                    playerTurn();
+                    canvas.receivedAction(keyPressed);
 
-                    canvas.hideActionMenu();
-                    canvas.resetCurrentAction();
+                    if (canvas.getCurrentAction() != null) {
 
-                    enemyTurn();
-                    characterStats();
+                        playerTurn();
+
+                        canvas.hideActionMenu();
+                        canvas.resetCurrentAction();
+
+                        enemyTurn();
+                        characterStats();
+                    }
+
+                    keyPressed = null;
                 }
 
-                keyPressed = null;
-            }
+                if (!stage.getEnemies()[playerTarget].isAlive()) {
 
-            if (!currentStage.getEnemies()[playerTarget].isAlive()) {
+                    if (currentKills == 5) {
+                        currentStage++;
+                        currentKills = 0;
+                    } else {
+                        currentKills++;
+                    }
 
-                canvas.getEvilGuy().delete();
-                try {
+                    canvas.getEvilGuy().delete();
+
                     Thread.sleep(1500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
 
-                newStage();
+
+                    newStage();
+                }
             }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
-        gameOver();
+        try {
+            gameOver();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+
+        }
+
     }
 
     public void receiveInput(KeyPress key) {
@@ -97,15 +119,9 @@ public class Game {
         keyPressed = key;
     }
 
-    private void playerAttack(Character playerChar, Character enemyChar) {
+    private void playerAttack(Character playerChar, Character enemyChar) throws InterruptedException {
 
-        //TODO handle exceptions correctly
-
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(500);
 
         if (enemyChar.isAlive()) {
             playerChar.attack(enemyChar);
@@ -114,31 +130,22 @@ public class Game {
 
     }
 
-    private void playerTurn() {
+    private void playerTurn() throws InterruptedException {
 
         switch (canvas.getCurrentAction()) {
 
             case ATTACK:
 
-                try {
-                    canvas.translateCharacter(canvas.getGoodGuy(), canvas.getEvilGuy());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                playerAttack(playerParty[0], currentStage.getEnemies()[playerTarget]);
+                canvas.translateCharacter(canvas.getGoodGuy(), canvas.getEvilGuy());
+                playerAttack(playerParty[0], stage.getEnemies()[playerTarget]);
                 showDamage(playerParty[0]);
                 break;
 
             case MAGIC:
 
-                try {
-                    canvas.drawMagicAttack();
-                    canvas.translateMagic(canvas.getEvilGuy());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                playerAttack(playerParty[0], currentStage.getEnemies()[playerTarget]);
+                canvas.drawMagicAttack();
+                canvas.translateMagic(canvas.getEvilGuy());
+                playerAttack(playerParty[0], stage.getEnemies()[playerTarget]);
                 showDamage(playerParty[0]);
                 break;
 
@@ -152,20 +159,15 @@ public class Game {
         }
     }
 
-    private void enemyTurn() {
+    private void enemyTurn() throws InterruptedException {
 
-        if (!currentStage.getEnemies()[playerTarget].isAlive()) {
+        if (!stage.getEnemies()[playerTarget].isAlive()) {
             return;
         }
 
-        for (Character enemy : currentStage.getEnemies()) {
+        for (Character enemy : stage.getEnemies()) {
 
-            try {
-                canvas.translateCharacter(canvas.getEvilGuy(), canvas.getGoodGuy());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
+            canvas.translateCharacter(canvas.getEvilGuy(), canvas.getGoodGuy());
             enemy.attack(playerParty, playerParty.length);
             showDamage(enemy);
 
@@ -179,50 +181,38 @@ public class Game {
         canvas.showHitPoints(playerParty[0].getHp(), playerParty[0].getMaxHp());
     }
 
-    private void showDamage(Character character) {
+    private void showDamage(Character character) throws InterruptedException {
 
         if (character == playerParty[0]) {
 
-            canvas.showDamage(canvas.getGoodGuy(),playerParty[0].getDamage());
+            canvas.showDamage(canvas.getGoodGuy(), playerParty[0].getDamage());
 
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            Thread.sleep(500);
 
             canvas.clearDamageDealt();
             return;
         }
 
-        canvas.showDamage(canvas.getEvilGuy(),currentStage.getEnemies()[playerTarget].getDamage());
+        canvas.showDamage(canvas.getEvilGuy(), stage.getEnemies()[playerTarget].getDamage());
 
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(500);
 
         canvas.clearDamageDealt();
     }
 
     private void newStage() {
 
-        currentStage = new Stage(1);
+        stage = new Stage(1, currentStage);
         canvas.newEnemy();
         canvas.getEvilGuy().draw();
     }
 
-    private void gameOver() {
+    private void gameOver() throws InterruptedException {
 
-        Picture gameover = new Picture(10, 10, "assets/gameover.jpg");
-        gameover.draw();
+        Picture gameOver = new Picture(10, 10, "assets/gameover.jpg");
+        gameOver.draw();
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(2000);
 
         System.exit(0);
     }

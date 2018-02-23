@@ -28,6 +28,7 @@ public class Canvas implements Drawable {
 
     private Text enemyDamage;
     private Text characterDamage;
+    private Text infoText;
 
     public Canvas() {
 
@@ -44,6 +45,7 @@ public class Canvas implements Drawable {
         createBackground();
         createMenu();
         drawCharacters();
+        createInfoText();
 
     }
 
@@ -83,6 +85,13 @@ public class Canvas implements Drawable {
 
     }
 
+    private void createInfoText() {
+        infoText = new Text(500, 150, "");
+        infoText.grow(90, 30);
+        infoText.setColor(Color.WHITE);
+
+    }
+
     //TODO clear translate tests in receivedAction method
 
     public void receivedAction(KeyPress keyPress) {
@@ -104,6 +113,19 @@ public class Canvas implements Drawable {
             default:
                 System.out.println("JVM fucked up");
         }
+    }
+
+    public void showInfo(String info) {
+
+        infoText.setText(info);
+        infoText.draw();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        infoText.delete();
+
     }
 
     public Action getCurrentAction() {
@@ -243,6 +265,11 @@ public class Canvas implements Drawable {
 
         private Position textPos4;
 
+        /**
+         * The ActionMenu class is in charge of handling everything related to the
+         * Action menu, where the player chooses their next action
+         */
+
         ActionMenu() {
 
             currentAction = null;
@@ -343,6 +370,10 @@ public class Canvas implements Drawable {
         }
     }
 
+    /**
+     * The CharacterMenu class is in charge of showing the currently selected character's name
+     */
+
     public class CharacterMenu extends Menu {
 
         private Position charmMenuPos;
@@ -370,6 +401,10 @@ public class Canvas implements Drawable {
             name.draw();
         }
     }
+
+    /**
+     * The StatusMenu class handles all showing of the player status, particularly the current and maximum HP
+     */
 
     public class StatusMenu extends Menu {
 
@@ -413,6 +448,11 @@ public class Canvas implements Drawable {
         }
     }
 
+    /**
+     * The Position class is intended to make it easier to work with relative positions instead of raw
+     * X and Y coordinates. Ideally, all items in the Canvas superclass and its subclasses should have
+     * Positions associated with them
+     */
     private class Position {
 
         private double posX;

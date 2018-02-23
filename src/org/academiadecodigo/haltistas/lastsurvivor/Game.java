@@ -50,6 +50,7 @@ public class Game {
         sound.loopIndef();
 
         // TODO: 22/02/18 needed to see while condition when more than one character on party
+
         while (playerParty[0].isAlive()) {
 
             canvas.showActionMenu();

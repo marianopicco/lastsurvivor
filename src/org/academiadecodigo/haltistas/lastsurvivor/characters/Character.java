@@ -70,6 +70,9 @@ public class Character {
         // Souts for testing
         // @TODO remove the souts after testing
 
+        // Attacking removes defending stance
+        this.isDefending = false;
+
         if (!this.isAlive) {
             return;
         }
@@ -88,6 +91,9 @@ public class Character {
 
         // Souts for testing
         // @TODO remove the souts after testing
+
+        // Attacking removes defending stance
+        this.isDefending = false;
 
         if (!this.isAlive) {
             return;
@@ -109,6 +115,7 @@ public class Character {
         // @TODO remove souts after testing
 
         if (isDefending) {
+            System.out.println("Defending!");
             damage = damage / 2;
             isDefending = false;
         }
@@ -173,10 +180,10 @@ public class Character {
         return isAlive;
     }
 
-    public void setDefending(boolean defending) {
+    public void setDefending() {
 
         System.out.println(name + ": I'm defending!");
-        isDefending = defending;
+        isDefending = true;
     }
 
     public boolean isDefending() {

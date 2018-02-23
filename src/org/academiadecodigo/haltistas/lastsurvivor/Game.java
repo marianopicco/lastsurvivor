@@ -70,7 +70,6 @@ public class Game {
             while (playerParty[currentPlayer].isAlive()) {
 
                 canvas.drawScore(score);
-
                 canvas.showActionMenu();
 
                 if (keyPressed != null) {
@@ -92,6 +91,7 @@ public class Game {
                 }
 
                 if (!stage.getEnemies()[playerTarget].isAlive()) {
+
                     score += (currentStage * 100);
 
                     if (currentKills == 4) {
@@ -100,6 +100,7 @@ public class Game {
                         currentKills = 0;
                     } else {
                         currentKills++;
+
                     }
 
                     canvas.getEvilGuy().delete();
@@ -154,7 +155,7 @@ public class Game {
                 break;
 
             case DEFEND:
-                playerParty[playerIndex].setDefending(true);
+                playerParty[playerIndex].setDefending();
                 break;
 
             case ITEMS:
@@ -180,9 +181,6 @@ public class Game {
             canvas.translateCharacter(canvas.getEvilGuy(), canvas.getGoodGuy());
             enemy.attack(playerParty, playerParty.length);
             showDamage(enemy);
-
-            playerParty[0].setDefending(false);
-
             System.out.println("\n");
         }
 

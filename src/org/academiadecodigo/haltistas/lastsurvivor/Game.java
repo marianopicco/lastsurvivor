@@ -51,6 +51,11 @@ public class Game {
         sound = new Sound("/assets/EyeOfTheTiger8Bit.wav");
     }
 
+    /**
+     * Game start
+     * Logic for processing the turns, and declaring game over
+     */
+
     public void start() {
 
         int currentKills = 0;
@@ -126,35 +131,13 @@ public class Game {
         keyPressed = key;
     }
 
-    private void playerAttack(Character playerChar, Character enemyChar) throws InterruptedException {
-
-        Thread.sleep(500);
-
-        if (enemyChar.isAlive()) {
-
-            playerChar.attack(enemyChar);
-            System.out.println("\n");
-        }
-    }
-
-    private void playerMagicAttack(Character playerChar, Character enemyChar) throws InterruptedException {
-
-        Thread.sleep(500);
-
-        if (enemyChar.isAlive()) {
-
-            playerChar.magicAttack(enemyChar);
-            System.out.println("\n");
-        }
-    }
-
     private void playerTurn(int playerIndex) throws InterruptedException {
 
         switch (canvas.getCurrentAction()) {
 
             case ATTACK:
                 canvas.translateCharacter(canvas.getGoodGuy(), canvas.getEvilGuy());
-                playerAttack(playerParty[playerIndex], stage.getEnemies()[playerTarget]);
+                playerParty[playerIndex].attack(stage.getEnemies()[playerTarget]);
                 showDamage(playerParty[playerIndex]);
                 break;
 
@@ -163,7 +146,7 @@ public class Game {
                     score -= 50;
                     canvas.drawMagicAttack();
                     canvas.translateMagic(canvas.getEvilGuy());
-                    playerMagicAttack(playerParty[playerIndex], stage.getEnemies()[playerTarget]);
+                    playerParty[playerIndex].magicAttack(stage.getEnemies()[playerTarget]);
                     showDamage(playerParty[playerIndex]);
                 }
 

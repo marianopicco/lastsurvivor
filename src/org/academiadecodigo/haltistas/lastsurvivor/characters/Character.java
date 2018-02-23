@@ -95,8 +95,6 @@ public class Character implements Drawable {
 
         System.out.println(name + ": Getting hit for " + damage);
 
-        isDefending = false;
-
         if (hp <= 0 && isAlive) {
             hp = 0;
             this.toggleAlive();
@@ -118,7 +116,6 @@ public class Character implements Drawable {
 
         if (hp >= maxHp){
             hp = maxHp;
-
         }
 
     }
@@ -160,5 +157,9 @@ public class Character implements Drawable {
 
         System.out.println(name + ": I'm defending!");
         isDefending = defending;
+    }
+
+    public boolean isDefending() {
+        return isDefending;
     }
 }

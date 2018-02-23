@@ -182,6 +182,8 @@ public class Game {
             enemy.attack(playerParty, playerParty.length);
             showDamage(enemy);
 
+            playerParty[0].setDefending(false);
+
             System.out.println("\n");
         }
 
@@ -204,7 +206,12 @@ public class Game {
             return;
         }
 
-        canvas.showDamage(canvas.getEvilGuy(), stage.getEnemies()[playerTarget].getDamage());
+        if (playerParty[0].isDefending()) {
+            canvas.showDamage(canvas.getEvilGuy(), stage.getEnemies()[playerTarget].getDamage() / 2);
+
+        } else {
+            canvas.showDamage(canvas.getEvilGuy(), stage.getEnemies()[playerTarget].getDamage());
+        }
 
         Thread.sleep(500);
 

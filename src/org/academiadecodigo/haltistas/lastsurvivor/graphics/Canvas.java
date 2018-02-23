@@ -213,6 +213,7 @@ public class Canvas implements Drawable {
             this.characterDamage.setText(" " + damage);
             this.characterDamage.draw();
 
+
         } else {
             this.enemyDamage.setText(" " + damage);
             this.enemyDamage.draw();

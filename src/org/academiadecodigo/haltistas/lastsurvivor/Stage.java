@@ -21,8 +21,8 @@ public class Stage {
 
     private void populateEnemies(int stageDifficulty) {
 
-        double constitution = 1 + (stageDifficulty / 3);
-        double strength = 1 + (stageDifficulty / 4);
+        double constitution = 1 + (stageDifficulty / 2);
+        double strength = 1 + (stageDifficulty / 2);
 
         for (int i = 0; i < numEnemies; i++) {
             enemies[i] = CharacterFactory.createEnemy("Baddie " + (i + 1), constitution, strength);

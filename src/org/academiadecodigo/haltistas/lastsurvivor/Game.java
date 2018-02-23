@@ -37,8 +37,8 @@ public class Game {
 
         // Current party only has one character, expandable in the future
 
-        //playerParty[0] = CharacterFactory.createCharacter("Player", Role.WARRIOR);
-        playerParty[0] = CharacterFactory.createCharacter("Player", Role.WIZARD);
+        playerParty[0] = CharacterFactory.createCharacter("Player", Role.WARRIOR);
+        //playerParty[0] = CharacterFactory.createCharacter("Player", Role.WIZARD);
 
         characterStats();
 

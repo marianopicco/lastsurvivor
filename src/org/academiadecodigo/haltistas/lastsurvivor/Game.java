@@ -21,6 +21,8 @@ public class Game {
 
     private int playerTarget = 0;
     private int currentStage;
+    private int score;
+
 
     /**
      * Game Class
@@ -51,6 +53,7 @@ public class Game {
 
         int currentKills = 0;
         int currentPlayer = 0;
+        score = 0;
         sound.loopIndef();
 
         try {
@@ -58,6 +61,8 @@ public class Game {
             // TODO: 22/02/18 needed to see while condition when more than one character on party
 
             while (playerParty[currentPlayer].isAlive()) {
+
+                canvas.drawScore(score);
 
                 canvas.showActionMenu();
 
@@ -80,8 +85,9 @@ public class Game {
                 }
 
                 if (!stage.getEnemies()[playerTarget].isAlive()) {
+                    score += currentStage;
 
-                    if (currentKills == 5) {
+                    if (currentKills == 4) {
                         currentStage++;
                         currentKills = 0;
                     } else {
@@ -221,4 +227,6 @@ public class Game {
 
         System.exit(0);
     }
+
+
 }

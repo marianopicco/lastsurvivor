@@ -1,7 +1,6 @@
 package org.academiadecodigo.haltistas.lastsurvivor.graphics;
 
 import org.academiadecodigo.haltistas.lastsurvivor.characters.CharacterFactory;
-import org.academiadecodigo.haltistas.lastsurvivor.characters.Role;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.*;
 import org.academiadecodigo.haltistas.lastsurvivor.input.KeyPress;
 import org.academiadecodigo.haltistas.lastsurvivor.interfaces.Drawable;
@@ -28,12 +27,18 @@ public class Canvas implements Drawable {
 
     private Text enemyDamage;
     private Text characterDamage;
+    private Text scoreBoard;
+
 
     public Canvas() {
 
         leftPosition = new Position(90, 330);
         rightPosition = new Position(750, 340);
         magicAttack = new Picture(rightPosition.getPosX(), rightPosition.getPosY(), "assets/magic.png");
+        scoreBoard = new Text(850, 100, "SCORE: 0" );
+        scoreBoard.grow(40, 40);
+        scoreBoard.setColor(Color.WHITE);
+
         draw();
     }
 
@@ -74,12 +79,20 @@ public class Canvas implements Drawable {
 
 
         enemyDamage = new Text(800, 250, "");
-        enemyDamage.grow(40, 80);
+        enemyDamage.grow(40, 40);
         enemyDamage.setColor(Color.RED);
 
         characterDamage = new Text(200, 250, "");
-        characterDamage.grow(40, 80);
+        characterDamage.grow(40, 40);
         characterDamage.setColor(Color.RED);
+
+    }
+
+    public void drawScore(int score) {
+
+
+         scoreBoard.setText("SCORE: " + score);
+         scoreBoard.draw();
 
     }
 

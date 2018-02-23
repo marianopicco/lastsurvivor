@@ -132,13 +132,14 @@ public class Character implements Drawable {
     public void draw() {
     }
 
-    public void heal() {
+    public int heal() {
         int healing = Randomizer.rInt(40, 55);
         hp += healing;
 
         if (hp >= maxHp){
             hp = maxHp;
         }
+        return healing;
 
     }
 

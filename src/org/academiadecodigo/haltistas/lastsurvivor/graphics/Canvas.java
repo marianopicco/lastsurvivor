@@ -126,8 +126,18 @@ public class Canvas implements Drawable {
         }
     }
 
-    public void showInfo(String info) {
+    /**
+     *
+     * @param info
+     *      The String to be displayed on the screen
+     *
+     * @param color
+     *      The color of the message
+     */
 
+    public void showInfo(String info, Color color) {
+
+        infoText.setColor(color);
         infoText.setText(info);
         infoText.draw();
         try {

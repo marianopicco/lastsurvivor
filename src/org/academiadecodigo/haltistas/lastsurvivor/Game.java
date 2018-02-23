@@ -96,6 +96,7 @@ public class Game {
 
                     if (currentKills == 4) {
                         currentStage++;
+                        canvas.showInfo("Stage " + currentStage + "!", Color.ORANGE);
                         currentKills = 0;
                     } else {
                         currentKills++;
@@ -159,7 +160,7 @@ public class Game {
             case ITEMS:
                 if (score >= 100) {
                     score -= 100;
-                    playerParty[playerIndex].heal();
+                    canvas.showInfo("Healing for "+playerParty[playerIndex].heal(), Color.GREEN);
                 }
                 break;
 

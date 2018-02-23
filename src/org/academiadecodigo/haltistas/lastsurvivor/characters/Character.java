@@ -98,6 +98,7 @@ public class Character implements Drawable {
         isDefending = false;
 
         if (hp <= 0 && isAlive) {
+            hp = 0;
             this.toggleAlive();
             System.out.println(this + " dead.\n");
         }

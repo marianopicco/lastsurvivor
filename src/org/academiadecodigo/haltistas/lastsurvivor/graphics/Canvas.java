@@ -1,6 +1,7 @@
 package org.academiadecodigo.haltistas.lastsurvivor.graphics;
 
 import org.academiadecodigo.haltistas.lastsurvivor.characters.CharacterFactory;
+import org.academiadecodigo.haltistas.lastsurvivor.characters.Role;
 import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.*;
 import org.academiadecodigo.haltistas.lastsurvivor.input.KeyPress;
 import org.academiadecodigo.haltistas.lastsurvivor.interfaces.Drawable;
@@ -72,12 +73,12 @@ public class Canvas implements Drawable {
         actionMenu.instantiateStuff();
 
 
-        enemyDamage = new Text(700, 400, "");
-        enemyDamage.grow(60, 20);
+        enemyDamage = new Text(800, 250, "");
+        enemyDamage.grow(40, 80);
         enemyDamage.setColor(Color.RED);
 
-        characterDamage = new Text(200, 400, "");
-        characterDamage.grow(60, 20);
+        characterDamage = new Text(200, 250, "");
+        characterDamage.grow(40, 80);
         characterDamage.setColor(Color.RED);
 
     }

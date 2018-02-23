@@ -169,6 +169,10 @@ public class Character implements Drawable {
         return realDamage;
     }
 
+    private int getMagicDamage() {
+        return baseMagic;
+    }
+
     public boolean isAlive() {
         return isAlive;
     }

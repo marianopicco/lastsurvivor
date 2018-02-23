@@ -1,8 +1,7 @@
 package org.academiadecodigo.haltistas.lastsurvivor.graphics;
 
 import org.academiadecodigo.haltistas.lastsurvivor.characters.CharacterFactory;
-import org.academiadecodigo.haltistas.lastsurvivor.characters.Role;
-import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.*;
+import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.Menu;
 import org.academiadecodigo.haltistas.lastsurvivor.input.KeyPress;
 import org.academiadecodigo.haltistas.lastsurvivor.interfaces.Drawable;
 import org.academiadecodigo.simplegraphics.graphics.Color;
@@ -29,12 +28,17 @@ public class Canvas implements Drawable {
     private Text enemyDamage;
     private Text characterDamage;
     private Text infoText;
+    private Text scoreBoard;
 
     public Canvas() {
 
         leftPosition = new Position(90, 330);
         rightPosition = new Position(750, 340);
         magicAttack = new Picture(rightPosition.getPosX(), rightPosition.getPosY(), "assets/magic.png");
+        scoreBoard = new Text(850, 100, "SCORE: 0");
+        scoreBoard.grow(50, 20);
+        scoreBoard.setColor(Color.WHITE);
+
         draw();
     }
 
@@ -76,11 +80,11 @@ public class Canvas implements Drawable {
 
 
         enemyDamage = new Text(800, 250, "");
-        enemyDamage.grow(40, 80);
+        enemyDamage.grow(40, 40);
         enemyDamage.setColor(Color.RED);
 
         characterDamage = new Text(200, 250, "");
-        characterDamage.grow(40, 80);
+        characterDamage.grow(40, 40);
         characterDamage.setColor(Color.RED);
 
     }
@@ -89,6 +93,13 @@ public class Canvas implements Drawable {
         infoText = new Text(500, 150, "");
         infoText.grow(90, 30);
         infoText.setColor(Color.WHITE);
+    }
+
+    public void drawScore(int score) {
+
+
+        scoreBoard.setText("SCORE: " + score);
+        scoreBoard.draw();
 
     }
 
@@ -145,6 +156,7 @@ public class Canvas implements Drawable {
     }
 
     public void translateMagic(Picture target) throws InterruptedException {
+
         while (magicAttack.getX() > target.getX() + 100) {
             magicAttack.translate(-3, 0);
             Thread.sleep(1);
@@ -155,7 +167,6 @@ public class Canvas implements Drawable {
             magicAttack.translate(3, 0);
             Thread.sleep(1);
         }
-
     }
 
     private void drawCharacters() {
@@ -222,6 +233,7 @@ public class Canvas implements Drawable {
             this.characterDamage.setText(" " + damage);
             this.characterDamage.draw();
 
+
         } else {
             this.enemyDamage.setText(" " + damage);
             this.enemyDamage.draw();
@@ -241,6 +253,7 @@ public class Canvas implements Drawable {
     public Picture getGoodGuy() {
         return goodGuy;
     }
+
 
     public class ActionMenu extends Menu {
 
@@ -363,6 +376,7 @@ public class Canvas implements Drawable {
                     currentAction = Action.DEFEND;
                     break;
                 case 3:
+                    currentAction = Action.ITEMS;
                     break;
                 default:
                     System.out.println("JVM fucked up");

@@ -15,6 +15,7 @@ public class Character implements Drawable {
     private boolean isDefending;
 
     public Character(String name, int hp, int baseAttack, int baseMagic) {
+
         this.name = name;
         this.hp = hp;
         this.maxHp = hp;
@@ -83,21 +84,41 @@ public class Character implements Drawable {
         target.getHit(realDamage());
     }
 
+    public void magicAttack(Character target) {
+
+        // Souts for testing
+        // @TODO remove the souts after testing
+
+        if (!this.isAlive) {
+            return;
+        }
+
+        if (!target.isAlive) {
+            System.out.println(name + ": Target is dead\n");
+            return;
+        }
+
+        System.out.println(name + ": I'm attacking " + target);
+        realDamage = baseMagic;
+
+        target.getHit(baseMagic);
+    }
+
     private void getHit(int damage) {
 
         // @TODO remove souts after testing
 
         if (isDefending) {
             damage = damage / 2;
+            isDefending = false;
         }
 
         hp = hp - damage;
 
         System.out.println(name + ": Getting hit for " + damage);
 
-        isDefending = false;
-
         if (hp <= 0 && isAlive) {
+            hp = 0;
             this.toggleAlive();
             System.out.println(this + " dead.\n");
         }
@@ -111,9 +132,19 @@ public class Character implements Drawable {
     public void draw() {
     }
 
+    public void heal() {
+        int healing = Randomizer.rInt(40, 55);
+        hp += healing;
+
+        if (hp >= maxHp){
+            hp = maxHp;
+        }
+
+    }
+
     private int realDamage() {
 
-        realDamage = baseAttack + Randomizer.rInt(-2, 2);
+        realDamage = baseAttack + Randomizer.rInt(-4, 4);
         return realDamage;
     }
 
@@ -137,7 +168,8 @@ public class Character implements Drawable {
     }
 
     public int getDamage() {
-        return realDamage;
+            return realDamage;
+
     }
 
     public boolean isAlive() {
@@ -148,5 +180,9 @@ public class Character implements Drawable {
 
         System.out.println(name + ": I'm defending!");
         isDefending = defending;
+    }
+
+    public boolean isDefending() {
+        return isDefending;
     }
 }

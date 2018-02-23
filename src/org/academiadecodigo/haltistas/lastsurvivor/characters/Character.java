@@ -131,7 +131,7 @@ public class Character implements Drawable {
     }
 
     public void heal() {
-        int healing = Randomizer.rInt(40, 75);
+        int healing = Randomizer.rInt(40, 55);
         hp += healing;
 
         if (hp >= maxHp){
@@ -142,7 +142,7 @@ public class Character implements Drawable {
 
     private int realDamage() {
 
-        realDamage = baseAttack + Randomizer.rInt(-2, 2);
+        realDamage = baseAttack + Randomizer.rInt(-4, 4);
         return realDamage;
     }
 
@@ -166,11 +166,9 @@ public class Character implements Drawable {
     }
 
     public int getDamage() {
-        return realDamage;
-    }
-
-    private int getMagicDamage() {
-        return baseMagic;
+        if (realDamage != 0) {
+            return realDamage;
+        } return baseMagic;
     }
 
     public boolean isAlive() {

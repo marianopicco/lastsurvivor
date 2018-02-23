@@ -18,14 +18,14 @@ public class CharacterFactory {
 
                 constitution = Randomizer.rDouble(3, 4);
                 strength = Randomizer.rDouble(2, 3);
-                wisdom = Randomizer.rDouble(0.5, 1);
+                wisdom = Randomizer.rDouble(4, 8);
                 break;
 
             case WIZARD:
 
                 constitution = Randomizer.rDouble(1, 2);
                 strength = Randomizer.rDouble(0.5, 1.5);
-                wisdom = Randomizer.rDouble(2, 3);
+                wisdom = Randomizer.rDouble(6, 12);
                 break;
 
             case HEALER:

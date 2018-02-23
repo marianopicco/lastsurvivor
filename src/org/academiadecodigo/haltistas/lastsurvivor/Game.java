@@ -7,6 +7,8 @@ import org.academiadecodigo.haltistas.lastsurvivor.graphics.Canvas;
 import org.academiadecodigo.haltistas.lastsurvivor.input.InputHandler;
 import org.academiadecodigo.haltistas.lastsurvivor.input.KeyPress;
 import org.academiadecodigo.haltistas.lastsurvivor.sound.Sound;
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Game {
@@ -85,7 +87,7 @@ public class Game {
                 }
 
                 if (!stage.getEnemies()[playerTarget].isAlive()) {
-                    score += currentStage;
+                    score += (currentStage * 100);
 
                     if (currentKills == 4) {
                         currentStage++;
@@ -151,27 +153,31 @@ public class Game {
         switch (canvas.getCurrentAction()) {
 
             case ATTACK:
-
                 canvas.translateCharacter(canvas.getGoodGuy(), canvas.getEvilGuy());
                 playerAttack(playerParty[playerIndex], stage.getEnemies()[playerTarget]);
                 showDamage(playerParty[playerIndex]);
                 break;
 
             case MAGIC:
+                if (score >= 50) {
+                    score -= 50;
+                    canvas.drawMagicAttack();
+                    canvas.translateMagic(canvas.getEvilGuy());
+                    playerMagicAttack(playerParty[playerIndex], stage.getEnemies()[playerTarget]);
+                    showDamage(playerParty[playerIndex]);
+                }
 
-                canvas.drawMagicAttack();
-                canvas.translateMagic(canvas.getEvilGuy());
-                playerMagicAttack(playerParty[playerIndex], stage.getEnemies()[playerTarget]);
-                showDamage(playerParty[playerIndex]);
                 break;
 
             case DEFEND:
-
                 playerParty[playerIndex].setDefending(true);
                 break;
-            case ITEMS:
 
-                playerParty[playerIndex].heal();
+            case ITEMS:
+                if (score >= 100) {
+                    score -= 100;
+                    playerParty[playerIndex].heal();
+                }
                 break;
 
             default:
@@ -239,7 +245,12 @@ public class Game {
         Picture gameOver = new Picture(10, 10, "assets/gameover.jpg");
         gameOver.draw();
 
-        Thread.sleep(2000);
+        Text finalScore = new Text(500, 600, "FINAL SCORE: " + score);
+        finalScore.setColor(Color.BLACK);
+        finalScore.grow(250, 50);
+        finalScore.draw();
+
+        Thread.sleep(5000);
 
         System.exit(0);
     }

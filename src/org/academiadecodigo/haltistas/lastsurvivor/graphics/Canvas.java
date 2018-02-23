@@ -36,7 +36,7 @@ public class Canvas implements Drawable {
         rightPosition = new Position(750, 340);
         magicAttack = new Picture(rightPosition.getPosX(), rightPosition.getPosY(), "assets/magic.png");
         scoreBoard = new Text(850, 100, "SCORE: 0");
-        scoreBoard.grow(40, 40);
+        scoreBoard.grow(50, 20);
         scoreBoard.setColor(Color.WHITE);
 
         draw();

@@ -99,6 +99,7 @@ public class Character implements Drawable {
         }
 
         System.out.println(name + ": I'm attacking " + target);
+        realDamage = baseMagic;
 
         target.getHit(baseMagic);
     }
@@ -109,6 +110,7 @@ public class Character implements Drawable {
 
         if (isDefending) {
             damage = damage / 2;
+            isDefending = false;
         }
 
         hp = hp - damage;
@@ -166,9 +168,8 @@ public class Character implements Drawable {
     }
 
     public int getDamage() {
-        if (realDamage != 0) {
             return realDamage;
-        } return baseMagic;
+
     }
 
     public boolean isAlive() {

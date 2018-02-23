@@ -335,6 +335,7 @@ public class Canvas implements Drawable {
                     currentAction = Action.DEFEND;
                     break;
                 case 3:
+                    currentAction = Action.ITEMS;
                     break;
                 default:
                     System.out.println("JVM fucked up");

@@ -50,13 +50,14 @@ public class Game {
     public void start() {
 
         int currentKills = 0;
+        int currentPlayer = 0;
         sound.loopIndef();
 
         try {
 
             // TODO: 22/02/18 needed to see while condition when more than one character on party
 
-            while (playerParty[0].isAlive()) {
+            while (playerParty[currentPlayer].isAlive()) {
 
                 canvas.showActionMenu();
 
@@ -66,7 +67,7 @@ public class Game {
 
                     if (canvas.getCurrentAction() != null) {
 
-                        playerTurn();
+                        playerTurn(currentPlayer);
 
                         canvas.hideActionMenu();
                         canvas.resetCurrentAction();
@@ -130,28 +131,32 @@ public class Game {
 
     }
 
-    private void playerTurn() throws InterruptedException {
+    private void playerTurn(int playerIndex) throws InterruptedException {
 
         switch (canvas.getCurrentAction()) {
 
             case ATTACK:
 
                 canvas.translateCharacter(canvas.getGoodGuy(), canvas.getEvilGuy());
-                playerAttack(playerParty[0], stage.getEnemies()[playerTarget]);
-                showDamage(playerParty[0]);
+                playerAttack(playerParty[playerIndex], stage.getEnemies()[playerTarget]);
+                showDamage(playerParty[playerIndex]);
                 break;
 
             case MAGIC:
 
                 canvas.drawMagicAttack();
                 canvas.translateMagic(canvas.getEvilGuy());
-                playerAttack(playerParty[0], stage.getEnemies()[playerTarget]);
-                showDamage(playerParty[0]);
+                playerAttack(playerParty[playerIndex], stage.getEnemies()[playerTarget]);
+                showDamage(playerParty[playerIndex]);
                 break;
 
             case DEFEND:
 
-                playerParty[0].setDefending(true);
+                playerParty[playerIndex].setDefending(true);
+                break;
+            case ITEMS:
+
+                playerParty[playerIndex].heal();
                 break;
 
             default:

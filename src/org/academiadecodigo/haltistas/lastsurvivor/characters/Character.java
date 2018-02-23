@@ -111,6 +111,17 @@ public class Character implements Drawable {
     public void draw() {
     }
 
+    public void heal() {
+        int healing = Randomizer.rInt(40, 75);
+        hp += healing;
+
+        if (hp >= maxHp){
+            hp = maxHp;
+
+        }
+
+    }
+
     private int realDamage() {
 
         realDamage = baseAttack + Randomizer.rInt(-2, 2);

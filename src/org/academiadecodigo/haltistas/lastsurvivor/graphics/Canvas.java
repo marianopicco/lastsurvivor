@@ -35,7 +35,7 @@ public class Canvas implements Drawable {
         leftPosition = new Position(90, 330);
         rightPosition = new Position(750, 340);
         magicAttack = new Picture(rightPosition.getPosX(), rightPosition.getPosY(), "assets/magic.png");
-        scoreBoard = new Text(850, 100, "SCORE: 0" );
+        scoreBoard = new Text(850, 100, "SCORE: 0");
         scoreBoard.grow(40, 40);
         scoreBoard.setColor(Color.WHITE);
 
@@ -91,8 +91,8 @@ public class Canvas implements Drawable {
     public void drawScore(int score) {
 
 
-         scoreBoard.setText("SCORE: " + score);
-         scoreBoard.draw();
+        scoreBoard.setText("SCORE: " + score);
+        scoreBoard.draw();
 
     }
 
@@ -136,6 +136,7 @@ public class Canvas implements Drawable {
     }
 
     public void translateMagic(Picture target) throws InterruptedException {
+
         while (magicAttack.getX() > target.getX() + 100) {
             magicAttack.translate(-3, 0);
             Thread.sleep(1);
@@ -146,7 +147,6 @@ public class Canvas implements Drawable {
             magicAttack.translate(3, 0);
             Thread.sleep(1);
         }
-
     }
 
     private void drawCharacters() {
@@ -233,6 +233,7 @@ public class Canvas implements Drawable {
     public Picture getGoodGuy() {
         return goodGuy;
     }
+
 
     public class ActionMenu extends Menu {
 

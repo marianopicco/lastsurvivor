@@ -98,7 +98,6 @@ public class Game {
 
                     Thread.sleep(1500);
 
-
                     newStage();
                 }
             }
@@ -114,7 +113,6 @@ public class Game {
             e.printStackTrace();
 
         }
-
     }
 
     public void receiveInput(KeyPress key) {
@@ -131,10 +129,21 @@ public class Game {
         Thread.sleep(500);
 
         if (enemyChar.isAlive()) {
+
             playerChar.attack(enemyChar);
             System.out.println("\n");
         }
+    }
 
+    private void playerMagicAttack(Character playerChar, Character enemyChar) throws InterruptedException {
+
+        Thread.sleep(500);
+
+        if (enemyChar.isAlive()) {
+
+            playerChar.magicAttack(enemyChar);
+            System.out.println("\n");
+        }
     }
 
     private void playerTurn(int playerIndex) throws InterruptedException {
@@ -152,7 +161,7 @@ public class Game {
 
                 canvas.drawMagicAttack();
                 canvas.translateMagic(canvas.getEvilGuy());
-                playerAttack(playerParty[playerIndex], stage.getEnemies()[playerTarget]);
+                playerMagicAttack(playerParty[playerIndex], stage.getEnemies()[playerTarget]);
                 showDamage(playerParty[playerIndex]);
                 break;
 

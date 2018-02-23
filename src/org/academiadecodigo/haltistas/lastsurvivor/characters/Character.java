@@ -15,6 +15,7 @@ public class Character implements Drawable {
     private boolean isDefending;
 
     public Character(String name, int hp, int baseAttack, int baseMagic) {
+
         this.name = name;
         this.hp = hp;
         this.maxHp = hp;
@@ -81,6 +82,25 @@ public class Character implements Drawable {
         System.out.println(name + ": I'm attacking " + target);
 
         target.getHit(realDamage());
+    }
+
+    public void magicAttack(Character target) {
+
+        // Souts for testing
+        // @TODO remove the souts after testing
+
+        if (!this.isAlive) {
+            return;
+        }
+
+        if (!target.isAlive) {
+            System.out.println(name + ": Target is dead\n");
+            return;
+        }
+
+        System.out.println(name + ": I'm attacking " + target);
+
+        target.getHit(baseMagic);
     }
 
     private void getHit(int damage) {

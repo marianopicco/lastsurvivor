@@ -140,7 +140,7 @@ public class Canvas implements Drawable {
 
         evilGuy = CharacterFactory.getEnemyPicture(leftPosition.getPosX(), leftPosition.getPosY());
         evilGuy.draw();
-        
+
         goodGuy = new Picture(rightPosition.getPosX(), rightPosition.getPosY(), "assets/supergranny.png");
         goodGuy.draw();
 

@@ -1,7 +1,7 @@
 package org.academiadecodigo.haltistas.lastsurvivor.graphics;
 
 import org.academiadecodigo.haltistas.lastsurvivor.characters.CharacterFactory;
-import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.*;
+import org.academiadecodigo.haltistas.lastsurvivor.graphics.menus.Menu;
 import org.academiadecodigo.haltistas.lastsurvivor.input.KeyPress;
 import org.academiadecodigo.haltistas.lastsurvivor.interfaces.Drawable;
 import org.academiadecodigo.simplegraphics.graphics.Color;

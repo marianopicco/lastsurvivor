@@ -3,7 +3,7 @@ package org.academiadecodigo.haltistas.lastsurvivor.characters;
 import org.academiadecodigo.haltistas.lastsurvivor.Randomizer;
 import org.academiadecodigo.haltistas.lastsurvivor.interfaces.Drawable;
 
-public class Character implements Drawable {
+public class Character {
 
     private String name;
     private int hp;
@@ -126,10 +126,6 @@ public class Character implements Drawable {
 
     public void toggleAlive() {
         isAlive = !isAlive;
-    }
-
-    @Override
-    public void draw() {
     }
 
     public int heal() {
